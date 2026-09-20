@@ -147,7 +147,7 @@ def render_guide(module: str) -> None:
                 "A clinic admin can create it from the Admin page.")
         return
     # strip the language markers' own title lines? no — they read fine as sections
-    st.markdown(text)
+    st.markdown(re.sub(r"<!--.*?-->\n?", "", text))  # hide language markers
     st.success(guide.CTA)
     st.caption("General procedural information, not legal advice.")
 
