@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Client\", \"Builder\"],\n    \"amount_inr\": 6500000,\n    \"date_of_cause\": \"2023-01-01\",\n    \"what_happened\": \"A builder promised possession of a residential flat in 2023 for ₹65 lakh. The flat has not been delivered as of September 2026, more than three years after the promised date.\"\n  },\n  \"missing_fact\": \"In which city or district is the flat located, and what is the exact promised possession date in 2023?\"\n}\n```",
+ "ts": 1789891969.197959,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Client",
+    "Builder"
+   ],
+   "amount_inr": 6500000,
+   "date_of_cause": "2023-01-01",
+   "what_happened": "A builder promised possession of a residential flat in 2023 for ₹65 lakh. The flat has not been delivered as of September 2026, more than three years after the promised date."
+  },
+  "missing_fact": "In which city or district is the flat located, and what is the exact promised possession date in 2023?"
+ }
+}

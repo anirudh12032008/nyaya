@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Client\", \"Builder\"],\n    \"amount_inr\": 6500000,\n    \"date_of_cause\": \"2023-01-01\",\n    \"what_happened\": \"A builder promised possession of a flat in 2023 but has failed to deliver it. The client paid ₹65 lakh for the property and remains without possession after 3+ years.\"\n  },\n  \"missing_fact\": \"What is the exact promised possession date in 2023, and do you have a written agreement or booking receipt?\"\n}\n```",
+ "ts": 1789891966.910016,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Client",
+    "Builder"
+   ],
+   "amount_inr": 6500000,
+   "date_of_cause": "2023-01-01",
+   "what_happened": "A builder promised possession of a flat in 2023 but has failed to deliver it. The client paid ₹65 lakh for the property and remains without possession after 3+ years."
+  },
+  "missing_fact": "What is the exact promised possession date in 2023, and do you have a written agreement or booking receipt?"
+ }
+}

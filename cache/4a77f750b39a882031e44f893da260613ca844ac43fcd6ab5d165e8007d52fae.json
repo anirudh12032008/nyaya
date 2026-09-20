@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"tenant\",\n  \"jurisdiction\": \"Bhopal, Madhya Pradesh\",\n  \"urgency\": \"low\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\n      \"Ms. Anjali Verma (Lessee)\",\n      \"Shri Ramesh Chandra Agrawal (Lessor)\"\n    ],\n    \"amount_inr\": 300000,\n    \"date_of_cause\": \"2026-04-01\",\n    \"what_happened\": \"A rent agreement for a residential flat (Flat No. 302, Shanti Residency, Kolar Road, Bhopal) was executed on 1 April 2026 for Rs. 50,000 per month with a security deposit of Rs. 3,00,000. The agreement contains a 24-month lock-in period, a 12% annual rent escalation clause, and a penalty clause for early vacation or breach.\"\n  },\n  \"missing_fact\": \"Does the client seek to challenge specific clauses, recover the deposit, vacate early, or address a dispute that has already arisen?\"\n}\n```",
+ "ts": 1789892401.927553,
+ "parsed": {
+  "module": "tenant",
+  "jurisdiction": "Bhopal, Madhya Pradesh",
+  "urgency": "low",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Ms. Anjali Verma (Lessee)",
+    "Shri Ramesh Chandra Agrawal (Lessor)"
+   ],
+   "amount_inr": 300000,
+   "date_of_cause": "2026-04-01",
+   "what_happened": "A rent agreement for a residential flat (Flat No. 302, Shanti Residency, Kolar Road, Bhopal) was executed on 1 April 2026 for Rs. 50,000 per month with a security deposit of Rs. 3,00,000. The agreement contains a 24-month lock-in period, a 12% annual rent escalation clause, and a penalty clause for early vacation or breach."
+  },
+  "missing_fact": "Does the client seek to challenge specific clauses, recover the deposit, vacate early, or address a dispute that has already arisen?"
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"tenant\",\n  \"jurisdiction\": \"Bhopal\",\n  \"urgency\": \"low\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\n      \"Ms. Anjali Verma (Lessee)\",\n      \"Shri Ramesh Chandra Agrawal (Lessor)\"\n    ],\n    \"amount_inr\": 300000,\n    \"date_of_cause\": \"2026-04-01\",\n    \"what_happened\": \"A rent agreement was executed on 1 April 2026 for Flat No. 302, Shanti Residency, Kolar Road, Bhopal, at a monthly rent of Rs. 50,000 with a security deposit of Rs. 3,00,000. The agreement contains multiple restrictive clauses including a 24-month lock-in period, automatic renewal for successive 11-month terms, a 50,000 rupee penalty for early vacation, unilateral entry rights for the lessor without notice, and asymmetric termination rights.\"\n  },\n  \"missing_fact\": \"What is the client's concern or dispute regarding this agreement—has a breach occurred, has the landlord taken action, or is the client seeking advice on the terms before signing?\"\n}\n```",
+ "ts": 1789892421.885712,
+ "parsed": {
+  "module": "tenant",
+  "jurisdiction": "Bhopal",
+  "urgency": "low",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Ms. Anjali Verma (Lessee)",
+    "Shri Ramesh Chandra Agrawal (Lessor)"
+   ],
+   "amount_inr": 300000,
+   "date_of_cause": "2026-04-01",
+   "what_happened": "A rent agreement was executed on 1 April 2026 for Flat No. 302, Shanti Residency, Kolar Road, Bhopal, at a monthly rent of Rs. 50,000 with a security deposit of Rs. 3,00,000. The agreement contains multiple restrictive clauses including a 24-month lock-in period, automatic renewal for successive 11-month terms, a 50,000 rupee penalty for early vacation, unilateral entry rights for the lessor without notice, and asymmetric termination rights."
+  },
+  "missing_fact": "What is the client's concern or dispute regarding this agreement—has a breach occurred, has the landlord taken action, or is the client seeking advice on the terms before signing?"
+ }
+}

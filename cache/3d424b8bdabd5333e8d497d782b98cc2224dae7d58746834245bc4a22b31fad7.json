@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"police\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Client\", \"Police station\"],\n    \"amount_inr\": 60000,\n    \"date_of_cause\": \"2026-09-13\",\n    \"what_happened\": \"Client's motorcycle worth ₹60,000 was stolen from hostel parking approximately one week ago. The police station refused to register a First Information Report (FIR) for the theft.\"\n  },\n  \"missing_fact\": \"Which police station refused to register the complaint, and what reason did they give for the refusal?\"\n}\n```",
+ "ts": 1789892275.635653,
+ "parsed": {
+  "module": "police",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Client",
+    "Police station"
+   ],
+   "amount_inr": 60000,
+   "date_of_cause": "2026-09-13",
+   "what_happened": "Client's motorcycle worth ₹60,000 was stolen from hostel parking approximately one week ago. The police station refused to register a First Information Report (FIR) for the theft."
+  },
+  "missing_fact": "Which police station refused to register the complaint, and what reason did they give for the refusal?"
+ }
+}

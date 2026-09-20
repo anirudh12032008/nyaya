@@ -1,0 +1,22 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"hinglish\",\n  \"facts\": {\n    \"parties\": [\n      \"Client\",\n      \"Service centre (name unknown)\",\n      \"Phone manufacturer/brand (unknown)\"\n    ],\n    \"amount_inr\": 40000,\n    \"date_of_cause\": \"2026-01-01\",\n    \"what_happened\": \"Client purchased a phone in January 2026 for ₹40,000. The phone has been at a service centre for three months. The service centre is refusing warranty coverage.\"\n  },\n  \"missing_fact\": \"Service centre ka naam aur phone ka brand/model kya hai?\"\n}\n```",
+ "ts": 1789892027.1990678,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "hinglish",
+  "facts": {
+   "parties": [
+    "Client",
+    "Service centre (name unknown)",
+    "Phone manufacturer/brand (unknown)"
+   ],
+   "amount_inr": 40000,
+   "date_of_cause": "2026-01-01",
+   "what_happened": "Client purchased a phone in January 2026 for ₹40,000. The phone has been at a service centre for three months. The service centre is refusing warranty coverage."
+  },
+  "missing_fact": "Service centre ka naam aur phone ka brand/model kya hai?"
+ }
+}

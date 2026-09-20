@@ -60,12 +60,14 @@ def _parse_json(text: str):
 
 
 def _call_api(model: str, system: str, user: str, temperature: float, max_tokens: int) -> str:
-    resp = _get_client().messages.create(
+    # Streaming keeps the socket alive on long drafts; TIMEOUT_S still bounds each read.
+    with _get_client().messages.stream(
         model=model,
         max_tokens=max_tokens,  # SDK 1.x: no temperature param; kept in signature for callers
         system=system,
         messages=[{"role": "user", "content": user}],
-    )
+    ) as stream:
+        resp = stream.get_final_message()
     return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
 
 
@@ -74,7 +76,7 @@ def last_trace() -> dict:
 
 
 def ask(model: str, system: str, user: str, json_mode: bool = False,
-        temperature: float = 0.0, max_tokens: int = 4096, use_cache: bool = True):
+        temperature: float = 0.0, max_tokens: int = 8192, use_cache: bool = True):
     """Call Claude with timeout + one retry, falling back to the file cache.
 
     Returns the text reply, or a parsed dict/list when json_mode=True.
@@ -110,9 +112,11 @@ def ask(model: str, system: str, user: str, json_mode: bool = False,
     if json_mode:
         try:
             parsed = _parse_json(text)
-        except (json.JSONDecodeError, ValueError):
-            text = _call_api(model, system + "\n\nReturn ONLY valid JSON. No prose, no code fences.",
-                             user, temperature, max_tokens)
+        except (json.JSONDecodeError, ValueError) as e:
+            repair = (user + "\n\n[SYSTEM] Your previous reply was not valid JSON (" + str(e)[:120]
+                      + "). Return the same content as ONLY valid JSON: escape quotes and newlines "
+                      "inside strings, no prose, no code fences.\n\nPrevious reply:\n" + text[:6000])
+            text = _call_api(model, system + "\n\nReturn ONLY valid JSON.", repair, temperature, max_tokens)
             parsed = _parse_json(text)  # let it raise if still broken
 
     record = {"model": model, "text": text, "ts": time.time()}

@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"hinglish\",\n  \"facts\": {\n    \"parties\": [\"Client\", \"Service centre (name unknown)\"],\n    \"amount_inr\": 40000,\n    \"date_of_cause\": \"2026-01-01\",\n    \"what_happened\": \"Client purchased a phone in January 2026 for ₹40,000. The phone has been with a service centre for three months (since approximately June 2026). The service centre is denying warranty coverage.\"\n  },\n  \"missing_fact\": \"Service centre ka naam aur pata kya hai?\"\n}\n```",
+ "ts": 1789892025.0247848,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "hinglish",
+  "facts": {
+   "parties": [
+    "Client",
+    "Service centre (name unknown)"
+   ],
+   "amount_inr": 40000,
+   "date_of_cause": "2026-01-01",
+   "what_happened": "Client purchased a phone in January 2026 for ₹40,000. The phone has been with a service centre for three months (since approximately June 2026). The service centre is denying warranty coverage."
+  },
+  "missing_fact": "Service centre ka naam aur pata kya hai?"
+ }
+}

@@ -16,9 +16,13 @@ def main() -> int:
         line = line.strip()
         if not line:
             continue
-        r = run_intake(line)
-        if r.get("missing_fact") and not r.get("draft"):
-            r = run_intake(line, answers="Not sure")
+        try:
+            r = run_intake(line)
+            if r.get("missing_fact") and not r.get("draft"):
+                r = run_intake(line, answers="Not sure")
+        except Exception as e:  # API down and nothing cached yet
+            print(f"\n{line[:70]}…\n  SKIPPED: {e}")
+            continue
         f, d = r.get("forum") or {}, r.get("draft") or {}
         print(f"\n{line[:70]}…\n  forum={f.get('forum')} fee=Rs.{f.get('fee_inr')} "
               f"deadline={d.get('deadline_iso')} dropped={r.get('sections_dropped')}")

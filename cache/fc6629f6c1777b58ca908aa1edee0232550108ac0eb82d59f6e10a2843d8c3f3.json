@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Client\", \"Airline (name not stated)\"],\n    \"amount_inr\": 18000,\n    \"date_of_cause\": \"2026-03-01\",\n    \"what_happened\": \"Client purchased a flight ticket for ₹18,000 in March 2026. The airline cancelled the flight and has refused to issue a refund to the client.\"\n  },\n  \"missing_fact\": \"What is the name of the airline?\"\n}\n```",
+ "ts": 1789892123.100938,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Client",
+    "Airline (name not stated)"
+   ],
+   "amount_inr": 18000,
+   "date_of_cause": "2026-03-01",
+   "what_happened": "Client purchased a flight ticket for ₹18,000 in March 2026. The airline cancelled the flight and has refused to issue a refund to the client."
+  },
+  "missing_fact": "What is the name of the airline?"
+ }
+}

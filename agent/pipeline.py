@@ -29,8 +29,14 @@ def run_intake(text: str, module_override: str | None = None, answers: str | Non
     if result["missing_fact"] and not answers:
         return result
 
+    if module in ("police", "tenant"):  # stage2 branches, same result shape
+        from agent import pipeline_modules
+        draft = pipeline_modules.run_module(module, classification, text, today, trace)
+        result["draft"] = draft
+        result["sections_dropped"] = draft.get("sections_dropped", [])
+        return result
+
     if module != "consumer":
-        # stage2: police and tenant branches hook in here (same shape: forum/draft/sections_dropped).
         return result
 
     facts = classification["facts"]

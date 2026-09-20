@@ -14,9 +14,13 @@ def _trace_panel(trace):
 
 
 def _analyse(text, override, answer=None):
-    with st.spinner("Claude is reading the intake…"):
-        st.session_state.result = run_intake(
-            text, module_override=None if override == "auto" else override, answers=answer)
+    try:
+        with st.spinner("Claude is reading the intake…"):
+            st.session_state.result = run_intake(
+                text, module_override=None if override == "auto" else override, answers=answer)
+    except RuntimeError as e:  # API down and nothing cached for this input
+        st.error(f"Could not reach Claude and nothing is cached for this text. {e}")
+        return
     r = st.session_state.result
     if r.get("draft"):
         try:
@@ -32,6 +36,12 @@ def render():
 
     prefill = st.query_params.get("prefill", "")
     text = st.text_area("Client's statement", value=prefill, height=160, key="intake_text")
+
+    pdf_file = st.file_uploader("Rent agreement PDF (optional)", type="pdf")  # stage2
+    if pdf_file is not None:
+        from agent.tenant import extract_pdf_text
+        text = (text + "\n\n" + extract_pdf_text(pdf_file.getvalue())).strip()
+        st.caption(f"Attached {pdf_file.name} — its text is appended to the statement.")
 
     detected = (st.session_state.get("result") or {}).get("classification", {}).get("module")
     col1, col2 = st.columns([2, 1])
@@ -72,8 +82,23 @@ def render():
         st.info(f"Module '{cls['module']}' drafting arrives in Stage 2.")
         return
 
+    if d.get("flags"):  # stage2: tenant clause review
+        st.markdown("### Clause flags")
+        st.table([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
+                   "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
+                  for x in d["flags"]])
+
     st.markdown("### Draft")
     st.markdown(d["draft_markdown"])
+
+    if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
+        st.markdown("### Letter to the Superintendent of Police — BNSS 173(4)")
+        st.markdown(d["sp_letter_markdown"])
+
+    if d.get("what_to_carry"):  # stage2
+        st.markdown("### What to carry to the station")
+        for s in d["what_to_carry"]:
+            st.markdown(f"- {s}")
 
     st.markdown("### Sections relied on")
     for s in d["sections"]:
