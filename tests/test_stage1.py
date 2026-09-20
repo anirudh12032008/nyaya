@@ -1,4 +1,4 @@
-"""Stage 1 checks — no API key needed (agent.client.ask is monkeypatched)."""
+"""Stage 1 checks - no API key needed (agent.client.ask is monkeypatched)."""
 import json
 import sys
 from pathlib import Path

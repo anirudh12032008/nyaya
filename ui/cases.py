@@ -67,7 +67,7 @@ def render():
         days = db.days_to_deadline(c.get("deadline"))
         rows.append({"id": c["id"], "client": c.get("client_name"), "module": c.get("module"),
                      "urgency": c.get("urgency"), "status": c.get("status"),
-                     "volunteer": names.get(c.get("assigned_to"), "—"),
+                     "volunteer": names.get(c.get("assigned_to"), " - "),
                      "deadline": c.get("deadline"), "days_left": days})
 
     _urgent_strip(cases, names)
@@ -97,7 +97,7 @@ def render():
 
 
 def _urgent_strip(cases: list[dict], names: dict) -> None:
-    """The handful of cases whose limitation period is closest — clickable."""
+    """The handful of cases whose limitation period is closest - clickable."""
     dated = [(db.days_to_deadline(c.get("deadline")), c) for c in cases]
     urgent = sorted(((d, c) for d, c in dated if d is not None and d < 30), key=lambda t: t[0])[:4]
     if not urgent:
@@ -185,9 +185,9 @@ def _eligibility(case: dict) -> None:
     """Section 12 Legal Services Authorities Act verdict, in plain words."""
     reason = case.get("eligibility_reason") or "No reason recorded."
     if case.get("eligible_aid"):
-        st.success(f"**Free legal aid: eligible** · निःशुल्क विधिक सहायता — {reason}")
+        st.success(f"**Free legal aid: eligible** · निःशुल्क विधिक सहायता - {reason}")
     else:
-        st.warning(f"**Free legal aid: not established** · पात्रता सिद्ध नहीं — {reason}")
+        st.warning(f"**Free legal aid: not established** · पात्रता सिद्ध नहीं - {reason}")
 
 
 def _draft_tab(case: dict) -> None:

@@ -1,4 +1,4 @@
-"""Labour module checks — no API: agent.client.ask is monkeypatched with canned JSON.
+"""Labour module checks - no API: agent.client.ask is monkeypatched with canned JSON.
 
 Run: .venv/bin/python tests/test_labour.py     (or: pytest tests/test_labour.py)
 """

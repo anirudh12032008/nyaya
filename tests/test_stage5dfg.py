@@ -1,4 +1,4 @@
-"""Stage 5D+5F+5G checks — no API key needed (agent.client.ask is monkeypatched)."""
+"""Stage 5D+5F+5G checks - no API key needed (agent.client.ask is monkeypatched)."""
 import importlib
 import sys
 from pathlib import Path

@@ -56,7 +56,7 @@ def template_prefill(case: dict) -> str:
     """Intake text built from this case's module + facts, with the specifics blanked."""
     facts = _facts(case)
     facts.setdefault("client_name", case.get("client_name"))
-    lines = [f"[{(case.get('module') or 'other').upper()} MATTER — template from case "
+    lines = [f"[{(case.get('module') or 'other').upper()} MATTER - template from case "
              f"#{case.get('id')}; replace every bracket]",
              blank_facts(facts.get("what_happened") or case.get("summary") or "", facts)]
     if _party_names(facts):
@@ -133,7 +133,7 @@ def _public_footer() -> None:
 
 
 def render_readonly(case_id) -> None:
-    """?case=<id>&view=readonly — draft + next steps only, nothing editable."""
+    """?case=<id>&view=readonly - draft + next steps only, nothing editable."""
     try:
         case = db.get_case(int(case_id))
     except (TypeError, ValueError):
@@ -147,7 +147,7 @@ def render_readonly(case_id) -> None:
     theme.page_header(
         f"Your case file · {case.get('client_name') or ''}".strip(" ·"),
         "A read-only copy of what the clinic has prepared for you.",
-        hindi="आपकी फाइल की नकल — इसे बदला नहीं जा सकता।",
+        hindi="आपकी फाइल की नकल - इसे बदला नहीं जा सकता।",
         eyebrow=f"Case #{case['id']}",
     )
 
@@ -186,7 +186,7 @@ def render_readonly(case_id) -> None:
 # ---------------------------------------------------------------- public guide route
 
 def render_guide(module: str) -> None:
-    """?page=guide-<module> — the generated public how-to page."""
+    """?page=guide-<module> - the generated public how-to page."""
     _masthead()
     hi_module = guide.HI_MODULE.get(module, module)
     theme.page_header(
@@ -238,13 +238,13 @@ def _guide_panel() -> None:
 
 def _learning_panel() -> None:
     with theme.card("Most corrected sections",
-                    "What volunteers keep fixing — fed back into the drafting prompts."):
+                    "What volunteers keep fixing - fed back into the drafting prompts."):
         rows = [{"module": m, "correction": c["note"], "times": c["count"], "👎": c["down"]}
                 for m in MODULES for c in learn.corrections(m)[:5]]
         if rows:
             st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
         else:
-            st.caption("No feedback notes yet — add one from a case's Feedback box.")
+            st.caption("No feedback notes yet - add one from a case's Feedback box.")
 
         module = st.selectbox("Module prompt to update", MODULES, key="hintmodule")
         if st.button("Regenerate prompt hints"):

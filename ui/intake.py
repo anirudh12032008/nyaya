@@ -28,7 +28,7 @@ EXAMPLES = {
 
 
 def _done_steps(r):
-    """Which of STEPS actually completed, read off the result — never guessed."""
+    """Which of STEPS actually completed, read off the result - never guessed."""
     if not r:
         return set()
     steps = {t["step"] for t in r.get("trace") or []}
@@ -54,7 +54,7 @@ def _trace_panel(trace, issues=()):
               "cached": bool(t["cached"])} for t in trace],
             use_container_width=True, hide_index=True)
         if any(t["cached"] for t in trace):
-            st.caption("cached — served from cache/, no API call")
+            st.caption("cached - served from cache/, no API call")
         if issues:  # stage5b: verifier findings
             st.markdown("**Verifier issues**")
             for i in issues:
@@ -96,7 +96,7 @@ def _input_card():
     """Returns (text, override, clicked)."""
     text = ""
     with theme.card("Client's statement",
-                    "Hindi, Hinglish or English — write it the way the client said it."):
+                    "Hindi, Hinglish or English - write it the way the client said it."):
         tab_type, tab_speak, tab_upload = st.tabs(["Type", "Speak", "Upload"])
 
         with tab_type:
@@ -118,7 +118,7 @@ def _input_card():
             if pdf_file is not None:
                 from agent.tenant import extract_pdf_text
                 text = (text + "\n\n" + extract_pdf_text(pdf_file.getvalue())).strip()
-                st.caption(f"Attached {pdf_file.name} — its text is appended to the statement.")
+                st.caption(f"Attached {pdf_file.name} - its text is appended to the statement.")
             else:
                 st.caption("A rent agreement helps the tenant module flag unfair clauses.")
 
@@ -142,11 +142,11 @@ def _summary_card(r, cls, d, f, v):
                      (cls.get("jurisdiction", "?"), "muted"))
 
         if f:
-            theme.stat_cards([{"label": "Forum", "value": f.get("forum", "—")},
-                              {"label": "Fee", "value": f"Rs.{f.get('fee_inr', '—')}"},
-                              {"label": "Limitation", "value": f"{f.get('limitation_years', '—')} yrs"}])
+            theme.stat_cards([{"label": "Forum", "value": f.get("forum", " - ")},
+                              {"label": "Fee", "value": f"Rs.{f.get('fee_inr', ' - ')}"},
+                              {"label": "Limitation", "value": f"{f.get('limitation_years', ' - ')} yrs"}])
             if f.get("amount_unknown"):
-                st.warning("Claim amount unknown — forum shown is provisional "
+                st.warning("Claim amount unknown - forum shown is provisional "
                            "(District Commission).")
 
         if d.get("deadline_iso"):
@@ -160,7 +160,7 @@ def _summary_card(r, cls, d, f, v):
                         unsafe_allow_html=True)
         elif v.get("pass") is False:
             n = len(v.get("first_issues") or v.get("issues") or [])
-            label = f"{n} issues flagged — redrafted once" if v.get("redrafted") \
+            label = f"{n} issues flagged - redrafted once" if v.get("redrafted") \
                 else f"{n} issues flagged"
             st.markdown(theme.badge(label, "warn", solid=True), unsafe_allow_html=True)
             with st.expander("Verifier issues"):
@@ -172,7 +172,7 @@ def _summary_card(r, cls, d, f, v):
         if d.get("sections"):
             with st.expander("Sections relied on", expanded=True):
                 for s in d["sections"]:
-                    st.markdown(f"- **{s.get('id')}** — {s.get('why', '')}")
+                    st.markdown(f"- **{s.get('id')}** - {s.get('why', '')}")
         if r.get("sections_dropped"):
             st.warning("Dropped (not in our statute data): " + ", ".join(
                 str(x) for x in r["sections_dropped"]))
@@ -257,7 +257,7 @@ def render():
         theme.document(d["draft_markdown"])
 
         if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
-            with st.expander("Letter to the Superintendent of Police — BNSS 173(4)"):
+            with st.expander("Letter to the Superintendent of Police - BNSS 173(4)"):
                 theme.document(d["sp_letter_markdown"])
 
         if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer

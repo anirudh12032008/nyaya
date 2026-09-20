@@ -55,7 +55,7 @@ def render_sentinel() -> None:
     for n in pending:
         with st.container(border=True):
             left, right = st.columns([3, 1])
-            left.markdown(f"**#{n['case_id']} · {n['client']}** — limitation {n['deadline']}")
+            left.markdown(f"**#{n['case_id']} · {n['client']}** - limitation {n['deadline']}")
             with right:
                 theme.badges(theme.deadline_badge(n["days_left"]))
             st.code(n["message"], language=None)

@@ -24,7 +24,7 @@ No ANTHROPIC_API_KEY in this environment: code must run end-to-end with the cach
 ## Money is computed in Python, never by the model
 `agent/forum.py:compute(amount_inr) -> {"forum": str, "forum_id": str, "fee_inr": int, "limitation_years": 2}` from cpa_rules.json. Stage 1 agent creates it; drafts receive forum+fee as input text.
 
-## DB (Stage 3 agent) — schema.sql exactly:
+## DB (Stage 3 agent) - schema.sql exactly:
 cases(id INTEGER PK, created_at TEXT, module TEXT, status TEXT, urgency TEXT, client_name TEXT, summary TEXT, draft_md TEXT, sections_json TEXT, deadline TEXT, assigned_to INTEGER, eligible_aid INTEGER, eligibility_reason TEXT, intake_seconds REAL, trace_json TEXT, facts_json TEXT)
 volunteers(id, name, load)
 feedback(id, case_id, rating, note, created_at)

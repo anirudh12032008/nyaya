@@ -31,6 +31,10 @@ DANGER = "#B3261E"
 TONES = {"ok": OK, "warn": WARN, "danger": DANGER, "info": NAVY, "muted": MUTED,
          "accent": BRASS}
 
+# Streamlit's default chat avatars come from an icon font that renders as clipped
+# letter boxes until it loads (very visible over the tunnel). Emoji need no font.
+AVATARS = {"user": "🧑", "assistant": "⚖️"}
+
 _CSS = f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
@@ -45,6 +49,12 @@ _CSS = f"""
 html, body, [class*="st-"], .stMarkdown, button, input, textarea, select {{
   font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
 }}
+/* Streamlit's Material Symbols spans carry st-emotion-* classes, so the rule above
+   matches them and the ligature renders as raw text ("keyboard_double_arrow_left").
+   Hand the icon font back. */
+[data-testid^="stIconMaterial"], .material-symbols-rounded, .material-icons {{
+  font-family: 'Material Symbols Rounded' !important;
+}}
 .stApp {{ background: var(--nyaya-paper); color: var(--nyaya-ink); }}
 .block-container {{ padding-top: 2.2rem; padding-bottom: 4rem; max-width: 1380px; }}
 
@@ -57,9 +67,42 @@ h3 {{ font-size: 1.1rem; font-weight: 600; }}
 
 /* sidebar: the clinic's masthead */
 section[data-testid="stSidebar"] {{
-  background: {SURFACE}; border-right: 1px solid var(--nyaya-line);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FCFAF6 100%);
+  border-right: 1px solid var(--nyaya-line);
 }}
-section[data-testid="stSidebar"] .block-container {{ padding-top: 1.2rem; }}
+section[data-testid="stSidebar"] .block-container {{ padding: 1.4rem 1rem 1.2rem; }}
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {{ gap: .15rem; }}
+
+/* nav rows: full-width buttons that read as a list, not as controls */
+section[data-testid="stSidebar"] .stButton > button {{
+  width: 100%; justify-content: flex-start; text-align: left;
+  border: 1px solid transparent; background: transparent; color: var(--nyaya-ink);
+  font-weight: 600; font-size: .92rem; padding: .48rem .65rem; border-radius: 9px;
+}}
+section[data-testid="stSidebar"] .stButton > button > div,
+section[data-testid="stSidebar"] .stButton > button p {{
+  width: 100%; text-align: left; justify-content: flex-start;
+}}
+section[data-testid="stSidebar"] .stButton > button:hover {{
+  background: #F3F0E9; border-color: var(--nyaya-line); color: var(--nyaya-navy);
+}}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"] {{
+  background: {NAVY}; border-color: {NAVY}; color: #fff;
+  box-shadow: 0 1px 2px rgba(31,58,95,.25);
+}}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {{
+  background: #16293F; color: #fff;
+}}
+.ny-navlabel {{ font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+                text-transform: uppercase; color: {MUTED}; opacity: .75;
+                margin: 1rem 0 .3rem .65rem; }}
+.ny-brand {{ display: flex; align-items: center; gap: .6rem; margin-bottom: .1rem; }}
+.ny-seal {{ width: 34px; height: 34px; border-radius: 9px; flex: none;
+            background: linear-gradient(140deg, {NAVY}, #2E5686);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; box-shadow: 0 1px 3px rgba(31,58,95,.3); }}
+.ny-clinic {{ border: 1px solid var(--nyaya-line); border-radius: 10px;
+              padding: .55rem .65rem; background: {SURFACE}; font-size: .8rem; }}
 
 /* controls */
 .stButton > button, .stDownloadButton > button, .stFormSubmitButton > button {{
@@ -176,7 +219,7 @@ def page_header(title: str, subtitle: str = "", hindi: str = "", eyebrow: str = 
 
 
 def badge(text: str, tone: str = "muted", solid: bool = False) -> str:
-    """Returns HTML — put it inside st.markdown(..., unsafe_allow_html=True) or badges()."""
+    """Returns HTML - put it inside st.markdown(..., unsafe_allow_html=True) or badges()."""
     c = TONES.get(tone, MUTED)
     style = (f"background:{c};color:#fff;" if solid
              else f"background:{c}14;color:{c};border-color:{c}55;")
@@ -211,7 +254,7 @@ def deadline_badge(days: int | None) -> str:
 
 
 def stat_cards(items: list[dict], cols: int | None = None) -> None:
-    """items: [{'label','value','delta'?,'tone'?}] — tone colours the delta line."""
+    """items: [{'label','value','delta'?,'tone'?}] - tone colours the delta line."""
     if not items:
         return
     for col, it in zip(st.columns(cols or len(items)), items):
@@ -224,7 +267,7 @@ def stat_cards(items: list[dict], cols: int | None = None) -> None:
 
 
 def agent_strip(steps: list[dict], active: str | None = None, done: set | None = None) -> None:
-    """steps: [{'key','title','desc'}] — the intake → verify pipeline as a strip."""
+    """steps: [{'key','title','desc'}] - the intake → verify pipeline as a strip."""
     done = done or set()
     cells = []
     for i, s in enumerate(steps, 1):

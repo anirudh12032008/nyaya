@@ -22,7 +22,7 @@ def render_copilot(case: dict) -> None:
         run = c1.button("Plan next steps" if not stored else "Re-plan", key=f"copilot{cid}",
                         type="primary" if not stored else "secondary", use_container_width=True)
         if stored:
-            c2.caption("A plan is already on file — re-plan after anything changes.")
+            c2.caption("A plan is already on file - re-plan after anything changes.")
 
     out = None
     if run:
@@ -66,12 +66,12 @@ def _outcome_form(case: dict) -> None:
             theme.quote(case["outcome_note"])
 
     with theme.card("Record the outcome",
-                    "This is what the clinic learns from — write it when the matter ends."):
+                    "This is what the clinic learns from - write it when the matter ends."):
         with st.form(f"outcome{cid}"):
             current = case.get("outcome") or ""
             choice = st.selectbox("How did this case end?", OUTCOMES,
                                   index=OUTCOMES.index(current) if current in OUTCOMES else 0,
-                                  format_func=lambda o: o or "— not yet —")
+                                  format_func=lambda o: o or " - not yet - ")
             note = st.text_area("What worked (this is what the clinic learns from)",
                                 value=case.get("outcome_note") or "")
             if st.form_submit_button("Save outcome", type="primary"):

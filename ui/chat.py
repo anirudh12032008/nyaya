@@ -12,7 +12,7 @@ from agent.chat import chat_turn
 from ui import theme
 
 STARTERS = ["Cases closest to their limitation deadline?",
-            "Rs 3.2 lakh ka claim — kaunsa forum, kitni fee?"]
+            "Rs 3.2 lakh ka claim - kaunsa forum, kitni fee?"]
 
 _CSS = f"""
 <style>
@@ -62,11 +62,11 @@ def _transcript():
     """Visible turns only: user text and assistant text (tool rounds collapsed)."""
     for m in st.session_state.chat_history:
         if isinstance(m["content"], str):
-            st.chat_message("user").markdown(m["content"])
+            st.chat_message("user", avatar=theme.AVATARS["user"]).markdown(m["content"])
         elif m["role"] == "assistant":
             text = "".join(b.get("text", "") for b in m["content"] if b.get("type") == "text")
             calls = [b for b in m["content"] if b.get("type") == "tool_use"]
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar=theme.AVATARS["assistant"]):
                 if calls:
                     st.markdown(_tool_line([_call_label(b["name"], b["input"]) for b in calls]),
                                 unsafe_allow_html=True)
@@ -81,8 +81,8 @@ def _focus_case_id():
 
 
 def _answer(prompt: str, focus):
-    st.chat_message("user").markdown(prompt)
-    with st.chat_message("assistant"):
+    st.chat_message("user", avatar=theme.AVATARS["user"]).markdown(prompt)
+    with st.chat_message("assistant", avatar=theme.AVATARS["assistant"]):
         log, seen = st.empty(), []
 
         def on_tool(name, args, result):
