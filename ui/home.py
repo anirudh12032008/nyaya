@@ -40,6 +40,11 @@ def _start_intake(text: str) -> None:
     st.rerun()
 
 
+def _goto(label: str) -> None:
+    st.session_state["_nav"] = label
+    st.rerun()
+
+
 def _case_rows(cases: list[dict], names: dict, key: str) -> None:
     """One line per case: id · client · module · volunteer · deadline badge · open button."""
     if not cases:
@@ -75,59 +80,33 @@ def render() -> None:
         eyebrow="Nyaya · Madhya Pradesh legal aid",
     )
 
-    # ── quick intake ────────────────────────────────────────────────────────
-    with theme.card("Start a new matter", "समस्या यहाँ लिखें - Type or paste what the client told you."):
-        text = st.text_area("Client's problem", key="home_intake_text", height=120,
-                            placeholder="e.g. The shop refuses to refund a defective phone…",
-                            label_visibility="collapsed")
-        row = st.columns([2, 1, 1, 1, 1])
-        if row[0].button("Analyse →", type="primary", use_container_width=True):
-            if text.strip():
-                _start_intake(text.strip())
-            else:
-                st.warning("Write a line or two first, or pick an example.")
-        for col, (label, sample) in zip(row[1:], EXAMPLES.items()):
-            if col.button(label, key=f"eg_{label}", use_container_width=True):
-                _start_intake(sample)
-
-    # ── pipeline ────────────────────────────────────────────────────────────
-    theme.section("Your case, our AI agents", "Every matter walks the same six steps.")
-    theme.agent_strip(PIPELINE)
-    st.write("")
+    # ── 3 big action cards ──────────────────────────────────────────────────
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        with theme.card("New intake", "Start a matter for a citizen or volunteer."):
+            if st.button("New intake →", type="primary", use_container_width=True, key="card_intake"):
+                _goto("New intake")
+    with c2:
+        with theme.card("My cases", "For lawyers and volunteers tracking their queue."):
+            if st.button("My cases →", type="primary", use_container_width=True, key="card_cases"):
+                _goto("Cases")
+    with c3:
+        with theme.card("Analyze a document", "Upload a document for Nyaya to read."):
+            if st.button("Analyze a document →", type="primary", use_container_width=True, key="card_doc"):
+                _goto("Document analyzer")
 
     if not cases:
         theme.empty_state("📁", "No cases yet",
                           "Take the first intake above and the clinic queue will fill up here.")
         return
 
-    # ── work queue ──────────────────────────────────────────────────────────
-    theme.section("Work queue", "काम की सूची")
-    urgent = [c for c in open_cases if c.get("urgency") == "high"]
-    recent = sorted(cases, key=lambda c: c["id"], reverse=True)[:8]
-    unassigned = [c for c in open_cases if not c.get("assigned_to")]
-    t_urgent, t_recent, t_unassigned = st.tabs(
-        [f"Urgent ({len(urgent)})", "Recent", f"Unassigned ({len(unassigned)})"])
-    with t_urgent:
-        _case_rows(urgent[:8], names, "urg")
-    with t_recent:
-        _case_rows(recent, names, "rec")
-    with t_unassigned:
-        _case_rows(unassigned[:8], names, "una")
-
-    # ── deadlines + brief ───────────────────────────────────────────────────
+    # ── urgent deadlines ─────────────────────────────────────────────────────
     dated = sorted(((db.days_to_deadline(c.get("deadline")), c) for c in open_cases
                     if db.days_to_deadline(c.get("deadline")) is not None),
                    key=lambda p: p[0])
-    today = date.today().isoformat()
-    new_today = [c for c in cases if str(c.get("created_at") or "")[:10] == today]
-    no_draft = [c for c in open_cases if not (c.get("draft_md") or "").strip()]
     near = [c for d, c in dated if d < 10]
-
-    left, right = st.columns([1, 1])
-    with left:
+    if near:
         with theme.card("Deadline watchlist", "Soonest limitation first"):
-            if not dated:
-                st.caption("No limitation dates recorded on open cases.")
             for days, c in dated[:6]:
                 st.markdown(
                     '<div class="ny-row">'
@@ -135,27 +114,47 @@ def render() -> None:
                     + theme.kv("", c.get("client_name") or " - ")
                     + theme.deadline_badge(days)
                     + "</div>", unsafe_allow_html=True)
-    with right:
-        with theme.card("Today's brief", "आज का सार"):
-            st.markdown(
-                f"- **{len(new_today)}** new case(s) opened today\n"
-                f"- **{len(urgent)}** open case(s) marked high urgency\n"
-                f"- **{len(no_draft)}** open case(s) still without a draft\n"
-                f"- **{len(near)}** open case(s) inside 10 days of limitation"
-            )
-            if near:
-                theme.quote(f"Nearest limitation: case #{near[0]['id']} - "
-                            f"{near[0].get('client_name') or 'client'}.")
 
-    # ── clinic impact ───────────────────────────────────────────────────────
-    theme.section("Clinic impact", "Counted from the case file, not estimated.")
-    per_status = stats.get("per_status", {})
-    theme.stat_cards([
-        {"label": "Cases on file", "value": stats.get("total", 0)},
-        {"label": "New", "value": per_status.get("new", 0), "tone": "info"},
-        {"label": "High urgency", "value": len(urgent), "tone": "danger"},
-        {"label": "Eligible for aid",
-         "value": sum(1 for c in cases if c.get("eligible_aid")), "tone": "ok"},
-        {"label": "Volunteers holding cases",
-         "value": sum(1 for v in db.volunteers() if (v.get("load") or 0) > 0), "tone": "accent"},
-    ])
+    # ── everything else, collapsed ──────────────────────────────────────────
+    with st.expander("Your case, our AI agents"):
+        theme.agent_strip(PIPELINE)
+
+    with st.expander("Work queue"):
+        urgent = [c for c in open_cases if c.get("urgency") == "high"]
+        recent = sorted(cases, key=lambda c: c["id"], reverse=True)[:8]
+        unassigned = [c for c in open_cases if not c.get("assigned_to")]
+        t_urgent, t_recent, t_unassigned = st.tabs(
+            [f"Urgent ({len(urgent)})", "Recent", f"Unassigned ({len(unassigned)})"])
+        with t_urgent:
+            _case_rows(urgent[:8], names, "urg")
+        with t_recent:
+            _case_rows(recent, names, "rec")
+        with t_unassigned:
+            _case_rows(unassigned[:8], names, "una")
+
+    with st.expander("Today's brief"):
+        today = date.today().isoformat()
+        new_today = [c for c in cases if str(c.get("created_at") or "")[:10] == today]
+        no_draft = [c for c in open_cases if not (c.get("draft_md") or "").strip()]
+        urgent = [c for c in open_cases if c.get("urgency") == "high"]
+        st.markdown(
+            f"- **{len(new_today)}** new case(s) opened today\n"
+            f"- **{len(urgent)}** open case(s) marked high urgency\n"
+            f"- **{len(no_draft)}** open case(s) still without a draft\n"
+            f"- **{len(near)}** open case(s) inside 10 days of limitation"
+        )
+        if near:
+            theme.quote(f"Nearest limitation: case #{near[0]['id']} - "
+                        f"{near[0].get('client_name') or 'client'}.")
+
+    with st.expander("Clinic impact"):
+        per_status = stats.get("per_status", {})
+        theme.stat_cards([
+            {"label": "Cases on file", "value": stats.get("total", 0)},
+            {"label": "New", "value": per_status.get("new", 0), "tone": "info"},
+            {"label": "High urgency", "value": len(urgent), "tone": "danger"},
+            {"label": "Eligible for aid",
+             "value": sum(1 for c in cases if c.get("eligible_aid")), "tone": "ok"},
+            {"label": "Volunteers holding cases",
+             "value": sum(1 for v in db.volunteers() if (v.get("load") or 0) > 0), "tone": "accent"},
+        ])

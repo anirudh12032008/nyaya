@@ -137,23 +137,64 @@ def _detail(case_id: int):
 
     _header_actions(case, names)
     _eligibility(case)
+    _summary_card(case, names, days)
 
-    tabs = st.tabs(["Draft", "Evidence", "Council", "Copilot", "Audit & history", "Feedback"])
-    with tabs[0]:
+    with st.expander("Read the draft"):
         _draft_tab(case)
-    with tabs[1]:
+
+    with st.expander("Legal sections"):
+        _sections_tab(case)
+
+    with st.expander("Evidence & documents"):
         from ui.evidence import render_evidence
         render_evidence(case)
-    with tabs[2]:
+
+    with st.expander("AI assistants"):
+        st.caption("Council · कौंसिल")
         from ui.orchestra import render_council
         render_council(case)
-    with tabs[3]:
+        st.divider()
+        st.caption("Copilot")
         from ui.copilot import render_copilot
         render_copilot(case)
-    with tabs[4]:
+
+    with st.expander("History & audit"):
         _audit_tab(case)
-    with tabs[5]:
+
+    with st.expander("Feedback"):
         _feedback_tab(case)
+
+
+def _forum_from_draft(draft_md: str) -> str:
+    """Best-effort forum name from the draft's first heading line."""
+    for line in (draft_md or "").splitlines():
+        line = line.strip().lstrip("#").strip()
+        if line:
+            return line
+    return "Not recorded"
+
+
+def _next_action_from_copilot(copilot_json) -> str:
+    try:
+        out = json.loads(copilot_json) if copilot_json else {}
+    except (ValueError, TypeError):
+        out = {}
+    actions = (out or {}).get("next_actions") or []
+    if actions:
+        return actions[0].get("action") or "See AI assistants"
+    return "See AI assistants for a plan"
+
+
+def _summary_card(case: dict, names: dict, days: int | None) -> None:
+    with theme.card("At a glance", "Everything else is tucked into the sections below."):
+        theme.stat_cards([
+            {"label": "Client", "value": case.get("client_name") or "Unnamed"},
+            {"label": "Module", "value": case.get("module") or "other"},
+            {"label": "Status", "value": case.get("status") or "new"},
+            {"label": "Forum", "value": _forum_from_draft(case.get("draft_md"))},
+            {"label": "Deadline", "value": case.get("deadline") or "not recorded"},
+            {"label": "Next action", "value": _next_action_from_copilot(case.get("copilot_json"))},
+        ])
 
 
 def _header_actions(case: dict, names: dict) -> None:
@@ -204,13 +245,17 @@ def _draft_tab(case: dict) -> None:
                        key=f"pdf{case_id}", type="primary")
     theme.document(case.get("draft_md") or "No draft stored.")
 
+    st.divider()
+    share_actions(case)
+
+
+def _sections_tab(case: dict) -> None:
     sections = _loads(case.get("sections_json"), [])
     if sections:
         theme.section("Sections relied on", "The law this draft stands on · आधार धाराएँ")
         st.dataframe(pd.DataFrame(sections), use_container_width=True, hide_index=True)
-
-    st.divider()
-    share_actions(case)
+    else:
+        theme.empty_state("📜", "No sections recorded for this draft")
 
 
 def _audit_tab(case: dict) -> None:

@@ -11,13 +11,24 @@ theme.apply()
 
 from ui import admin, cases, chat, document_analyzer, home, intake, tour  # noqa: E402
 
-# label -> (icon, module). Admin stays off the sidebar, reachable at ?page=admin.
+# label -> (icon, module)
 PAGES = {
     "Home": ("🏠", home),
     "New intake": ("📝", intake),
     "Cases": ("🗂️", cases),
     "Document analyzer": ("🔍", document_analyzer),
+    "Admin": ("🛠️", admin),
     "Guided tour": ("🧭", tour),
+}
+
+# who sees what. The sidebar is grouped by role so nobody has to guess.
+ROLES = {
+    "Citizen":   {"blurb": "Get help with your problem",
+                  "pages": ["Home", "New intake", "Document analyzer"]},
+    "Volunteer / Lawyer": {"blurb": "Run intakes and manage cases",
+                  "pages": ["Home", "New intake", "Cases", "Document analyzer"]},
+    "Admin":     {"blurb": "Clinic head: oversight and settings",
+                  "pages": ["Home", "Cases", "Admin"]},
 }
 
 
@@ -44,16 +55,22 @@ def _urgent_count() -> int:
 
 
 def _nav() -> str:
-    """Sidebar nav as a list of rows. The current row is the filled one."""
+    """Sidebar: pick a role, then a short list of pages for that role."""
+    role = st.sidebar.selectbox("I am a", list(ROLES), key="role",
+                                index=list(ROLES).index(st.session_state.get("role", "Citizen")))
+    st.sidebar.caption(ROLES[role]["blurb"])
+    allowed = ROLES[role]["pages"]
+
     current = st.session_state.pop("_nav", None) or st.session_state.get("nav_page") \
         or ("Cases" if st.query_params.get("case") else "Home")
-    if current not in PAGES:
+    if current not in allowed and current != "Guided tour":
         current = "Home"
     st.session_state["nav_page"] = current
 
     urgent = _urgent_count()
-    st.sidebar.markdown('<div class="ny-navlabel">Workspace</div>', unsafe_allow_html=True)
-    for label, (icon, _mod) in PAGES.items():
+    st.sidebar.markdown(f'<div class="ny-navlabel">{role}</div>', unsafe_allow_html=True)
+    for label in allowed + ["Guided tour"]:
+        icon = PAGES[label][0]
         if label == "Guided tour":                      # help sits apart from daily work
             st.sidebar.markdown('<div class="ny-navlabel">Help</div>', unsafe_allow_html=True)
         row = f"{icon}  {label}"
@@ -91,12 +108,9 @@ if not is_direct_workspace_link and not st.session_state.get("landing_entered"):
 elif page.startswith("guide-"):                                 # stage4: public how-to page
     from ui import stage4
     stage4.render_guide(page[len("guide-"):])
-elif page == "admin":                                           # hidden from the sidebar
-    _masthead()
-    st.sidebar.caption("Admin · clinic head")
-    admin.render()
-    _footer()
-    chat.render_dock()
+elif page == "admin":                                           # deep link -> admin role
+    st.session_state["role"] = "Admin"; st.session_state["_nav"] = "Admin"
+    st.query_params.clear(); st.rerun()
 elif qp.get("case") and qp.get("view") == "readonly":           # stage4: shared read-only case
     from ui import stage4
     stage4.render_readonly(qp["case"])

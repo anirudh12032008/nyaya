@@ -163,33 +163,37 @@ def _summary_card(r, cls, d, f, v):
             label = f"{n} issues flagged - redrafted once" if v.get("redrafted") \
                 else f"{n} issues flagged"
             st.markdown(theme.badge(label, "warn", solid=True), unsafe_allow_html=True)
-            with st.expander("Verifier issues"):
-                for i in v.get("issues") or v.get("first_issues") or []:
-                    st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
-        elif v:
-            st.caption(f"verifier skipped: {v.get('skipped', 'no result')}")
-
-        if d.get("sections"):
-            with st.expander("Sections relied on", expanded=True):
-                for s in d["sections"]:
-                    st.markdown(f"- **{s.get('id')}** - {s.get('why', '')}")
-        if r.get("sections_dropped"):
-            st.warning("Dropped (not in our statute data): " + ", ".join(
-                str(x) for x in r["sections_dropped"]))
 
         if d.get("next_steps"):
-            with st.expander("Next steps", expanded=True):
-                for s in d["next_steps"]:
-                    st.markdown(f"- {s}")
+            st.markdown("**Next steps**")
+            for s_ in d["next_steps"][:3]:
+                st.markdown(f"- {s_}")
 
-        if d.get("what_to_carry"):  # stage2
-            with st.expander("What to carry"):
-                for s in d["what_to_carry"]:
-                    st.markdown(f"- {s}")
-
-        if d.get("hindi_summary"):
-            st.markdown("**क्लाइंट के लिए सारांश**")
-            theme.quote(d["hindi_summary"])
+        with st.expander("More detail: sections, what to carry, Hindi summary"):
+            if d.get("sections"):
+                st.markdown("**Sections relied on**")
+                for s_ in d["sections"]:
+                    st.markdown(f"- **{s_.get('id')}** - {s_.get('why', '')}")
+            if r.get("sections_dropped"):
+                st.warning("Dropped (not in our statute data): " + ", ".join(
+                    str(x) for x in r["sections_dropped"]))
+            if len(d.get("next_steps") or []) > 3:
+                st.markdown("**All next steps**")
+                for s_ in d["next_steps"]:
+                    st.markdown(f"- {s_}")
+            if d.get("what_to_carry"):  # stage2
+                st.markdown("**What to carry**")
+                for s_ in d["what_to_carry"]:
+                    st.markdown(f"- {s_}")
+            if d.get("hindi_summary"):
+                st.markdown("**क्लाइंट के लिए सारांश**")
+                theme.quote(d["hindi_summary"])
+            if v.get("pass") is False:
+                st.markdown("**Verifier issues**")
+                for i in v.get("issues") or v.get("first_issues") or []:
+                    st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
+            elif v and v.get("pass") is None:
+                st.caption(f"verifier skipped: {v.get('skipped', 'no result')}")
 
         from pdf.render import draft_to_pdf
         st.download_button("Download PDF",
@@ -231,7 +235,6 @@ def render():
         return
 
     v = r.get("verification") or {}
-    _trace_panel(r["trace"], v.get("first_issues") or v.get("issues") or [])
 
     if r.get("missing_fact") and not r.get("draft"):
         with theme.card("One question before drafting", "एक सवाल"):
@@ -250,40 +253,36 @@ def render():
         return
 
     f = r.get("forum")
-    left, right = st.columns([3, 2], gap="large")
+    _summary_card(r, cls, d, f, v)
 
-    with left:
-        theme.section("Draft", "Review every fact before filing.")
+    with st.expander("Read the draft", expanded=False):
         theme.document(d["draft_markdown"])
-
-        if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
-            with st.expander("Letter to the Superintendent of Police - BNSS 173(4)"):
-                theme.document(d["sp_letter_markdown"])
-
-        if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer
-            with st.expander("Demand letter to the employer"):
-                theme.document(d["demand_letter_markdown"])
-
-        if d.get("flags"):  # stage2: tenant clause review
-            with theme.card("Clause flags", "Terms in the agreement that need a second look"):
-                st.dataframe([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
-                               "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
-                              for x in d["flags"]],
-                             use_container_width=True, hide_index=True)
-
-    with right:
-        _summary_card(r, cls, d, f, v)
+    if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
+        with st.expander("Letter to the Superintendent of Police - BNSS 173(4)"):
+            theme.document(d["sp_letter_markdown"])
+    if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer
+        with st.expander("Demand letter to the employer"):
+            theme.document(d["demand_letter_markdown"])
+    if d.get("flags"):  # stage2: tenant clause review
+        with st.expander("Clause flags in the agreement"):
+            st.dataframe([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
+                           "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
+                          for x in d["flags"]],
+                         use_container_width=True, hide_index=True)
 
     from ui.intake_extras import render_similar, render_autopilot  # 5G / 5F
-    try:
-        render_similar(r)
-    except Exception as e:  # never let memory lookups break the draft
-        st.caption(f"similar cases unavailable: {e}")
+    with st.expander("Similar past cases"):
+        try:
+            render_similar(r)
+        except Exception as e:  # never let memory lookups break the draft
+            st.caption(f"similar cases unavailable: {e}")
     with st.expander("Filing autopilot preview (mock)"):
         render_autopilot(r)
 
     if st.session_state.get("last_case_id"):  # orchestra: council runs itself right after the draft
         from db import db
         from ui.orchestra import render_council
-        st.divider()
-        render_council(db.get_case(st.session_state["last_case_id"]), auto=True)
+        with st.expander("AI council review"):
+            render_council(db.get_case(st.session_state["last_case_id"]), auto=True)
+
+    _trace_panel(r["trace"], v.get("first_issues") or v.get("issues") or [])

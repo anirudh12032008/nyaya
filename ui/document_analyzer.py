@@ -89,59 +89,33 @@ def render():
         )
     )
 
-    _show_list(
-        "👥 Parties",
-        result.get("parties", []),
-    )
+    explanation = result.get("simple_explanation", "No explanation available.")
+    st.info(explanation)
 
-    _show_list(
-        "📅 Important Dates",
-        result.get("important_dates", []),
-    )
+    with st.expander("👥 Parties & 📅 Important Dates"):
+        _show_list("👥 Parties", result.get("parties", []))
+        _show_list("📅 Important Dates", result.get("important_dates", []))
 
-    _show_list(
-        "⚖️ Laws & Sections",
-        result.get("laws_and_sections", []),
-    )
+    with st.expander("⚖️ Laws & Sections"):
+        _show_list("⚖️ Laws & Sections", result.get("laws_and_sections", []))
 
-    _show_list(
-        "📌 Key Clauses",
-        result.get("key_clauses", []),
-    )
+    with st.expander("📌 Key Clauses & 📝 Obligations"):
+        _show_list("📌 Key Clauses", result.get("key_clauses", []))
+        _show_list("📝 Obligations", result.get("obligations", []))
 
-    _show_list(
-        "📝 Obligations",
-        result.get("obligations", []),
-    )
+    with st.expander("⏰ Deadlines"):
+        _show_list("⏰ Deadlines", result.get("deadlines", []))
 
-    _show_list(
-        "⏰ Deadlines",
-        result.get("deadlines", []),
-    )
+    with st.expander("⚠️ Potential Issues to Review"):
+        risks = result.get("potential_risks", [])
+        if risks:
+            for risk in risks:
+                st.warning(risk)
+        else:
+            st.write("No potential issues were identified.")
 
-    st.subheader("⚠️ Potential Issues to Review")
-
-    risks = result.get("potential_risks", [])
-
-    if risks:
-        for risk in risks:
-            st.warning(risk)
-    else:
-        st.write("No potential issues were identified.")
-
-    _show_list(
-        "✅ Required Actions",
-        result.get("required_actions", []),
-    )
-
-    st.subheader("💡 Simple Explanation")
-
-    st.info(
-        result.get(
-            "simple_explanation",
-            "No explanation available.",
-        )
-    )
+    with st.expander("✅ Required Actions"):
+        _show_list("✅ Required Actions", result.get("required_actions", []))
 
     st.caption(
         "This analysis is informational and does not constitute legal advice."
