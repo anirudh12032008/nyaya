@@ -13,7 +13,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = Path(os.environ.get("NYAYA_DB") or ROOT / "db" / "nyaya.db")
+DB_PATH = Path(os.environ.get("NYAYA_DB") or ROOT / "db" / "nyaya.db").resolve()
 SCHEMA = ROOT / "db" / "schema.sql"
 SEED_CASES = ROOT / "data" / "seed_cases.json"
 
@@ -37,7 +37,7 @@ _conn: sqlite3.Connection | None = None
 
 def connect() -> sqlite3.Connection:
     global _conn
-    if _conn is None or Path(_conn.execute("PRAGMA database_list").fetchone()[2]) != DB_PATH:
+    if _conn is None or Path(_conn.execute("PRAGMA database_list").fetchone()[2]).resolve() != DB_PATH:
         DB_PATH.parent.mkdir(parents=True, exist_ok=True)
         _conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
         _conn.row_factory = sqlite3.Row
