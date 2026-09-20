@@ -41,6 +41,29 @@ Python 3.11+ (built on 3.12). Tests need no API key:
 .venv/bin/python -m pytest -q
 ```
 
+### Windows (PowerShell)
+
+The commands above are for macOS/Linux. On Windows, call the venv's programs directly, so there is
+nothing to activate:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+notepad .env                                        # one line: ANTHROPIC_API_KEY=sk-ant-...
+.venv\Scripts\python -m agent.client --selftest     # one Haiku call: proves the key works
+.venv\Scripts\python warm_cache.py                  # optional: pre-cache the demo inputs
+.venv\Scripts\streamlit run app.py
+.venv\Scripts\python -m pytest -q                   # tests need no key
+```
+
+- **Where the key goes.** Either a `.env` file in the project folder (git-ignored; save it as UTF-8,
+  Notepad's default, because a UTF-16 "Unicode" file cannot be read) or, for one terminal only,
+  `$env:ANTHROPIC_API_KEY = "sk-ant-..."`. `setx` only reaches terminals opened afterwards.
+- **Restart Streamlit after adding or changing the key.** It is read once, when the app starts.
+- **`Could not resolve authentication method`** on the first agent step means no key reached the app.
+  Check the two points above, then restart. With no key, only requests already saved in `cache/` are
+  served.
+
 ## How it works
 
 ### 1. Every model call goes through one function
