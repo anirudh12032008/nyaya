@@ -56,6 +56,7 @@ html, body, [class*="st-"], .stMarkdown, button, input, textarea, select {{
   font-family: 'Material Symbols Rounded' !important;
 }}
 .stApp {{ background: var(--nyaya-paper); color: var(--nyaya-ink); }}
+
 .block-container {{ padding-top: 2.2rem; padding-bottom: 4rem; max-width: 1380px; }}
 
 /* headings read as documents, not dashboards */
@@ -231,9 +232,36 @@ def apply() -> None:
         st.markdown(_NIGHT_CSS, unsafe_allow_html=True)
 
 
-def t(en: str, hi: str) -> str:
-    """Pick the UI language. Sidebar toggle sets st.session_state['hindi']."""
-    return hi if st.session_state.get("hindi") and hi else en
+_ENTER_CSS = """
+<style>
+/* the landing departs behind a paper-coloured veil; easing the workspace in from the
+   same paper makes the two halves read as one move instead of a cut */
+@keyframes ny-enter { from { opacity:0; transform:translateY(6px); } }
+.block-container, section[data-testid="stSidebar"] {
+  animation: ny-enter .38s cubic-bezier(.4,0,.2,1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .block-container, section[data-testid="stSidebar"] { animation: none; }
+}
+</style>
+"""
+
+
+def enter_animation() -> None:
+    """Fade the workspace in once, right after the landing hands over."""
+    st.markdown(_ENTER_CSS, unsafe_allow_html=True)
+
+
+def t(en: str, hi: str = "") -> str:
+    """Pick the UI language. Sidebar toggle sets st.session_state['hindi'].
+
+    Pass `hi` for a one-off string; otherwise the Hindi comes from ui/hi.py keyed
+    on the English. No entry means the English shows through.
+    """
+    if not st.session_state.get("hindi"):
+        return en
+    from ui.hi import HI
+    return hi or HI.get(en) or en
 
 
 def _e(x) -> str:
@@ -242,9 +270,12 @@ def _e(x) -> str:
 
 # ── components ──────────────────────────────────────────────────────────────
 def page_header(title: str, subtitle: str = "", hindi: str = "", eyebrow: str = "") -> None:
-    """Document-style page masthead. `hindi` is the Devanagari gloss shown at the right."""
-    if st.session_state.get("hindi") and hindi:
-        title, hindi = hindi, title
+    """Document-style page masthead. `hindi` is the Devanagari gloss shown at the right.
+
+    The gloss column is sized for one short line, so in Hindi the title itself is
+    translated rather than swapped into it.
+    """
+    title, subtitle, eyebrow = t(title), t(subtitle), t(eyebrow)
     right = f'<div class="hi">{_e(hindi)}</div>' if hindi else ""
     eb = f'<div class="ny-eyebrow">{_e(eyebrow)}</div>' if eyebrow else ""
     sub = f'<div class="sub">{_e(subtitle)}</div>' if subtitle else ""
@@ -277,14 +308,14 @@ def badges(*items) -> None:
 
 def deadline_badge(days: int | None) -> str:
     if days is None:
-        return badge("no limitation date", "muted")
+        return badge(t("no limitation date"), "muted")
     if days < 0:
-        return badge(f"limitation passed {abs(days)}d ago", "danger", solid=True)
+        return badge(t("limitation passed %dd ago") % abs(days), "danger", solid=True)
     if days < 10:
-        return badge(f"{days} days left", "danger", solid=True)
+        return badge(t("%d days left") % days, "danger", solid=True)
     if days < 30:
-        return badge(f"{days} days left", "warn")
-    return badge(f"{days} days left", "ok")
+        return badge(t("%d days left") % days, "warn")
+    return badge(t("%d days left") % days, "ok")
 
 
 def stat_cards(items: list[dict], cols: int | None = None) -> None:
@@ -307,8 +338,8 @@ def agent_strip(steps: list[dict], active: str | None = None, done: set | None =
     for i, s in enumerate(steps, 1):
         cls = "on" if s["key"] == active else ("done" if s["key"] in done else "")
         cells.append(f'<div class="ny-step {cls}"><div class="n">{i:02d}</div>'
-                     f'<div class="t">{_e(s["title"])}</div>'
-                     f'<div class="d">{_e(s.get("desc", ""))}</div></div>')
+                     f'<div class="t">{_e(t(s["title"]))}</div>'
+                     f'<div class="d">{_e(t(s.get("desc", "")))}</div></div>')
     st.markdown(f'<div class="ny-strip">{"".join(cells)}</div>', unsafe_allow_html=True)
 
 
@@ -335,7 +366,7 @@ def kv(label: str, value: str) -> str:
 
 def empty_state(icon: str, title: str, body: str = "") -> None:
     st.markdown(f'<div class="ny-empty"><div class="i">{_e(icon)}</div>'
-                f'<div class="t">{_e(title)}</div><div class="b">{_e(body)}</div></div>',
+                f'<div class="t">{_e(t(title))}</div><div class="b">{_e(t(body))}</div></div>',
                 unsafe_allow_html=True)
 
 
@@ -345,13 +376,13 @@ def card(title: str = "", caption: str = ""):
     box = st.container(border=True)
     with box:
         if title:
-            st.markdown(f"##### {title}")
+            st.markdown(f"##### {t(title)}")
         if caption:
-            st.caption(caption)
+            st.caption(t(caption))
         yield box
 
 
 def section(title: str, caption: str = "") -> None:
-    st.markdown(f"### {title}")
+    st.markdown(f"### {t(title)}")
     if caption:
         st.caption(caption)

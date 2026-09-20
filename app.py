@@ -20,9 +20,6 @@ PAGES = {
     "Admin": ("🛠️", admin),
     "Guided tour": ("🧭", tour),
 }
-HI = {"Home": "होम", "New intake": "नया मामला", "Cases": "केस", "Document analyzer": "दस्तावेज़ जाँच",
-      "Admin": "प्रशासन", "Guided tour": "गाइड", "Citizen": "नागरिक", "Volunteer / Lawyer": "स्वयंसेवक / वकील",
-      "Help": "मदद", "I am a": "मैं हूँ", "urgent": "तत्काल"}
 
 # who sees what. The sidebar is grouped by role so nobody has to guess.
 ROLES = {
@@ -62,11 +59,11 @@ def _nav() -> str:
     c1, c2 = st.sidebar.columns(2)
     c1.toggle("🌙 Night", key="night")
     c2.toggle("हिंदी", key="hindi")
-    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("I am a", HI["I am a"])}</div>', unsafe_allow_html=True)
+    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("I am a")}</div>', unsafe_allow_html=True)
     role = st.sidebar.selectbox("I am a", list(ROLES), key="role", label_visibility="collapsed",
-                                format_func=lambda x: theme.t(x, HI.get(x, x)),
+                                format_func=lambda x: theme.t(x),
                                 index=list(ROLES).index(st.session_state.get("role", "Citizen")))
-    st.sidebar.caption(ROLES[role]["blurb"])
+    st.sidebar.caption(theme.t(ROLES[role]["blurb"]))
     allowed = ROLES[role]["pages"]
 
     current = st.session_state.pop("_nav", None) or st.session_state.get("nav_page") \
@@ -76,14 +73,14 @@ def _nav() -> str:
     st.session_state["nav_page"] = current
 
     urgent = _urgent_count()
-    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t(role, HI.get(role, role))}</div>', unsafe_allow_html=True)
+    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t(role)}</div>', unsafe_allow_html=True)
     for label in allowed + ["Guided tour"]:
         icon = PAGES[label][0]
         if label == "Guided tour":                      # help sits apart from daily work
-            st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("Help", HI["Help"])}</div>', unsafe_allow_html=True)
-        row = f"{icon}  {theme.t(label, HI[label])}"
+            st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("Help")}</div>', unsafe_allow_html=True)
+        row = f"{icon}  {theme.t(label)}"
         if label == "Cases" and urgent:
-            row += f"   ·  {urgent} {theme.t('urgent', HI['urgent'])}"
+            row += f"   ·  {urgent} {theme.t('urgent')}"
         if st.sidebar.button(row, key=f"nav_{label}", width="stretch",
                              type="primary" if label == current else "secondary"):
             st.session_state["nav_page"] = label
@@ -94,10 +91,10 @@ def _nav() -> str:
 def _footer() -> None:
     clinic = st.query_params.get("clinic") or "Bhopal Legal Aid Clinic"
     st.sidebar.markdown(
-        f'<div class="ny-navlabel">Clinic</div>'
+        f'<div class="ny-navlabel">{theme.t("Clinic")}</div>'
         f'<div class="ny-clinic"><div><span style="color:{theme.OK}">●</span> '
         f'<b style="color:{theme.INK}">{clinic}</b></div>'
-        f'<div style="color:{theme.MUTED};margin-top:.1rem">Madhya Pradesh</div></div>',
+        f'<div style="color:{theme.MUTED};margin-top:.1rem">{theme.t("Madhya Pradesh")}</div></div>',
         unsafe_allow_html=True)
     st.sidebar.markdown(
         f'<div style="margin-top:1.1rem;border-left:3px solid {theme.BRASS};padding-left:.7rem;'
@@ -112,6 +109,7 @@ is_direct_workspace_link = bool(qp.get("enter") or qp.get("clinic") or page or q
 if not is_direct_workspace_link and not st.session_state.get("landing_entered"):
     if landing.render():
         st.session_state["landing_entered"] = True
+        st.session_state["_just_entered"] = True
         st.rerun()
 elif page.startswith("guide-"):                                 # stage4: public how-to page
     from ui import stage4
@@ -123,6 +121,8 @@ elif qp.get("case") and qp.get("view") == "readonly":           # stage4: shared
     from ui import stage4
     stage4.render_readonly(qp["case"])
 else:
+    if st.session_state.pop("_just_entered", False):
+        theme.enter_animation()
     _masthead()
     # pages hand the nav over by setting st.session_state["_nav"] = "Cases" before a rerun
     choice = _nav()

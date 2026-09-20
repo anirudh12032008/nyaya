@@ -5,15 +5,16 @@ import streamlit as st
 
 from agent.document_analyzer import analyze_document
 from agent.evidence import extract_text
+from ui import theme
 
 
 def _show_list(title: str, items) -> None:
     """Display a list section consistently."""
 
-    st.subheader(title)
+    st.subheader(theme.t(title))
 
     if not items:
-        st.write("Not specified.")
+        st.write(theme.t("Not specified."))
         return
 
     for item in items:
@@ -23,10 +24,10 @@ def _show_list(title: str, items) -> None:
 def render():
     """Render the Legal Document Analyzer page."""
 
-    st.title("📄 Legal Document Analyzer")
+    st.title(theme.t("📄 Legal Document Analyzer"))
 
     st.markdown(
-        """
+        theme.t("""
         Upload a legal document and Nyaya will extract:
 
         - 👥 Parties
@@ -37,23 +38,23 @@ def render():
         - ⏰ Deadlines
         - ⚠️ Potential issues to review
         - ✅ Required actions
-        """
+        """)
     )
 
     uploaded_file = st.file_uploader(
-        "Upload a legal document",
+        theme.t("Upload a legal document"),
         type=["pdf", "txt"],
-        help="Supported formats: PDF and TXT.",
+        help=theme.t("Supported formats: PDF and TXT."),
     )
 
     if uploaded_file is None:
-        st.info("Upload a PDF or TXT document to start.")
+        st.info(theme.t("Upload a PDF or TXT document to start."))
         return
 
-    st.success(f"Uploaded: {uploaded_file.name}")
+    st.success(f'{theme.t("Uploaded:")} {uploaded_file.name}')
 
     if not st.button(
-        "🔍 Analyze Document",
+        theme.t("🔍 Analyze Document"),
         type="primary",
     ):
         return
@@ -79,44 +80,44 @@ def render():
         st.error(result["error"])
         return
 
-    st.success("Document analysis completed.")
+    st.success(theme.t("Document analysis completed."))
 
-    st.subheader("📋 Document Type")
+    st.subheader(theme.t("📋 Document Type"))
     st.write(
         result.get(
             "document_type",
-            "Not specified",
+            theme.t("Not specified."),
         )
     )
 
     explanation = result.get("simple_explanation", "No explanation available.")
     st.info(explanation)
 
-    with st.expander("👥 Parties & 📅 Important Dates"):
+    with st.expander(theme.t("👥 Parties & 📅 Important Dates")):
         _show_list("👥 Parties", result.get("parties", []))
         _show_list("📅 Important Dates", result.get("important_dates", []))
 
-    with st.expander("⚖️ Laws & Sections"):
+    with st.expander(theme.t("⚖️ Laws & Sections")):
         _show_list("⚖️ Laws & Sections", result.get("laws_and_sections", []))
 
-    with st.expander("📌 Key Clauses & 📝 Obligations"):
+    with st.expander(theme.t("📌 Key Clauses & 📝 Obligations")):
         _show_list("📌 Key Clauses", result.get("key_clauses", []))
         _show_list("📝 Obligations", result.get("obligations", []))
 
-    with st.expander("⏰ Deadlines"):
+    with st.expander(theme.t("⏰ Deadlines")):
         _show_list("⏰ Deadlines", result.get("deadlines", []))
 
-    with st.expander("⚠️ Potential Issues to Review"):
+    with st.expander(theme.t("⚠️ Potential Issues to Review")):
         risks = result.get("potential_risks", [])
         if risks:
             for risk in risks:
                 st.warning(risk)
         else:
-            st.write("No potential issues were identified.")
+            st.write(theme.t("No potential issues were identified."))
 
-    with st.expander("✅ Required Actions"):
+    with st.expander(theme.t("✅ Required Actions")):
         _show_list("✅ Required Actions", result.get("required_actions", []))
 
     st.caption(
-        "This analysis is informational and does not constitute legal advice."
+        theme.t("This analysis is informational and does not constitute legal advice.")
     )
