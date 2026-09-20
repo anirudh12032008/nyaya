@@ -7,7 +7,7 @@ import streamlit as st
 from db import db
 
 STATUSES = ["new", "in_progress", "filed", "closed"]
-MODULES = ["consumer", "police", "tenant", "other"]
+MODULES = ["consumer", "police", "tenant", "labour", "other"]
 URGENCIES = ["high", "medium", "low"]
 
 

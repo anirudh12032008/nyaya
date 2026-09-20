@@ -1,0 +1,10 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"label\": \"TAX INVOICE No 77/2024\",\n  \"kind\": \"Tax Invoice\",\n  \"summary\": \"Tax invoice dated 12 March 2024 for a Nokia phone priced at Rs 40,000\"\n}\n```",
+ "ts": 1789896421.5924559,
+ "parsed": {
+  "label": "TAX INVOICE No 77/2024",
+  "kind": "Tax Invoice",
+  "summary": "Tax invoice dated 12 March 2024 for a Nokia phone priced at Rs 40,000"
+ }
+}

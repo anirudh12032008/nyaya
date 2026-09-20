@@ -13,7 +13,7 @@ from agent.data import load
 from db import db
 from pdf.qr import base_url, case_url, qr_for_case
 
-MODULES = ["consumer", "police", "tenant"]
+MODULES = ["consumer", "police", "tenant", "labour"]
 
 _MONEY = re.compile(r"(?:rs\.?|₹|inr)\s*[\d,]+(?:\.\d+)?(?:\s*(?:lakh|crore|thousand))?", re.I)
 _DATE = re.compile(r"\b(?:\d{4}-\d{2}-\d{2}|\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"

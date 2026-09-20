@@ -15,7 +15,11 @@ CREATE TABLE IF NOT EXISTS cases (
   intake_seconds REAL,
   trace_json TEXT,
   facts_json TEXT,
-  council_json TEXT
+  council_json TEXT,
+  outcome TEXT,
+  outcome_note TEXT,
+  outcome_at TEXT,
+  copilot_json TEXT
 );
 
 CREATE TABLE IF NOT EXISTS volunteers (
@@ -38,4 +42,16 @@ CREATE TABLE IF NOT EXISTS events (
   type TEXT,
   payload TEXT,
   ts TEXT
+);
+
+CREATE TABLE IF NOT EXISTS annexures (
+  id INTEGER PRIMARY KEY,
+  case_id INTEGER,
+  filename TEXT,
+  path TEXT,
+  kind TEXT,
+  label TEXT,
+  summary TEXT,
+  matches_item TEXT,
+  created_at TEXT
 );

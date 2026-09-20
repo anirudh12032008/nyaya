@@ -13,7 +13,8 @@ PUBLIC = ROOT / "public"
 CTA = "Get help at your nearest legal aid clinic"
 TITLES = {"en": "How to file a {m} complaint in Madhya Pradesh",
           "hi": "मध्य प्रदेश में {m} शिकायत कैसे दर्ज करें"}
-HI_MODULE = {"consumer": "उपभोक्ता", "police": "पुलिस", "tenant": "किरायेदारी"}
+HI_MODULE = {"consumer": "उपभोक्ता", "police": "पुलिस", "tenant": "किरायेदारी",
+             "labour": "श्रम"}
 _MARK = "<!-- nyaya:lang="
 
 

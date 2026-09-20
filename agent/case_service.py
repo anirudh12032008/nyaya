@@ -36,7 +36,7 @@ def persist_intake(text: str, result: dict) -> int:
     if result.get("flags"):
         payload["flags"] = result["flags"]
 
-    return db.create_case({
+    case_id = db.create_case({
         "module": cls.get("module") or "other",
         "status": "new",
         "urgency": cls.get("urgency") or "medium",
@@ -51,3 +51,12 @@ def persist_intake(text: str, result: dict) -> int:
         "trace_json": json.dumps(trace, ensure_ascii=False, default=str),
         "facts_json": json.dumps(payload, ensure_ascii=False, default=str),
     })
+
+    v = result.get("verification") or {}
+    if v:  # audit trail: the reviewer's verdict happens before the case row exists
+        db.log_event(case_id, "verified", {"pass": v.get("pass"), "issues": v.get("issues") or [],
+                                           "redrafted": bool(v.get("redrafted")),
+                                           "sections_dropped": result.get("sections_dropped") or []})
+        if v.get("redrafted"):
+            db.log_event(case_id, "redrafted", {"issues_fixed": len(v.get("first_issues") or [])})
+    return case_id

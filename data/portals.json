@@ -36,5 +36,20 @@
   ],
   "fee_rule": "Court fee as per MP Court Fees Act, nominal for rent applications; varies by relief sought.",
   "deadline_rule": "Reply within notice period; 3 years for money claims under Limitation Act."
+ },
+ "labour": {
+  "portal_url": "https://labour.mp.gov.in",
+  "portal_note": "Labour Commissioner, Madhya Pradesh (Shram Seva / Shramik Sewa portal) and the district Labour Office; claims under the Payment of Wages Act go to the notified Authority / Labour Court, PF grievances to EPFiGMS (epfigms.gov.in) and the EPFO Regional Office Indore or Bhopal",
+  "documents": [
+   "ID proof of the worker (Aadhaar) and, if issued, the employer's ID card or gate pass",
+   "Appointment letter, contract or any written terms of employment",
+   "Wage slips, wage register extract or bank statement showing salary credits",
+   "Proof of the period worked (attendance record, muster roll entry, biometric log)",
+   "Termination or relieving letter, or a note of the date and manner of dismissal if none was given",
+   "EPFO member passbook / UAN statement and ESIC contribution history, if PF or ESI is in issue",
+   "Copy of the demand letter sent to the employer and its postal/email delivery proof"
+  ],
+  "fee_rule": "No court fee on a worker's application to the Authority under the Payment of Wages Act 1936 or the Minimum Wages Act 1948; no fee for a complaint to the Labour Commissioner, EPFO or ESIC.",
+  "deadline_rule": "12 months from the date the wages fell due (Payment of Wages Act 1936, s.15(2)); 6 months for a minimum-wage claim (Minimum Wages Act 1948, s.20(2)); 3 years from the date of termination for a direct application to the Labour Court (Industrial Disputes Act 1947, s.2A(3)); gratuity is payable within 30 days and the application to the Controlling Authority is ordinarily within 90 days thereafter (Payment of Gratuity Act 1972, s.7)."
  }
 }

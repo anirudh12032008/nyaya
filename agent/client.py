@@ -7,6 +7,7 @@ is available via last_trace() for the UI trace panel.
 """
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import os
@@ -71,19 +72,28 @@ def _call_api(model: str, system: str, user: str, temperature: float, max_tokens
     return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
 
 
+def _text_of(user) -> str:
+    """The prompt as plain text; content-block lists lose their non-text parts."""
+    if isinstance(user, str):
+        return user
+    return "\n".join(b.get("text", "") for b in user
+                     if isinstance(b, dict) and b.get("type") == "text")
+
+
 def last_trace() -> dict:
     return dict(_last_trace)
 
 
-def ask(model: str, system: str, user: str, json_mode: bool = False,
-        temperature: float = 0.0, max_tokens: int = 8192, use_cache: bool = True):
+def ask(model: str, system: str, user, json_mode: bool = False,
+        temperature: float = 0.0, max_tokens: int = 8192, use_cache: bool = True,
+        cache_key: str | None = None):
     """Call Claude with timeout + one retry, falling back to the file cache.
 
     Returns the text reply, or a parsed dict/list when json_mode=True.
     Raises RuntimeError only if the API fails twice AND nothing is cached.
     """
     global _last_trace
-    key = _key(model, system, user)
+    key = _key(model, system, user if cache_key is None else cache_key)
     path = CACHE_DIR / f"{key}.json"
     t0 = time.time()
 
@@ -113,7 +123,7 @@ def ask(model: str, system: str, user: str, json_mode: bool = False,
         try:
             parsed = _parse_json(text)
         except (json.JSONDecodeError, ValueError) as e:
-            repair = (user + "\n\n[SYSTEM] Your previous reply was not valid JSON (" + str(e)[:120]
+            repair = (_text_of(user) + "\n\n[SYSTEM] Your previous reply was not valid JSON (" + str(e)[:120]
                       + "). Return the same content as ONLY valid JSON: escape quotes and newlines "
                       "inside strings, no prose, no code fences.\n\nPrevious reply:\n" + text[:6000])
             text = _call_api(model, system + "\n\nReturn ONLY valid JSON.", repair, temperature, max_tokens)
@@ -125,6 +135,17 @@ def ask(model: str, system: str, user: str, json_mode: bool = False,
     path.write_text(json.dumps(record, ensure_ascii=False, indent=1))
     _last_trace = {"model": model, "ms": int((time.time() - t0) * 1000), "cached": False}
     return parsed if json_mode else text
+
+
+def ask_image(model: str, system: str, prompt: str, image_bytes: bytes,
+              mime: str = "image/png", json_mode: bool = False, max_tokens: int = 2048):
+    """ask() for one image. Same cache + trace; the cache key covers the bytes."""
+    content = [{"type": "image",
+                "source": {"type": "base64", "media_type": mime,
+                           "data": base64.standard_b64encode(image_bytes).decode()}},
+               {"type": "text", "text": prompt}]
+    return ask(model, system, content, json_mode=json_mode, max_tokens=max_tokens,
+               cache_key=prompt + "\x00" + hashlib.sha256(image_bytes).hexdigest())
 
 
 def selftest() -> None:
