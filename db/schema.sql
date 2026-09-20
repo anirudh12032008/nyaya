@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS cases (
   eligibility_reason TEXT,
   intake_seconds REAL,
   trace_json TEXT,
-  facts_json TEXT
+  facts_json TEXT,
+  council_json TEXT
 );
 
 CREATE TABLE IF NOT EXISTS volunteers (

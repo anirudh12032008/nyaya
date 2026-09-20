@@ -25,7 +25,7 @@ DONE = ("filed", "closed")
 
 CASE_COLS = ["created_at", "module", "status", "urgency", "client_name", "summary",
              "draft_md", "sections_json", "deadline", "assigned_to", "eligible_aid",
-             "eligibility_reason", "intake_seconds", "trace_json", "facts_json"]
+             "eligibility_reason", "intake_seconds", "trace_json", "facts_json", "council_json"]
 
 _conn: sqlite3.Connection | None = None
 
@@ -64,6 +64,8 @@ def _wait_for_seed(timeout_s: int = 600) -> bool:
 def init() -> None:
     c = connect()
     c.executescript(SCHEMA.read_text())
+    if "council_json" not in {r[1] for r in c.execute("PRAGMA table_info(cases)")}:
+        c.execute("ALTER TABLE cases ADD COLUMN council_json TEXT")  # orchestra, added post-seed
     if not c.execute("SELECT 1 FROM volunteers LIMIT 1").fetchone():
         c.executemany("INSERT INTO volunteers(name, load) VALUES (?, 0)",
                       [(n,) for n in VOLUNTEERS])
@@ -104,7 +106,7 @@ def create_case(d: dict) -> int:
     d = dict(d)
     d.setdefault("created_at", _now())
     d.setdefault("status", "new")
-    for k in ("sections_json", "trace_json", "facts_json"):
+    for k in ("sections_json", "trace_json", "facts_json", "council_json"):
         if not isinstance(d.get(k), (str, type(None))):
             d[k] = json.dumps(d[k], ensure_ascii=False, default=str)
     if not d.get("assigned_to"):

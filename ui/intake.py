@@ -152,3 +152,9 @@ def render():
         st.caption(f"similar cases unavailable: {e}")
     with st.expander("Filing autopilot preview (mock)"):
         render_autopilot(r)
+
+    if st.session_state.get("last_case_id"):  # orchestra: council runs itself right after the draft
+        from db import db
+        from ui.orchestra import render_council
+        st.divider()
+        render_council(db.get_case(st.session_state["last_case_id"]), auto=True)
