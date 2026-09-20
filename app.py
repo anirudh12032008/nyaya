@@ -56,7 +56,8 @@ def _urgent_count() -> int:
 
 def _nav() -> str:
     """Sidebar: pick a role, then a short list of pages for that role."""
-    role = st.sidebar.selectbox("I am a", list(ROLES), key="role",
+    st.sidebar.markdown('<div class="ny-navlabel">I am a</div>', unsafe_allow_html=True)
+    role = st.sidebar.selectbox("I am a", list(ROLES), key="role", label_visibility="collapsed",
                                 index=list(ROLES).index(st.session_state.get("role", "Citizen")))
     st.sidebar.caption(ROLES[role]["blurb"])
     allowed = ROLES[role]["pages"]
