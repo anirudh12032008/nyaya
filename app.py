@@ -5,7 +5,7 @@ st.set_page_config(page_title="Nyaya · Legal aid clinic", page_icon="⚖️",
                    layout="wide", initial_sidebar_state="expanded")
 
 from db.db import init as _db_init; _db_init()  # noqa: E402  (schema + seed, idempotent)
-from ui import theme  # noqa: E402
+from ui import landing, theme  # noqa: E402
 
 theme.apply()
 
@@ -82,8 +82,13 @@ def _footer() -> None:
 
 qp = st.query_params
 page = qp.get("page", "")
+is_direct_workspace_link = bool(qp.get("enter") or qp.get("clinic") or page or qp.get("case"))
 
-if page.startswith("guide-"):                                   # stage4: public how-to page
+if not is_direct_workspace_link and not st.session_state.get("landing_entered"):
+    if landing.render():
+        st.session_state["landing_entered"] = True
+        st.rerun()
+elif page.startswith("guide-"):                                 # stage4: public how-to page
     from ui import stage4
     stage4.render_guide(page[len("guide-"):])
 elif page == "admin":                                           # hidden from the sidebar
