@@ -1,14 +1,29 @@
-# Nyaya - legal aid clinic agent (Madhya Pradesh)
+# Nyaya · न्याय
 
-A citizen describes a problem in Hindi, Hinglish or English. Nyaya classifies it (consumer,
-police, tenant), works out the forum, fee and deadline, drafts the filing, checks the draft with
-a second model pass, renders a PDF, and drops the case into a clinic queue with an eligibility
-verdict and an assigned volunteer.
+**An AI legal aid clinic for Madhya Pradesh.** A citizen describes a problem in Hindi, Hinglish or
+English. Nyaya classifies it, works out the correct forum, fee and deadline *in Python*, drafts the
+filing, checks that draft with a second model pass, renders a PDF, and drops the case into a clinic
+queue with a NALSA eligibility verdict and an assigned volunteer.
+
+Four problem modules today - **consumer**, **police**, **tenant**, **labour** - plus a **document
+analyzer**, an agentic **Ask Nyaya** assistant and a **guided tour** for new volunteers.
 
 Stack: Streamlit + Anthropic API + SQLite. No other services. Live at https://nyaya.workwithani.tech.
 
 Contributing? Read [CONTRIBUTING.md](CONTRIBUTING.md) first (branch → PR → review → squash).
 Module contracts and data schemas live in [CONTRACT.md](CONTRACT.md).
+
+## What's in the app
+
+| Page | What it does |
+|---|---|
+| Home | Clinic dashboard: open cases, deadlines, throughput |
+| New intake | Paste or speak the problem → classification, forum/fee, draft, verification, PDF |
+| Cases | Queue with eligibility, assignment, evidence, audit trail, outcomes, counsel brief |
+| Document analyzer | Upload a contract or notice → parties, dates, deadlines, risky clauses |
+| Guided tour | An agent that walks a new volunteer through the workspace |
+| Ask Nyaya | Floating 💬 bubble on every page: an Opus 5 tool-use loop over the live workspace |
+| Admin | `?page=admin`, off the sidebar: metrics, overnight triage, deadline sentinel |
 
 ## Run locally
 
@@ -93,11 +108,13 @@ Query params select special views: `?page=guide-<module>` (public guide),
 | 5F | Filing autopilot preview: mock e-Daakhil form autofill, disabled Submit | `ui/intake_extras.py` |
 | 5G | Similar past cases from the clinic DB (Sonnet over summaries, no vector DB) | `agent/similar.py` |
 | 6 | Orchestra: five specialist agents (evidence, devil's advocate, strategy, risk, client letter) run in parallel on a case, then Opus 5 writes the counsel brief. Auto-runs after intake, on-demand from the case page, stored in `cases.council_json` | `agent/orchestra.py`, `ui/orchestra.py` |
+| 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace - lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` (floating 💬 bubble, bottom-right of every page) |
 | 8 | Labour module: unpaid wages, termination, PF/ESI, gratuity. Forum + limitation from `data/labour_rules.json` in Python; PWA s.15 claim + demand letter (Sonnet) | `agent/labour.py` |
 | 9 | Evidence: Haiku checklist per module, upload photos/PDFs, Haiku vision labels each one, annexure index appended to the draft | `agent/evidence.py`, `ui/evidence.py` |
 | 10 | Outcomes + volunteer copilot: record won/lost/settled, similar cases and `## Learned` use real outcomes; Opus plans call script + 3 dated next actions | `agent/copilot.py`, `ui/copilot.py` |
 | 11 | Audit trail: per-case timeline, model calls, verifier verdict, council run, Haiku plain summary, PDF export for funders/DLSA. Also an Ask Nyaya tool | `agent/audit.py`, `ui/audit.py` |
-| 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace - lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` (floating 💬 bubble, bottom-right of every page) |
+| 12 | Document analyzer: upload any contract or notice, Sonnet extracts parties, dates, money, deadlines and flags one-sided clauses | `agent/document_analyzer.py`, `ui/document_analyzer.py` |
+| 13 | Guided tour: an agent that walks a new volunteer through the workspace page by page | `agent/tour.py`, `ui/tour.py` |
 
 ## Layout
 
@@ -121,8 +138,9 @@ warm_cache.py       pre-runs every demo input through the pipeline
 2. Paste the builder case (₹65 lakh) → routes to State Commission, fee ₹2000.
 3. Paste the refused-FIR bike theft → SHO complaint + SP letter under BNSS 173(4).
 4. Paste `data/sample_rent_agreement.txt` → three flags (REG-17, MTA-11, CA-74) + counter-notice.
-5. Cases → new case is in the queue, assigned, with eligibility verdict; one seeded case shows "limitation in 9 days".
-6. Admin (`?page=admin`, hidden from the sidebar) → 13 cases, per-module chart, overnight triage, deadline sentinel.
+5. Document Analyzer → upload `data/sample_employment_termination.txt` → parties, 15 Sep 2026 termination date, 3-day release deadline, no-notice-pay and dues-withholding clauses flagged.
+6. Cases → new case is in the queue, assigned, with eligibility verdict; one seeded case shows "limitation in 9 days".
+7. Admin (`?page=admin`, hidden from the sidebar) → 13 cases, per-module chart, overnight triage, deadline sentinel.
 
 ## Deploy (Mac + Cloudflare tunnel)
 
