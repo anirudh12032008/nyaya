@@ -3,6 +3,7 @@ import streamlit as st
 
 from agent.chat import chat_turn
 from db import db
+from ui.justice import bot_avatar
 
 STARTERS = ["Which cases are closest to their limitation deadline?",
             "Run the council on the most urgent new case and summarise the brief.",
@@ -18,7 +19,7 @@ def _transcript():
         elif m["role"] == "assistant":
             text = "".join(b.get("text", "") for b in m["content"] if b.get("type") == "text")
             calls = [b for b in m["content"] if b.get("type") == "tool_use"]
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar=bot_avatar()):
                 if calls:
                     st.caption("🔧 " + ", ".join(f"{b['name']}({', '.join(f'{k}={v}' for k, v in b['input'].items())})"
                                                  for b in calls))
@@ -51,7 +52,7 @@ def render():
         return
 
     st.chat_message("user").markdown(prompt)
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=bot_avatar()):
         log = st.empty()
         seen = []
 
