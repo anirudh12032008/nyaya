@@ -2,7 +2,7 @@ import streamlit as st
 
 from agent.pipeline import run_intake
 
-MODULES = ["auto", "consumer", "police", "tenant"]
+MODULES = ["auto", "consumer", "police", "tenant", "labour"]
 
 
 def _trace_panel(trace, issues=()):
@@ -115,8 +115,12 @@ def render():
         st.markdown("### Letter to the Superintendent of Police — BNSS 173(4)")
         st.markdown(d["sp_letter_markdown"])
 
+    if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer
+        st.markdown("### Demand letter to the employer")
+        st.markdown(d["demand_letter_markdown"])
+
     if d.get("what_to_carry"):  # stage2
-        st.markdown("### What to carry to the station")
+        st.markdown("### What to carry")
         for s in d["what_to_carry"]:
             st.markdown(f"- {s}")
 

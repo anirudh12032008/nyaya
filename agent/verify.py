@@ -21,8 +21,9 @@ def _slice(module: str, draft: dict) -> list[dict]:
 
 
 def _lean(draft: dict) -> dict:
-    keys = ("draft_markdown", "sp_letter_markdown", "flags", "sections", "next_steps",
-            "deadline_iso", "station_refused")
+    keys = ("draft_markdown", "sp_letter_markdown", "demand_letter_markdown", "flags",
+            "sections", "next_steps", "deadline_iso", "station_refused", "forum",
+            "limitation")
     return {k: draft[k] for k in keys if draft.get(k) not in (None, "", [])}
 
 
@@ -70,4 +71,7 @@ def redraft_with_issues(module: str, facts: dict, forum: dict | None, draft: dic
     if module == "tenant":
         from agent.tenant import draft_tenant
         return draft_tenant(raw_text, facts, today, extra=extra)
+    if module == "labour":
+        from agent.labour import draft_labour
+        return draft_labour(facts, raw_text, today, extra=extra)
     raise ValueError(f"no drafter for module {module!r}")

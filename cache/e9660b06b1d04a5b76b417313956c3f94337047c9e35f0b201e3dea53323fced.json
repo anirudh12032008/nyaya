@@ -1,0 +1,27 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"labour\",\n  \"jurisdiction\": \"Pithampur\",\n  \"urgency\": \"high\",\n  \"language\": \"hinglish\",\n  \"facts\": {\n    \"parties\": [\n      \"Client, helper\",\n      \"Shree Auto Components, Sector 3 Pithampur, employer\"\n    ],\n    \"amount_inr\": 36000,\n    \"date_of_cause\": \"2026-06-20\",\n    \"what_happened\": \"Client worked as a helper at the factory from July 2024. Wages of ₹12,000 per month were not paid for the last 3 months. Last week, client was terminated without notice. Provident fund (PF) was deducted from wages but not deposited into the client's account.\",\n    \"employer\": \"Shree Auto Components, Sector 3 Pithampur\",\n    \"monthly_wage_inr\": 12000,\n    \"months_unpaid\": 3,\n    \"last_working_day\": \"2026-09-13\",\n    \"pf_uan\": null,\n    \"workers_count\": null\n  },\n  \"missing_fact\": \"Client ka PF UAN number kya hai?\"\n}\n```",
+ "ts": 1789896474.5417259,
+ "parsed": {
+  "module": "labour",
+  "jurisdiction": "Pithampur",
+  "urgency": "high",
+  "language": "hinglish",
+  "facts": {
+   "parties": [
+    "Client, helper",
+    "Shree Auto Components, Sector 3 Pithampur, employer"
+   ],
+   "amount_inr": 36000,
+   "date_of_cause": "2026-06-20",
+   "what_happened": "Client worked as a helper at the factory from July 2024. Wages of ₹12,000 per month were not paid for the last 3 months. Last week, client was terminated without notice. Provident fund (PF) was deducted from wages but not deposited into the client's account.",
+   "employer": "Shree Auto Components, Sector 3 Pithampur",
+   "monthly_wage_inr": 12000,
+   "months_unpaid": 3,
+   "last_working_day": "2026-09-13",
+   "pf_uan": null,
+   "workers_count": null
+  },
+  "missing_fact": "Client ka PF UAN number kya hai?"
+ }
+}

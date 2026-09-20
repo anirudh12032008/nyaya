@@ -3,7 +3,8 @@
 find_similar(summary, facts, k=3) -> [{"case_id","client_name","module","why","what_worked"}]
 Only case_ids that actually exist in the DB are kept; the model's "why" is trusted for
 free text only, everything else (client_name, module, what_worked) is filled in from the
-DB row in Python so the model can't fabricate a case that never happened.
+DB row in Python so the model can't fabricate a case that never happened. `what_worked` is
+the recorded `outcome` column when the clinic has set one, else the old status guess.
 """
 import json
 
@@ -20,7 +21,8 @@ def find_similar(summary: str, facts: dict | None, k: int = 3) -> list[dict]:
 
     by_id = {c["id"]: c for c in cases}
     slim = [{"id": c["id"], "module": c.get("module"), "summary": c.get("summary"),
-             "status": c.get("status")} for c in cases]
+             "status": c.get("status"), "outcome": c.get("outcome"),
+             "outcome_note": c.get("outcome_note")} for c in cases]
 
     template = prompts.load("similar")
     sys_prompt = (template
@@ -48,6 +50,9 @@ def find_similar(summary: str, facts: dict | None, k: int = 3) -> list[dict]:
             "client_name": row.get("client_name") or "",
             "module": row.get("module") or "",
             "why": (entry.get("why") if isinstance(entry, dict) else "") or "",
-            "what_worked": "worked" if (row.get("status") in WORKED) else "in progress",
+            # real recorded outcome beats the status guess
+            "what_worked": row.get("outcome")
+                           or ("worked" if row.get("status") in WORKED else "in progress"),
+            "outcome_note": row.get("outcome_note") or "",
         })
     return result

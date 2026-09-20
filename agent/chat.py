@@ -28,15 +28,15 @@ TOOLS = [
     {"name": "list_cases", "description": "List cases in the queue. All filters optional.",
      "input_schema": {"type": "object", "properties": {
          "status": {"type": "string", "enum": ["new", "in_progress", "filed", "closed"]},
-         "module": {"type": "string", "enum": ["consumer", "police", "tenant", "other"]},
+         "module": {"type": "string", "enum": ["consumer", "police", "tenant", "labour", "other"]},
          "urgency": {"type": "string", "enum": ["high", "medium", "low"]}}}},
     {"name": "get_case", "description": "Full record of one case: facts, draft, sections, deadline, council brief.",
      "input_schema": {"type": "object", "properties": {"case_id": {"type": "integer"}},
                       "required": ["case_id"]}},
     {"name": "search_sections",
-     "description": "Search the clinic's statute data (Consumer Protection Act rules, BNS sections, MP tenancy rules) by keyword.",
+     "description": "Search the clinic's statute data (Consumer Protection Act rules, BNS sections, MP tenancy rules, labour law) by keyword.",
      "input_schema": {"type": "object", "properties": {
-         "module": {"type": "string", "enum": ["consumer", "police", "tenant"]},
+         "module": {"type": "string", "enum": ["consumer", "police", "tenant", "labour"]},
          "query": {"type": "string"}}, "required": ["module", "query"]}},
     {"name": "compute_forum",
      "description": "Consumer forum, court fee and limitation for a claim amount in rupees.",
@@ -49,6 +49,10 @@ TOOLS = [
      "description": "Run the five-agent review council on a case (evidence, opponent, strategy, risk, client letter) and return the counsel brief. Takes ~1 minute; reuses a stored brief unless force=true.",
      "input_schema": {"type": "object", "properties": {"case_id": {"type": "integer"},
                                                        "force": {"type": "boolean"}},
+                      "required": ["case_id"]}},
+    {"name": "export_audit",
+     "description": "Build the funder/DLSA audit-trail PDF for a case (timeline, model calls, verification, council) and return its path plus a plain-English summary.",
+     "input_schema": {"type": "object", "properties": {"case_id": {"type": "integer"}},
                       "required": ["case_id"]}},
     {"name": "update_case", "description": "Change a case's status or urgency. Only when the user asks.",
      "input_schema": {"type": "object", "properties": {
@@ -97,6 +101,11 @@ def dispatch(name: str, args: dict):
         from agent.orchestra import council_for_case
         out = council_for_case(int(args["case_id"]), force=bool(args.get("force")))
         return {"brief_md": out["brief_md"], "errors": out.get("errors"), "ms": out["ms"]}
+    if name == "export_audit":
+        from agent.audit import build_audit, export_audit_pdf
+        cid = int(args["case_id"])
+        return {"pdf_path": str(export_audit_pdf(cid)),
+                "plain_summary": build_audit(cid)["plain_summary"]}
     if name == "update_case":
         cid = int(args.pop("case_id"))
         db.update_case(cid, **{k: v for k, v in args.items() if v})

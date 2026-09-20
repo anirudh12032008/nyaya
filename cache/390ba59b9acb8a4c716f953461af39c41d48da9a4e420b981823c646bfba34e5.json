@@ -1,0 +1,5 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "Rakesh Sharma presented a consumer dispute case on 20 September 2026 concerning a smartphone worth Rs 40,000 purchased in January 2026, which has remained with an authorised service centre for three months while the centre denies warranty repair. The case was created in the consumer module with medium urgency and a deadline of 29 September 2026; intake took 22 seconds. Automated verification found no issues and was not redrafted. Four automated specialist checks ran—client letter, evidence, risk, and strategy—using claude-opus-5 and claude-sonnet-5 models. No sections were dropped from the case record. The eligibility determination shows the client is not eligible for free legal aid; the reason recorded is that no category was identified, and the file notes that the client should be asked about annual income and any other protected status. Verification status is not recorded as passed or failed.",
+ "ts": 1789896357.907222
+}

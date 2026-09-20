@@ -52,6 +52,8 @@ text ──► classify (Haiku) ──► module? ──┬─ consumer ─► f
                                                       verification, trace, sections_dropped
 ```
 
+Admin lives at `?page=admin` (not in the sidebar).
+
 Two hard rules enforced in code, not prompts:
 
 - **Money is computed in Python.** `agent/forum.py` reads `data/cpa_rules.json` and returns
@@ -91,6 +93,10 @@ Query params select special views: `?page=guide-<module>` (public guide),
 | 5F | Filing autopilot preview: mock e-Daakhil form autofill, disabled Submit | `ui/intake_extras.py` |
 | 5G | Similar past cases from the clinic DB (Sonnet over summaries, no vector DB) | `agent/similar.py` |
 | 6 | Orchestra: five specialist agents (evidence, devil's advocate, strategy, risk, client letter) run in parallel on a case, then Opus 5 writes the counsel brief. Auto-runs after intake, on-demand from the case page, stored in `cases.council_json` | `agent/orchestra.py`, `ui/orchestra.py` |
+| 8 | Labour module: unpaid wages, termination, PF/ESI, gratuity. Forum + limitation from `data/labour_rules.json` in Python; PWA s.15 claim + demand letter (Sonnet) | `agent/labour.py` |
+| 9 | Evidence: Haiku checklist per module, upload photos/PDFs, Haiku vision labels each one, annexure index appended to the draft | `agent/evidence.py`, `ui/evidence.py` |
+| 10 | Outcomes + volunteer copilot: record won/lost/settled, similar cases and `## Learned` use real outcomes; Opus plans call script + 3 dated next actions | `agent/copilot.py`, `ui/copilot.py` |
+| 11 | Audit trail: per-case timeline, model calls, verifier verdict, council run, Haiku plain summary, PDF export for funders/DLSA. Also an Ask Nyaya tool | `agent/audit.py`, `ui/audit.py` |
 | 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace — lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` |
 
 ## Layout
@@ -116,7 +122,7 @@ warm_cache.py       pre-runs every demo input through the pipeline
 3. Paste the refused-FIR bike theft → SHO complaint + SP letter under BNSS 173(4).
 4. Paste `data/sample_rent_agreement.txt` → three flags (REG-17, MTA-11, CA-74) + counter-notice.
 5. Cases → new case is in the queue, assigned, with eligibility verdict; one seeded case shows "limitation in 9 days".
-6. Admin → 13 cases, per-module chart, overnight triage, deadline sentinel.
+6. Admin (`?page=admin`, hidden from the sidebar) → 13 cases, per-module chart, overnight triage, deadline sentinel.
 
 ## Deploy (Mac + Cloudflare tunnel)
 

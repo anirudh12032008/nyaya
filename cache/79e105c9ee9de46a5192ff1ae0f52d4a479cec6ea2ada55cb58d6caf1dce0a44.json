@@ -1,0 +1,30 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\n  \"pass\": false,\n  \"issues\": [\n    {\n      \"type\": \"section\",\n      \"detail\": \"ID Act 25B is cited with the why: 'Establishes that the worker's uninterrupted service from July 2024 constitutes continuous service of one year, triggering the Section 25F protections.' The gist of ID Act 25B requires actual work of at least 240 days in the preceding twelve months to establish continuous service; the draft treats mere uninterrupted employment duration as sufficient without addressing the 240-day threshold, which the facts do not confirm (workers_count and attendance data are null/absent).\",\n      \"fix\": \"Either add a [TO CONFIRM] qualifier to the 25B why-clause noting that the 240-day threshold must be verified from attendance records before this section is relied upon, or remove ID Act 25B from the sections list until attendance data is confirmed.\"\n    },\n    {\n      \"type\": \"unsupported_claim\",\n      \"detail\": \"In the demand_letter_markdown, the drafter states 'in violation of Section 25F of the Industrial Disputes Act 1947' as an established fact and demands 'Pay one month's wages in lieu of notice: ₹12,000/-'. The facts confirm termination without notice but do not confirm the 240-day continuous service threshold required by ID Act 25B/25F; the demand letter presents this as settled fact rather than a claim subject to verification.\",\n      \"fix\": \"Add a [TO CONFIRM — subject to verification of 240-day continuous service under ID Act 25B] qualifier in the demand letter wherever Section 25F entitlement is stated as an established fact.\"\n    },\n    {\n      \"type\": \"unsupported_claim\",\n      \"detail\": \"Paragraph 2 of PART 2 — FACTS states the unpaid wage periods are 'June 2026, July 2026 and August 2026'. The FACTS JSON gives date_of_cause as 2026-06-20 and months_unpaid as 3, with last_working_day 2026-09-13. The specific wage-period months (June, July, August) are an inference by the drafter, not stated in the facts or client's words; the client only said '3 mahine se salary nahi mili'. September 2026 (partial month to 13 Sep) may also be in dispute.\",\n      \"fix\": \"Replace the specific months 'June 2026, July 2026 and August 2026' with '[TO CONFIRM — exact three wage periods for which wages are due]' or confirm these months from the client before filing.\"\n    },\n    {\n      \"type\": \"unsupported_claim\",\n      \"detail\": \"In PART 2 paragraph 2, the draft states wages 'of the 7th/10th day' as the deadline, referencing both thresholds. The workers_count field is null, so it is unknown whether the establishment has fewer or more than 1,000 workers; the applicable deadline (7th or 10th day) cannot be determined from the facts provided.\",\n      \"fix\": \"Replace '7वें/10वें दिन' with '[TO CONFIRM — 7th day if establishment has fewer than 1,000 workers, 10th day otherwise; verify workers_count]' until the establishment's worker count is confirmed.\"\n    }\n  ]\n}\n```",
+ "ts": 1789896623.143153,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "section",
+    "detail": "ID Act 25B is cited with the why: 'Establishes that the worker's uninterrupted service from July 2024 constitutes continuous service of one year, triggering the Section 25F protections.' The gist of ID Act 25B requires actual work of at least 240 days in the preceding twelve months to establish continuous service; the draft treats mere uninterrupted employment duration as sufficient without addressing the 240-day threshold, which the facts do not confirm (workers_count and attendance data are null/absent).",
+    "fix": "Either add a [TO CONFIRM] qualifier to the 25B why-clause noting that the 240-day threshold must be verified from attendance records before this section is relied upon, or remove ID Act 25B from the sections list until attendance data is confirmed."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "In the demand_letter_markdown, the drafter states 'in violation of Section 25F of the Industrial Disputes Act 1947' as an established fact and demands 'Pay one month's wages in lieu of notice: ₹12,000/-'. The facts confirm termination without notice but do not confirm the 240-day continuous service threshold required by ID Act 25B/25F; the demand letter presents this as settled fact rather than a claim subject to verification.",
+    "fix": "Add a [TO CONFIRM — subject to verification of 240-day continuous service under ID Act 25B] qualifier in the demand letter wherever Section 25F entitlement is stated as an established fact."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Paragraph 2 of PART 2 — FACTS states the unpaid wage periods are 'June 2026, July 2026 and August 2026'. The FACTS JSON gives date_of_cause as 2026-06-20 and months_unpaid as 3, with last_working_day 2026-09-13. The specific wage-period months (June, July, August) are an inference by the drafter, not stated in the facts or client's words; the client only said '3 mahine se salary nahi mili'. September 2026 (partial month to 13 Sep) may also be in dispute.",
+    "fix": "Replace the specific months 'June 2026, July 2026 and August 2026' with '[TO CONFIRM — exact three wage periods for which wages are due]' or confirm these months from the client before filing."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "In PART 2 paragraph 2, the draft states wages 'of the 7th/10th day' as the deadline, referencing both thresholds. The workers_count field is null, so it is unknown whether the establishment has fewer or more than 1,000 workers; the applicable deadline (7th or 10th day) cannot be determined from the facts provided.",
+    "fix": "Replace '7वें/10वें दिन' with '[TO CONFIRM — 7th day if establishment has fewer than 1,000 workers, 10th day otherwise; verify workers_count]' until the establishment's worker count is confirmed."
+   }
+  ]
+ }
+}

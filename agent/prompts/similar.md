@@ -20,5 +20,9 @@ NEW CASE
 Summary: {summary}
 Facts: {facts}
 
-PAST CASES (JSON, id/module/summary/status only)
+- `outcome` (won/lost/settled/withdrawn) and `outcome_note` are how the case actually ended;
+  null means it is still open. Prefer past cases with a recorded outcome when they are equally
+  similar — they carry more institutional memory. Do not restate the outcome in `why`.
+
+PAST CASES (JSON: id/module/summary/status/outcome/outcome_note)
 {cases}

@@ -24,6 +24,12 @@ def extra_case_actions(case: dict) -> None:
     _s4_case(case)
     from ui.orchestra import render_council  # orchestra: five-agent council on demand
     st.divider(); render_council(case)
+    from ui.evidence import render_evidence      # wave 2: checklist + annexure uploads
+    from ui.copilot import render_copilot        # wave 2: Opus next-steps plan + outcome
+    from ui.audit import render_audit            # wave 2: funder audit trail PDF
+    st.divider(); render_evidence(case)
+    st.divider(); render_copilot(case)
+    st.divider(); render_audit(case)
 
 
 def admin_extras() -> None:

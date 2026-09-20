@@ -1,9 +1,9 @@
-"""Stage 2 dispatch: classification -> the police or tenant drafter, with trace."""
+"""Stage 2 dispatch: classification -> the police, tenant or labour drafter, with trace."""
 from __future__ import annotations
 
 from agent import client
 
-MODULES = ("police", "tenant")
+MODULES = ("police", "tenant", "labour")
 
 
 def run_module(module: str, classification: dict, raw_text: str,
@@ -17,6 +17,9 @@ def run_module(module: str, classification: dict, raw_text: str,
     elif module == "tenant":
         from agent.tenant import draft_tenant
         out = draft_tenant(raw_text, facts, today)
+    elif module == "labour":
+        from agent.labour import draft_labour
+        out = draft_labour(facts, raw_text, today)
     else:
         raise ValueError(f"pipeline_modules handles {MODULES}, not {module!r}")
 
