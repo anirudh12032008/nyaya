@@ -28,13 +28,15 @@ def persist_intake(text: str, result: dict) -> int:
 
     summary = (facts.get("what_happened") or text or "")[:200]
     draft_md = draft.get("draft_markdown") or ""
-    if result.get("sp_letter_markdown"):
-        draft_md += "\n\n---\n\n" + result["sp_letter_markdown"]
+    # the drafters return their covering letter alongside the draft, not at the top level
+    for letter in ("sp_letter_markdown", "demand_letter_markdown"):
+        if draft.get(letter):
+            draft_md += "\n\n---\n\n" + draft[letter]
 
     verdict = eligibility.assess(facts, summary)
     payload = dict(facts)
-    if result.get("flags"):
-        payload["flags"] = result["flags"]
+    if draft.get("flags"):
+        payload["flags"] = draft["flags"]
 
     case_id = db.create_case({
         "module": cls.get("module") or "other",

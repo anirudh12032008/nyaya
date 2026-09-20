@@ -9,7 +9,7 @@ from ui import theme  # noqa: E402
 
 theme.apply()
 
-from ui import admin, cases, chat, home, intake  # noqa: E402  (each exposes render())
+from ui import admin, cases, chat, document_analyzer, home, intake  # noqa: E402
 
 # label -> (icon, module). Admin stays off the sidebar, reachable at ?page=admin.
 PAGES = {
@@ -17,6 +17,7 @@ PAGES = {
     "New intake": ("📝", intake),
     "Cases": ("🗂️", cases),
     "Ask Nyaya": ("💬", chat),
+    "Document analyzer": ("🔍", document_analyzer),
 }
 
 
