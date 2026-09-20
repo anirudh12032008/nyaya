@@ -59,10 +59,11 @@ STEPS = [
             "obligations and deadlines, and the points worth a second look. Use it on "
             "paperwork you have not read yet; use Intake when you have the client's own "
             "account of what happened."},
-    {"page": "Ask Nyaya",
+    {"page": "Home",
      "title": "Ask the workspace agent",
-     "do": "Pick a focus case in the sidebar and ask in plain language — 'which cases are "
-           "closest to their deadline?', 'Rs 3.2 lakh ka claim hai, kaunsa forum?'",
+     "do": "Click the 💬 bubble at the bottom-right of any page and ask in plain language — "
+           "'which cases are closest to their deadline?', 'Rs 3.2 lakh ka claim hai, kaunsa "
+           "forum?'. Open it while a case file is on screen and it answers about that case.",
      "why": "Ask Nyaya has tools over the real data: it lists and opens cases, searches "
             "the statutes, computes the consumer forum and fee, finds similar past cases, "
             "runs the council, and updates a case's status when you ask it to."},
@@ -70,8 +71,8 @@ STEPS = [
 
 SYSTEM = """You are Nyaya's guide: you show a new legal-aid clinic volunteer how to use the
 Nyaya app itself. You explain the software, not the law — if they ask a legal question, or
-anything about a specific case, tell them to use the Ask Nyaya page, which has tools over the
-real case data, and do not answer it yourself.
+anything about a specific case, tell them to use the 💬 Ask Nyaya bubble at the bottom-right of
+any page, which has tools over the real case data, and do not answer it yourself.
 
 Be short. Two or three sentences, or a few bullets. Name the page and the button by the exact
 label they will see on screen. Answer in the language they write in (Hindi, Hinglish or

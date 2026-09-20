@@ -16,7 +16,6 @@ PAGES = {
     "Home": ("🏠", home),
     "New intake": ("📝", intake),
     "Cases": ("🗂️", cases),
-    "Ask Nyaya": ("💬", chat),
     "Document analyzer": ("🔍", document_analyzer),
     "Guided tour": ("🧭", tour),
 }
@@ -59,6 +58,7 @@ elif page == "admin":                                           # hidden from th
     st.sidebar.caption("Admin · clinic head")
     admin.render()
     _footer()
+    chat.render_dock()
 elif qp.get("case") and qp.get("view") == "readonly":           # stage4: shared read-only case
     from ui import stage4
     stage4.render_readonly(qp["case"])
@@ -73,3 +73,4 @@ else:
                               label_visibility="collapsed")
     _footer()
     PAGES[choice][1].render()
+    chat.render_dock()
