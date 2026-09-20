@@ -216,7 +216,7 @@ section[data-testid="stSidebar"] .stButton > button[kind="secondary"], .stButton
 .ny-brand div, .ny-brand span { color: var(--nyaya-navy) !important; }
 .ny-brand span:last-child { color: var(--nyaya-brass) !important; }
 .ny-clinic, .ny-clinic b, .ny-clinic div, [style*="1A1D21"], [style*="5B6470"] { color: var(--nyaya-ink) !important; }
-[data-testid="stSelectbox"] [data-baseweb="select"] div { background: var(--nyaya-surface) !important; }
+[data-testid="stSelectbox"] div { background: var(--nyaya-surface) !important; }
 [data-testid="stSelectbox"] *, [data-testid="stSelectbox"] svg { color: var(--nyaya-ink) !important; fill: var(--nyaya-ink) !important; }
 [data-baseweb="select"] *, [data-baseweb="popover"] *, [data-baseweb="menu"] * { color: var(--nyaya-ink) !important; }
 [data-baseweb="popover"] > div, [data-baseweb="menu"] { background: var(--nyaya-surface) !important; }
