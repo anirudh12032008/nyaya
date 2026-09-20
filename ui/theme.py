@@ -96,6 +96,9 @@ section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {{
 .ny-navlabel {{ font-size: .68rem; font-weight: 700; letter-spacing: .12em;
                 text-transform: uppercase; color: {MUTED}; opacity: .75;
                 margin: 1rem 0 .3rem .65rem; }}
+/* st's markdown wrapper has margin-bottom:-1rem to cancel a trailing <p>; a bare div has none,
+   so the label spilled into the next nav row. */
+[data-testid="stMarkdownContainer"]:has(> .ny-navlabel) {{ margin-bottom: 0; }}
 .ny-brand {{ display: flex; align-items: center; gap: .6rem; margin-bottom: .1rem; }}
 .ny-seal {{ width: 34px; height: 34px; border-radius: 9px; flex: none;
             background: linear-gradient(140deg, {NAVY}, #2E5686);
