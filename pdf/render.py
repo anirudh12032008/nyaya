@@ -1,11 +1,14 @@
 """Markdown draft -> PDF bytes. Devanagari if the bundled Noto font is there, else Latin-only."""
 import io
+import re
 import unicodedata
 from pathlib import Path
 
 from fpdf import FPDF
 
 FONT = Path(__file__).resolve().parent / "fonts" / "NotoSansDevanagari-Regular.ttf"
+# there is no bold run in the single-weight PDF, so **bold** would print its asterisks
+_BOLD = re.compile(r"\*\*(.+?)\*\*", re.S)
 
 
 def _latin(text: str) -> str:
@@ -32,6 +35,7 @@ def draft_to_pdf(draft_md: str, meta: dict | None = None, qr_png: bytes | None =
         family, bold = "helvetica", "B"
 
     def write(text: str, size: int, style: str = "", gap: float = 2):
+        text = _BOLD.sub(r"\1", text)
         pdf.set_font(family, style, size)
         pdf.multi_cell(0, size * 0.55, text if unicode_ok else _latin(text))
         pdf.ln(gap)

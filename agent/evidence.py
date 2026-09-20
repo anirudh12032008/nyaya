@@ -105,9 +105,31 @@ def _pdf_text(raw: bytes) -> str:
         return ""
 
 
+# what the Messages API accepts as an image media_type
+IMAGE_MIMES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+_MAGIC = ((b"\x89PNG\r\n", "image/png"), (b"\xff\xd8\xff", "image/jpeg"),
+          (b"GIF8", "image/gif"), (b"RIFF", "image/webp"))
+
+
+def base_mime(mime: str | None) -> str:
+    """'IMAGE/PNG; charset=binary' -> 'image/png'. Browsers send both forms; the API takes neither."""
+    return (mime or "").split(";")[0].strip().lower()
+
+
+def image_mime(raw: bytes, mime: str | None = None) -> str | None:
+    """The API-legal media_type for an image upload, else None. Bytes win over the declared type,
+    which may be missing, cased oddly, parameterised, or simply wrong."""
+    for magic, m in _MAGIC:
+        if raw[:len(magic)] == magic and (m != "image/webp" or raw[8:12] == b"WEBP"):
+            return m
+    m = base_mime(mime)
+    m = "image/jpeg" if m == "image/jpg" else m
+    return m if m in IMAGE_MIMES else None
+
+
 def extract_text(raw: bytes, mime: str, filename: str = "") -> str:
     """Plain text from a PDF or text-ish upload. Empty for images/binaries."""
-    if (mime or "").endswith("pdf") or filename.lower().endswith(".pdf"):
+    if base_mime(mime).endswith("pdf") or filename.lower().endswith(".pdf"):
         return _pdf_text(raw)[:MAX_TEXT_CHARS]
     try:
         return raw.decode("utf-8")[:MAX_TEXT_CHARS]
@@ -127,8 +149,9 @@ def label_upload(case_id: int, filename: str, raw: bytes, mime: str) -> dict:
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(raw)
 
-    if (mime or "").startswith("image/"):
-        out = client.ask_image(client.HAIKU, _LABEL_SYS, prompt, raw, mime=mime, json_mode=True)
+    img = image_mime(raw, mime)
+    if img:
+        out = client.ask_image(client.HAIKU, _LABEL_SYS, prompt, raw, mime=img, json_mode=True)
     else:
         text = extract_text(raw, mime, filename)
         out = client.ask(client.HAIKU, _LABEL_SYS,
