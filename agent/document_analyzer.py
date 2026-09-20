@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from agent.client import HAIKU, ask
+from agent import client
+from agent.client import HAIKU
 
 
 SYSTEM_PROMPT = """
@@ -62,7 +63,7 @@ Return the requested JSON structure only.
 """
 
     try:
-        result = ask(
+        result = client.ask(
             HAIKU,
             SYSTEM_PROMPT,
             user_prompt,
