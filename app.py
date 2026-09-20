@@ -20,6 +20,9 @@ PAGES = {
     "Admin": ("🛠️", admin),
     "Guided tour": ("🧭", tour),
 }
+HI = {"Home": "होम", "New intake": "नया मामला", "Cases": "केस", "Document analyzer": "दस्तावेज़ जाँच",
+      "Admin": "प्रशासन", "Guided tour": "गाइड", "Citizen": "नागरिक", "Volunteer / Lawyer": "स्वयंसेवक / वकील",
+      "Help": "मदद", "I am a": "मैं हूँ", "urgent": "तत्काल"}
 
 # who sees what. The sidebar is grouped by role so nobody has to guess.
 ROLES = {
@@ -56,8 +59,12 @@ def _urgent_count() -> int:
 
 def _nav() -> str:
     """Sidebar: pick a role, then a short list of pages for that role."""
-    st.sidebar.markdown('<div class="ny-navlabel">I am a</div>', unsafe_allow_html=True)
+    c1, c2 = st.sidebar.columns(2)
+    c1.toggle("🌙 Night", key="night")
+    c2.toggle("हिंदी", key="hindi")
+    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("I am a", HI["I am a"])}</div>', unsafe_allow_html=True)
     role = st.sidebar.selectbox("I am a", list(ROLES), key="role", label_visibility="collapsed",
+                                format_func=lambda x: theme.t(x, HI.get(x, x)),
                                 index=list(ROLES).index(st.session_state.get("role", "Citizen")))
     st.sidebar.caption(ROLES[role]["blurb"])
     allowed = ROLES[role]["pages"]
@@ -69,14 +76,14 @@ def _nav() -> str:
     st.session_state["nav_page"] = current
 
     urgent = _urgent_count()
-    st.sidebar.markdown(f'<div class="ny-navlabel">{role}</div>', unsafe_allow_html=True)
+    st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t(role, HI.get(role, role))}</div>', unsafe_allow_html=True)
     for label in allowed + ["Guided tour"]:
         icon = PAGES[label][0]
         if label == "Guided tour":                      # help sits apart from daily work
-            st.sidebar.markdown('<div class="ny-navlabel">Help</div>', unsafe_allow_html=True)
-        row = f"{icon}  {label}"
+            st.sidebar.markdown(f'<div class="ny-navlabel">{theme.t("Help", HI["Help"])}</div>', unsafe_allow_html=True)
+        row = f"{icon}  {theme.t(label, HI[label])}"
         if label == "Cases" and urgent:
-            row += f"   ·  {urgent} urgent"
+            row += f"   ·  {urgent} {theme.t('urgent', HI['urgent'])}"
         if st.sidebar.button(row, key=f"nav_{label}", width="stretch",
                              type="primary" if label == current else "secondary"):
             st.session_state["nav_page"] = label
@@ -119,6 +126,7 @@ else:
     _masthead()
     # pages hand the nav over by setting st.session_state["_nav"] = "Cases" before a rerun
     choice = _nav()
+    theme.apply()          # night-mode CSS depends on the toggle rendered above
     _footer()
     PAGES[choice][1].render()
     chat.render_dock()

@@ -202,9 +202,33 @@ hr {{ border-color: var(--nyaya-line); }}
 """
 
 
+_NIGHT_CSS = """
+<style>
+:root { --nyaya-ink:#ECE9E1; --nyaya-muted:#A8AEB8; --nyaya-line:#3A3F47;
+        --nyaya-paper:#15181D; --nyaya-surface:#1E2229; --nyaya-navy:#7FA6D9; --nyaya-brass:#D9A653; }
+.stApp, section[data-testid="stSidebar"], .stApp header { background: var(--nyaya-paper) !important; color: var(--nyaya-ink) !important; }
+.stApp *, section[data-testid="stSidebar"] * { color: inherit; }
+.ny-card, .ny-clinic, .ny-doc, .ny-stat, .ny-empty, [data-testid="stExpander"], [data-testid="stExpander"] details,
+.stTextArea textarea, .stTextInput input, [data-baseweb="select"] > div, [data-baseweb="tab-list"],
+section[data-testid="stSidebar"] .stButton > button[kind="secondary"], .stButton > button[kind="secondary"],
+[data-testid="stAlert"], [data-testid="stDataFrame"] { background: var(--nyaya-surface) !important; color: var(--nyaya-ink) !important; border-color: var(--nyaya-line) !important; }
+.ny-head h1, .ny-card h3, .ny-section h2, .stMarkdown, .stMarkdown p, .stMarkdown li, label, .stCaption, [data-testid="stCaptionContainer"] { color: var(--nyaya-ink) !important; }
+[style*="color:#1F3A5F"] { color: var(--nyaya-navy) !important; }
+[style*="color:#1A1D21"], [style*="color:#5B6470"] { color: var(--nyaya-ink) !important; }
+.stButton > button[kind="primary"] { background: var(--nyaya-navy) !important; color: #15181D !important; }
+</style>"""
+
+
 def apply() -> None:
     """Inject the stylesheet. Safe to call more than once per run."""
     st.markdown(_CSS, unsafe_allow_html=True)
+    if st.session_state.get("night"):
+        st.markdown(_NIGHT_CSS, unsafe_allow_html=True)
+
+
+def t(en: str, hi: str) -> str:
+    """Pick the UI language. Sidebar toggle sets st.session_state['hindi']."""
+    return hi if st.session_state.get("hindi") and hi else en
 
 
 def _e(x) -> str:
@@ -214,6 +238,8 @@ def _e(x) -> str:
 # ── components ──────────────────────────────────────────────────────────────
 def page_header(title: str, subtitle: str = "", hindi: str = "", eyebrow: str = "") -> None:
     """Document-style page masthead. `hindi` is the Devanagari gloss shown at the right."""
+    if st.session_state.get("hindi") and hindi:
+        title, hindi = hindi, title
     right = f'<div class="hi">{_e(hindi)}</div>' if hindi else ""
     eb = f'<div class="ny-eyebrow">{_e(eyebrow)}</div>' if eyebrow else ""
     sub = f'<div class="sub">{_e(subtitle)}</div>' if subtitle else ""
