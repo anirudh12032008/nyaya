@@ -9,7 +9,7 @@ from ui import theme  # noqa: E402
 
 theme.apply()
 
-from ui import admin, cases, chat, document_analyzer, home, intake  # noqa: E402
+from ui import admin, cases, chat, document_analyzer, home, intake, tour  # noqa: E402
 
 # label -> (icon, module). Admin stays off the sidebar, reachable at ?page=admin.
 PAGES = {
@@ -18,6 +18,7 @@ PAGES = {
     "Cases": ("🗂️", cases),
     "Ask Nyaya": ("💬", chat),
     "Document analyzer": ("🔍", document_analyzer),
+    "Guided tour": ("🧭", tour),
 }
 
 
@@ -46,7 +47,6 @@ def _footer() -> None:
         f'font-family:\'Source Serif 4\',Georgia,serif;color:{theme.MUTED};font-size:.88rem;'
         f'line-height:1.45">“Nyaya for every citizen.”<br>हर नागरिक के लिए न्याय।</div>',
         unsafe_allow_html=True)
-
 
 qp = st.query_params
 page = qp.get("page", "")
