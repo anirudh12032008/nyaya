@@ -1,0 +1,21 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "{\"similar\": [{\"case_id\": 13, \"why\": \"Nearly identical facts: phone purchased January 2026 for Rs 40,000, held at service centre for three months, warranty repair being denied — same module, same parties, same amount, same cause of action.\"}, {\"case_id\": 1, \"why\": \"Exact duplicate of the new case: same smartphone value (Rs 40,000), same service centre, same 3-month delay, same warranty denial, same purchase date of January 2026.\"}, {\"case_id\": 4, \"why\": \"Same consumer module involving defective goods and a refusal to honour replacement/repair by the seller, though amount (Rs 3,500) is much lower and the dispute was resolved by shop agreeing to replace — outcome [TO CONFIRM] whether similar approach (written demand/consumer forum notice) was used here.\"}]}",
+ "ts": 1789893426.982496,
+ "parsed": {
+  "similar": [
+   {
+    "case_id": 13,
+    "why": "Nearly identical facts: phone purchased January 2026 for Rs 40,000, held at service centre for three months, warranty repair being denied — same module, same parties, same amount, same cause of action."
+   },
+   {
+    "case_id": 1,
+    "why": "Exact duplicate of the new case: same smartphone value (Rs 40,000), same service centre, same 3-month delay, same warranty denial, same purchase date of January 2026."
+   },
+   {
+    "case_id": 4,
+    "why": "Same consumer module involving defective goods and a refusal to honour replacement/repair by the seller, though amount (Rs 3,500) is much lower and the dispute was resolved by shop agreeing to replace — outcome [TO CONFIRM] whether similar approach (written demand/consumer forum notice) was used here."
+   }
+  ]
+ }
+}

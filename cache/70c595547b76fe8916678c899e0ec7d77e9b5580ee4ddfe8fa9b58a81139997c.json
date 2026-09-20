@@ -1,0 +1,30 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Paragraph 4 states 'The agreed date of possession was 1 January 2023' as a specific calendar date, but FACTS only records the year 2023; no specific day or month is confirmed in the facts or client's words.\",\n   \"fix\": \"Replace '1 January 2023' with '[TO CONFIRM — exact agreed possession date, year 2023]' wherever it appears in the draft (Facts paragraph 4, cause-of-action paragraph 7, and next_steps item 6).\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"The draft states '(i.e., 1 January 2025)' in next_steps as the limitation deadline, which is derived from the invented specific date '1 January 2023'; since that date is unconfirmed, the computed deadline is equally unsupported.\",\n   \"fix\": \"Replace '(i.e., 1 January 2025)' with '[TO CONFIRM — exact limitation deadline once agreed possession date is confirmed]'.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Verification block contains '[Name]' and '[Place]' as literal bracketed tokens distinct from the allowed '[TO CONFIRM]' form (e.g., '[Complainant's name]', '[Place]', '[Name]', '[Date]').\",\n   \"fix\": \"Replace '[Complainant's name]', '[Place]', '[Name]', and '[Date]' in the Verification section with '[TO CONFIRM]' to comply with the placeholder convention.\"\n  },\n  {\n   \"type\": \"placeholder\",\n   \"detail\": \"The Verification section contains '[Place]' and '[Date]' which are not in the permitted '[TO CONFIRM]' format.\",\n   \"fix\": \"Change '[Place]' to '[TO CONFIRM — place of verification]' and '[Date]' to '[TO CONFIRM — date of verification]'.\"\n  }\n ]}\n```",
+ "ts": 1789893424.183827,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "unsupported_claim",
+    "detail": "Paragraph 4 states 'The agreed date of possession was 1 January 2023' as a specific calendar date, but FACTS only records the year 2023; no specific day or month is confirmed in the facts or client's words.",
+    "fix": "Replace '1 January 2023' with '[TO CONFIRM — exact agreed possession date, year 2023]' wherever it appears in the draft (Facts paragraph 4, cause-of-action paragraph 7, and next_steps item 6)."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "The draft states '(i.e., 1 January 2025)' in next_steps as the limitation deadline, which is derived from the invented specific date '1 January 2023'; since that date is unconfirmed, the computed deadline is equally unsupported.",
+    "fix": "Replace '(i.e., 1 January 2025)' with '[TO CONFIRM — exact limitation deadline once agreed possession date is confirmed]'."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Verification block contains '[Name]' and '[Place]' as literal bracketed tokens distinct from the allowed '[TO CONFIRM]' form (e.g., '[Complainant's name]', '[Place]', '[Name]', '[Date]').",
+    "fix": "Replace '[Complainant's name]', '[Place]', '[Name]', and '[Date]' in the Verification section with '[TO CONFIRM]' to comply with the placeholder convention."
+   },
+   {
+    "type": "placeholder",
+    "detail": "The Verification section contains '[Place]' and '[Date]' which are not in the permitted '[TO CONFIRM]' format.",
+    "fix": "Change '[Place]' to '[TO CONFIRM — place of verification]' and '[Date]' to '[TO CONFIRM — date of verification]'."
+   }
+  ]
+ }
+}

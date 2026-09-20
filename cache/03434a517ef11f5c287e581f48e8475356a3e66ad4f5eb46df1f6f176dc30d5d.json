@@ -1,0 +1,9 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": true, \"issues\": []}\n```",
+ "ts": 1789893413.9695518,
+ "parsed": {
+  "pass": true,
+  "issues": []
+ }
+}

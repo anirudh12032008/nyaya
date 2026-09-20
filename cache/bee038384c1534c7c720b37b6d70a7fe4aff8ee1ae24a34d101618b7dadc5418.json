@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\n      \"Mohan Lal Patel (client)\",\n      \"Greenview Builders Pvt Ltd\"\n    ],\n    \"amount_inr\": 6500000,\n    \"date_of_cause\": \"2023-06-01\",\n    \"what_happened\": \"Builder Greenview Builders Pvt Ltd promised possession of a residential flat to Mohan Lal Patel in 2023 but has not delivered it as of September 2026. Client seeks refund of 65 lakh rupees with compensation.\"\n  },\n  \"missing_fact\": \"In which district or city of Madhya Pradesh is the flat located?\"\n}\n```",
+ "ts": 1789893364.47698,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Mohan Lal Patel (client)",
+    "Greenview Builders Pvt Ltd"
+   ],
+   "amount_inr": 6500000,
+   "date_of_cause": "2023-06-01",
+   "what_happened": "Builder Greenview Builders Pvt Ltd promised possession of a residential flat to Mohan Lal Patel in 2023 but has not delivered it as of September 2026. Client seeks refund of 65 lakh rupees with compensation."
+  },
+  "missing_fact": "In which district or city of Madhya Pradesh is the flat located?"
+ }
+}

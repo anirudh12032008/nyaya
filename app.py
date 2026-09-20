@@ -9,7 +9,18 @@ from ui import intake, cases, admin  # noqa: E402  (each page exposes render())
 PAGES = {"Intake": intake, "Cases": cases, "Admin": admin}
 
 qp = st.query_params
-default = "Cases" if qp.get("case") else "Intake"
-choice = st.sidebar.radio("Nyaya", list(PAGES), index=list(PAGES).index(default))
-st.sidebar.caption("Legal aid clinic agent · Madhya Pradesh")
-PAGES[choice].render()
+if qp.get("clinic"):
+    st.caption(f"Clinic: {qp['clinic']}")
+
+page = qp.get("page", "")
+if page.startswith("guide-"):                                   # stage4: public how-to page
+    from ui import stage4
+    stage4.render_guide(page[len("guide-"):])
+elif qp.get("case") and qp.get("view") == "readonly":           # stage4: shared read-only case
+    from ui import stage4
+    stage4.render_readonly(qp["case"])
+else:
+    default = "Cases" if qp.get("case") else "Intake"
+    choice = st.sidebar.radio("Nyaya", list(PAGES), index=list(PAGES).index(default))
+    st.sidebar.caption("Legal aid clinic agent · Madhya Pradesh")
+    PAGES[choice].render()

@@ -5,12 +5,16 @@ from agent.pipeline import run_intake
 MODULES = ["auto", "consumer", "police", "tenant"]
 
 
-def _trace_panel(trace):
+def _trace_panel(trace, issues=()):
     with st.expander(f"Agent trace ({sum(t['ms'] for t in trace)} ms)", expanded=False):
         st.table([{"step": t["step"], "model": t["model"], "ms": t["ms"],
                    "": "cached" if t["cached"] else ""} for t in trace])
         if any(t["cached"] for t in trace):
             st.caption(":grey[cached — served from cache/, no API call]")
+        if issues:  # stage5b: verifier findings
+            st.markdown("**Verifier issues**")
+            for i in issues:
+                st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
 
 
 def _analyse(text, override, answer=None):
@@ -54,7 +58,8 @@ def render():
     if not r:
         return
 
-    _trace_panel(r["trace"])
+    v = r.get("verification") or {}
+    _trace_panel(r["trace"], v.get("first_issues") or v.get("issues") or [])
 
     if r.get("missing_fact") and not r.get("draft"):
         st.info(f"**One question:** {r['missing_fact']}")
@@ -87,6 +92,18 @@ def render():
         st.table([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
                    "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
                   for x in d["flags"]])
+
+    if v.get("pass") is True:  # stage5b badge
+        st.success("✅ Verified by second agent")
+    elif v.get("pass") is False:
+        n = len(v.get("first_issues") or v.get("issues") or [])
+        st.warning(f"⚠️ Verifier flagged {n} issues (redrafted once)" if v.get("redrafted")
+                   else f"⚠️ Verifier flagged {n} issues")
+        with st.expander("Verifier issues"):
+            for i in v.get("issues") or v.get("first_issues") or []:
+                st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
+    elif v:
+        st.caption(f"verifier skipped: {v.get('skipped', 'no result')}")
 
     st.markdown("### Draft")
     st.markdown(d["draft_markdown"])

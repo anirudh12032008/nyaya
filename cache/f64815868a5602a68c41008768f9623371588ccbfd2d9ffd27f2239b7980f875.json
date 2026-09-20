@@ -1,0 +1,22 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"police\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Arjun Singh Thakur\", \"Unknown thief\", \"Local police station\"],\n    \"amount_inr\": 60000,\n    \"date_of_cause\": \"2026-09-13\",\n    \"what_happened\": \"Arjun Singh Thakur's motorcycle worth Rs 60,000 was stolen from his hostel parking on 13 September 2026. The local police station refused to register an FIR despite the theft report.\"\n  },\n  \"missing_fact\": \"Which police station refused to register the FIR, and on what date did you report it?\"\n}\n```",
+ "ts": 1789893364.491861,
+ "parsed": {
+  "module": "police",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Arjun Singh Thakur",
+    "Unknown thief",
+    "Local police station"
+   ],
+   "amount_inr": 60000,
+   "date_of_cause": "2026-09-13",
+   "what_happened": "Arjun Singh Thakur's motorcycle worth Rs 60,000 was stolen from his hostel parking on 13 September 2026. The local police station refused to register an FIR despite the theft report."
+  },
+  "missing_fact": "Which police station refused to register the FIR, and on what date did you report it?"
+ }
+}

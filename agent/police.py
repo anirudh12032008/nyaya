@@ -67,7 +67,7 @@ def pick_sections(text: str) -> list[dict]:
     return slice_
 
 
-def draft_police(facts: dict, raw_text: str, today: str | None = None) -> dict:
+def draft_police(facts: dict, raw_text: str, today: str | None = None, extra: str = "") -> dict:
     from agent.sections import filter_sections  # lazy: import order independence
 
     today = today or date.today().isoformat()
@@ -84,6 +84,7 @@ def draft_police(facts: dict, raw_text: str, today: str | None = None) -> dict:
         f"CLIENT'S OWN WORDS:\n{raw_text}\n\n"
         f"SECTIONS (cite only these ids):\n{json.dumps(lean, ensure_ascii=False, indent=1)}\n\n"
         f"PORTAL / PROCEDURE INFO:\n{json.dumps(portal, ensure_ascii=False, indent=1)}"
+        + (f"\n\n{extra}" if extra else "")
     )
     out = client.ask(client.SONNET, prompts.load("draft_police"), user,
                      json_mode=True, temperature=0.3)

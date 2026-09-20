@@ -1,0 +1,10 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"eligible\": false,\n  \"category\": \"\",\n  \"reason\": \"no category identified; ask client about annual income and any other protected status\"\n}\n```",
+ "ts": 1789893365.8964171,
+ "parsed": {
+  "eligible": false,
+  "category": "",
+  "reason": "no category identified; ask client about annual income and any other protected status"
+ }
+}

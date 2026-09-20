@@ -131,7 +131,8 @@ def _monthly_rent(text: str) -> int | None:
     return None
 
 
-def draft_tenant(agreement_text: str, facts: dict | None = None, today: str | None = None) -> dict:
+def draft_tenant(agreement_text: str, facts: dict | None = None, today: str | None = None,
+                 extra: str = "") -> dict:
     from agent.sections import filter_sections  # lazy: import order independence
 
     today = today or date.today().isoformat()
@@ -148,6 +149,7 @@ def draft_tenant(agreement_text: str, facts: dict | None = None, today: str | No
         f"FACTS JSON:\n{json.dumps(facts, ensure_ascii=False, indent=1)}\n\n"
         f"AGREEMENT TEXT / CLIENT'S WORDS:\n{agreement_text}\n\n"
         f"RULES (cite only these ids):\n{json.dumps(lean, ensure_ascii=False, indent=1)}"
+        + (f"\n\n{extra}" if extra else "")
     )
     out = client.ask(client.SONNET, prompts.load("draft_tenant"), user,
                      json_mode=True, temperature=0.3)

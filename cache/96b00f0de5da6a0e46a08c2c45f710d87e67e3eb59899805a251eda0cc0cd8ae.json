@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"police\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Neha Tiwari\", \"Unknown loan-app recovery agents\"],\n    \"amount_inr\": null,\n    \"date_of_cause\": \"2026-09-10\",\n    \"what_happened\": \"Neha Tiwari received harassment calls from loan-app recovery agents. The agents morphed her photograph and sent obscene messages to her contacts without consent following a loan default. She seeks to file a cyber-related police complaint.\"\n  },\n  \"missing_fact\": \"What is the name or details of the loan app or lending company involved?\"\n}\n```",
+ "ts": 1789893367.747936,
+ "parsed": {
+  "module": "police",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Neha Tiwari",
+    "Unknown loan-app recovery agents"
+   ],
+   "amount_inr": null,
+   "date_of_cause": "2026-09-10",
+   "what_happened": "Neha Tiwari received harassment calls from loan-app recovery agents. The agents morphed her photograph and sent obscene messages to her contacts without consent following a loan default. She seeks to file a cyber-related police complaint."
+  },
+  "missing_fact": "What is the name or details of the loan app or lending company involved?"
+ }
+}

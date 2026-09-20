@@ -1,0 +1,10 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"eligible\": true,\n  \"category\": \"women\",\n  \"reason\": \"Client is a woman facing harassment and threats to safety; eligible under s.12(c) regardless of income.\"\n}\n```",
+ "ts": 1789893365.718418,
+ "parsed": {
+  "eligible": true,
+  "category": "women",
+  "reason": "Client is a woman facing harassment and threats to safety; eligible under s.12(c) regardless of income."
+ }
+}

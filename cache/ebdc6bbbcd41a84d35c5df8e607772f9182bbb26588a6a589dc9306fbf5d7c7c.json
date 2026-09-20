@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"police\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Priya Malviya (client)\", \"former colleague (name withheld)\"],\n    \"amount_inr\": 50000,\n    \"date_of_cause\": \"2026-08-20\",\n    \"what_happened\": \"Priya Malviya received repeated threatening messages from a former colleague demanding money and making intimidating statements about her safety. The harassment began around 20 August 2026 and continues.\"\n  },\n  \"missing_fact\": \"What is the full name and contact details of the former colleague making these threats?\"\n}\n```",
+ "ts": 1789893364.456629,
+ "parsed": {
+  "module": "police",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Priya Malviya (client)",
+    "former colleague (name withheld)"
+   ],
+   "amount_inr": 50000,
+   "date_of_cause": "2026-08-20",
+   "what_happened": "Priya Malviya received repeated threatening messages from a former colleague demanding money and making intimidating statements about her safety. The harassment began around 20 August 2026 and continues."
+  },
+  "missing_fact": "What is the full name and contact details of the former colleague making these threats?"
+ }
+}

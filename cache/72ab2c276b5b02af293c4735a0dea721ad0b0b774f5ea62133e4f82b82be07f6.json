@@ -1,0 +1,25 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"draft_markdown states 'As of the date of this complaint (20 September 2026)' — the date '20 September 2026' is not present in FACTS, client's words, or the FORUM block\",\n   \"fix\": \"Replace '20 September 2026' with '[TO CONFIRM — date of filing]' or remove the parenthetical; do not invent a specific date\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"next_steps item reads 'Confirm the exact limitation deadline [TO CONFIRM — exact limitation deadline once agreed possession date is confirmed]' — deadline_iso field states '2025-01-01' as a computed fact, but this conflicts with the cause of action date of 2023-01-01 plus 2 years equalling 2025-01-01; the draft_markdown never surfaces this date, yet next_steps references it only as a placeholder while deadline_iso presents it as a resolved value. The deadline_iso value '2025-01-01' implies the limitation period may already have expired (complaint appears to be filed in 2026), which is an unresolved factual inconsistency the drafter has not flagged as [TO CONFIRM]\",\n   \"fix\": \"In next_steps, replace the computed/implied deadline with '[TO CONFIRM]' and add a note that the supervising advocate must verify whether the limitation period has expired and whether condonation of delay will be required; do not state or imply a resolved deadline date\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"draft_markdown states interest 'at 18% per annum' — no rate of interest is mentioned in FACTS, client's words, or the FORUM block\",\n   \"fix\": \"Replace '18% per annum' with '[TO CONFIRM — rate of interest to be determined by supervising advocate]'\"\n  }\n ]}\n```",
+ "ts": 1789893468.193275,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "unsupported_claim",
+    "detail": "draft_markdown states 'As of the date of this complaint (20 September 2026)' — the date '20 September 2026' is not present in FACTS, client's words, or the FORUM block",
+    "fix": "Replace '20 September 2026' with '[TO CONFIRM — date of filing]' or remove the parenthetical; do not invent a specific date"
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "next_steps item reads 'Confirm the exact limitation deadline [TO CONFIRM — exact limitation deadline once agreed possession date is confirmed]' — deadline_iso field states '2025-01-01' as a computed fact, but this conflicts with the cause of action date of 2023-01-01 plus 2 years equalling 2025-01-01; the draft_markdown never surfaces this date, yet next_steps references it only as a placeholder while deadline_iso presents it as a resolved value. The deadline_iso value '2025-01-01' implies the limitation period may already have expired (complaint appears to be filed in 2026), which is an unresolved factual inconsistency the drafter has not flagged as [TO CONFIRM]",
+    "fix": "In next_steps, replace the computed/implied deadline with '[TO CONFIRM]' and add a note that the supervising advocate must verify whether the limitation period has expired and whether condonation of delay will be required; do not state or imply a resolved deadline date"
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "draft_markdown states interest 'at 18% per annum' — no rate of interest is mentioned in FACTS, client's words, or the FORUM block",
+    "fix": "Replace '18% per annum' with '[TO CONFIRM — rate of interest to be determined by supervising advocate]'"
+   }
+  ]
+ }
+}

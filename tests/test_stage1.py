@@ -55,7 +55,7 @@ def test_pipeline_drafts_and_drops(monkeypatch):
     assert r["sections_dropped"] == ["999"], r["sections_dropped"]
     assert [s["id"] for s in r["draft"]["sections"]] == ["2(11)"], r["draft"]["sections"]
     assert r["draft"]["deadline_iso"] == "2028-01-01", "Python must override the model's deadline"
-    assert len(r["trace"]) == 2 and r["trace"][0]["step"] == "classify", r["trace"]
+    assert len(r["trace"]) >= 2 and r["trace"][0]["step"] == "classify", r["trace"]
 
 
 def test_pipeline_asks_one_question(monkeypatch):

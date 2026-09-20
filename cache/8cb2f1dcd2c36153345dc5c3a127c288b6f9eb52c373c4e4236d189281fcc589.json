@@ -1,0 +1,10 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"eligible\": true,\n  \"category\": \"senior_citizen\",\n  \"reason\": \"Client is an elderly widow; senior citizen status under s.12(c) confers eligibility regardless of income.\"\n}\n```",
+ "ts": 1789893369.445547,
+ "parsed": {
+  "eligible": true,
+  "category": "senior_citizen",
+  "reason": "Client is an elderly widow; senior citizen status under s.12(c) confers eligibility regardless of income."
+ }
+}

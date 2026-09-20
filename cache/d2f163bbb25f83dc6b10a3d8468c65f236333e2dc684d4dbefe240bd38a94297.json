@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"consumer\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"medium\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\n      \"Rakesh Sharma (client)\",\n      \"XYZ Mobiles Service Centre\"\n    ],\n    \"amount_inr\": 40000,\n    \"date_of_cause\": \"2026-01-15\",\n    \"what_happened\": \"Rakesh Sharma purchased a smartphone worth Rs 40,000 in January 2026. The device was deposited at XYZ Mobiles Service Centre for warranty repair approximately three months ago (around June 2026). The service centre is now denying warranty coverage and refusing to repair the device.\"\n  },\n  \"missing_fact\": \"What is the exact reason given by the service centre for denying the warranty claim?\"\n}\n```",
+ "ts": 1789893364.701216,
+ "parsed": {
+  "module": "consumer",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "medium",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Rakesh Sharma (client)",
+    "XYZ Mobiles Service Centre"
+   ],
+   "amount_inr": 40000,
+   "date_of_cause": "2026-01-15",
+   "what_happened": "Rakesh Sharma purchased a smartphone worth Rs 40,000 in January 2026. The device was deposited at XYZ Mobiles Service Centre for warranty repair approximately three months ago (around June 2026). The service centre is now denying warranty coverage and refusing to repair the device."
+  },
+  "missing_fact": "What is the exact reason given by the service centre for denying the warranty claim?"
+ }
+}

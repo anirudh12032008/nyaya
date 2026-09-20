@@ -22,7 +22,7 @@ def _deadline(date_of_cause: str | None, years: int) -> str | None:
         return d.replace(year=d.year + years, day=28).isoformat()
 
 
-def draft_consumer(facts: dict, forum: dict, today: str | None = None) -> dict:
+def draft_consumer(facts: dict, forum: dict, today: str | None = None, extra: str = "") -> dict:
     today = today or date.today().isoformat()
     portal = load("portals").get("consumer", {})
     slice_ = [{"id": s["id"], "title": s.get("title", ""), "gist": s.get("gist", "")}
@@ -37,7 +37,7 @@ def draft_consumer(facts: dict, forum: dict, today: str | None = None) -> dict:
         "DOCUMENTS THE PORTAL REQUIRES:\n"
         + json.dumps(portal.get("documents", []), ensure_ascii=False)
         + f"\nPortal: {portal.get('portal_url', '')}",
-    ])
+    ] + ([extra] if extra else []))
 
     raw = client.ask(client.SONNET, prompts.load("draft_consumer"), user,
                      json_mode=True, temperature=0.3)

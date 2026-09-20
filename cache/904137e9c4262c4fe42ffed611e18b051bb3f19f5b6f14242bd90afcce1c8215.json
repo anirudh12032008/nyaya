@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"tenant\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\n      \"Geeta Bai Ahirwar (client, tenant)\",\n      \"Landlord (name withheld)\"\n    ],\n    \"amount_inr\": null,\n    \"date_of_cause\": \"2026-09-15\",\n    \"what_happened\": \"Client, an elderly widow, received an eviction notice from her landlord citing personal use without following the required notice period for a month-to-month tenancy. The notice was served on 2026-09-15 with insufficient advance notice.\"\n  },\n  \"missing_fact\": \"What is the landlord's name and what notice period (in days) was actually provided in the eviction notice?\"\n}\n```",
+ "ts": 1789893368.099143,
+ "parsed": {
+  "module": "tenant",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Geeta Bai Ahirwar (client, tenant)",
+    "Landlord (name withheld)"
+   ],
+   "amount_inr": null,
+   "date_of_cause": "2026-09-15",
+   "what_happened": "Client, an elderly widow, received an eviction notice from her landlord citing personal use without following the required notice period for a month-to-month tenancy. The notice was served on 2026-09-15 with insufficient advance notice."
+  },
+  "missing_fact": "What is the landlord's name and what notice period (in days) was actually provided in the eviction notice?"
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"tenant\",\n  \"jurisdiction\": \"Madhya Pradesh\",\n  \"urgency\": \"high\",\n  \"language\": \"en\",\n  \"facts\": {\n    \"parties\": [\"Ramesh Chandra Dubey (tenant)\", \"Landlord (name withheld)\"],\n    \"amount_inr\": 24000,\n    \"date_of_cause\": \"2026-09-12\",\n    \"what_happened\": \"Landlord threatened to cut off water and electricity supply and demanded forfeiture of the full security deposit without providing an itemized accounting. The tenant disputes the rent and seeks a counter-notice.\"\n  },\n  \"missing_fact\": \"What is the landlord's name and address for service of notice?\"\n}\n```",
+ "ts": 1789893368.096847,
+ "parsed": {
+  "module": "tenant",
+  "jurisdiction": "Madhya Pradesh",
+  "urgency": "high",
+  "language": "en",
+  "facts": {
+   "parties": [
+    "Ramesh Chandra Dubey (tenant)",
+    "Landlord (name withheld)"
+   ],
+   "amount_inr": 24000,
+   "date_of_cause": "2026-09-12",
+   "what_happened": "Landlord threatened to cut off water and electricity supply and demanded forfeiture of the full security deposit without providing an itemized accounting. The tenant disputes the rent and seeks a counter-notice."
+  },
+  "missing_fact": "What is the landlord's name and address for service of notice?"
+ }
+}

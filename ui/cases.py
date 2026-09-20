@@ -90,6 +90,15 @@ def _detail(case_id: int):
         with st.expander(f"Agent trace ({case.get('intake_seconds') or 0:.1f}s)"):
             st.dataframe(pd.DataFrame(trace), use_container_width=True, hide_index=True)
 
+    from pdf.qr import qr_for_case                      # stage4: QR back to this case
+    from pdf.render import draft_to_pdf
+    st.download_button("Download PDF",
+                       draft_to_pdf(case.get("draft_md") or "",
+                                    {"deadline_iso": case.get("deadline")},
+                                    qr_png=qr_for_case(case_id)),
+                       file_name=f"nyaya-case-{case_id}.pdf", mime="application/pdf",
+                       key=f"pdf{case_id}")
+
     a, b = st.columns(2)
     if a.button("Mark filed", disabled=case.get("status") == "filed"):
         db.update_case(case_id, status="filed")

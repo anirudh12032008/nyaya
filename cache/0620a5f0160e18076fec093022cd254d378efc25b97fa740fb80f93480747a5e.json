@@ -1,0 +1,25 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Document 3 states 'Warranty/guarantee card, if any' — warranty/guarantee is not mentioned in FACTS or client's words and is inapplicable to an airline ticket refund dispute.\",\n   \"fix\": \"Remove 'Warranty/guarantee card, if any' from the Documents Annexed list; it has no factual basis in the provided FACTS.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Document 7 states '[Any cancellation notice or communication received from the airline – implied by facts]' — the drafter invented this item as 'implied'; no cancellation notice is mentioned in FACTS or client's words.\",\n   \"fix\": \"Replace with a '[TO CONFIRM]' placeholder, e.g., 'Cancellation notice or communication received from the airline [TO CONFIRM]', rather than asserting it is implied by the facts.\"\n  },\n  {\n   \"type\": \"placeholder\",\n   \"detail\": \"Verification section contains '___________________' as the signature line for 'Complainant's Signature:', which is an unresolved non-[TO CONFIRM] placeholder.\",\n   \"fix\": \"Replace '___________________' with '[TO CONFIRM]' or a clearly labelled blank consistent with the allowed placeholder format, or note it as a physical signature space with a descriptive label rather than an ambiguous underscore string.\"\n  }\n ]}\n```",
+ "ts": 1789893380.5169768,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "unsupported_claim",
+    "detail": "Document 3 states 'Warranty/guarantee card, if any' — warranty/guarantee is not mentioned in FACTS or client's words and is inapplicable to an airline ticket refund dispute.",
+    "fix": "Remove 'Warranty/guarantee card, if any' from the Documents Annexed list; it has no factual basis in the provided FACTS."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Document 7 states '[Any cancellation notice or communication received from the airline – implied by facts]' — the drafter invented this item as 'implied'; no cancellation notice is mentioned in FACTS or client's words.",
+    "fix": "Replace with a '[TO CONFIRM]' placeholder, e.g., 'Cancellation notice or communication received from the airline [TO CONFIRM]', rather than asserting it is implied by the facts."
+   },
+   {
+    "type": "placeholder",
+    "detail": "Verification section contains '___________________' as the signature line for 'Complainant's Signature:', which is an unresolved non-[TO CONFIRM] placeholder.",
+    "fix": "Replace '___________________' with '[TO CONFIRM]' or a clearly labelled blank consistent with the allowed placeholder format, or note it as a physical signature space with a descriptive label rather than an ambiguous underscore string."
+   }
+  ]
+ }
+}
