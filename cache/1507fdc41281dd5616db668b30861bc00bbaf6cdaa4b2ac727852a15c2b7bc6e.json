@@ -1,0 +1,25 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"section\",\n   \"detail\": \"Section 'BNSS 173(1)' is cited in `sections` with why: 'The complainant may register a Zero FIR at any police station in Madhya Pradesh regardless of territorial jurisdiction, which will then be transferred to the jurisdictional station.' The gist for BNSS 173(1) covers Zero FIR registration; the why is consistent. However, the id 'BNSS 173(1)' appears in the `sections` list but is never cited or invoked in `draft_markdown` under Section IV (Sections Invoked) — creating an inconsistency between the declared sections list and the body of the draft.\",\n   \"fix\": \"Either add BNSS 173(1) as a row in the Section IV table of draft_markdown, or remove it from the `sections` array if it is not being formally relied upon in this complaint.\"\n  },\n  {\n   \"type\": \"section\",\n   \"detail\": \"Section 'BNSS 175(3)' is cited in `sections` with why: 'If the SP also fails to act, the complainant may apply to the Magistrate to order a police investigation into this cognizable offence.' The gist covers Magistrate's power to order investigation. However, BNSS 175(3) is never cited in the body of draft_markdown (neither in Section IV nor elsewhere), creating an inconsistency between the declared sections list and the draft body.\",\n   \"fix\": \"Either add BNSS 175(3) as a row in the Section IV table of draft_markdown (noting it as a contingent remedy), or remove it from the `sections` array if it is not being formally relied upon in this filing.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"In `next_steps` item 7: 'The complainant may also file an e-FIR for vehicle theft on the MP Police citizen portal: https://mppolice.gov.in' — this URL is stated as fact but is not present in FACTS, CLIENT'S OWN WORDS, the FORUM block, or any other provided source.\",\n   \"fix\": \"Replace the URL with '[TO CONFIRM: MP Police e-FIR portal URL]' or remove the URL entirely; a supervising advocate should verify and insert the correct link before filing.\"\n  }\n ]}\n```",
+ "ts": 1789893676.4814541,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "section",
+    "detail": "Section 'BNSS 173(1)' is cited in `sections` with why: 'The complainant may register a Zero FIR at any police station in Madhya Pradesh regardless of territorial jurisdiction, which will then be transferred to the jurisdictional station.' The gist for BNSS 173(1) covers Zero FIR registration; the why is consistent. However, the id 'BNSS 173(1)' appears in the `sections` list but is never cited or invoked in `draft_markdown` under Section IV (Sections Invoked) — creating an inconsistency between the declared sections list and the body of the draft.",
+    "fix": "Either add BNSS 173(1) as a row in the Section IV table of draft_markdown, or remove it from the `sections` array if it is not being formally relied upon in this complaint."
+   },
+   {
+    "type": "section",
+    "detail": "Section 'BNSS 175(3)' is cited in `sections` with why: 'If the SP also fails to act, the complainant may apply to the Magistrate to order a police investigation into this cognizable offence.' The gist covers Magistrate's power to order investigation. However, BNSS 175(3) is never cited in the body of draft_markdown (neither in Section IV nor elsewhere), creating an inconsistency between the declared sections list and the draft body.",
+    "fix": "Either add BNSS 175(3) as a row in the Section IV table of draft_markdown (noting it as a contingent remedy), or remove it from the `sections` array if it is not being formally relied upon in this filing."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "In `next_steps` item 7: 'The complainant may also file an e-FIR for vehicle theft on the MP Police citizen portal: https://mppolice.gov.in' — this URL is stated as fact but is not present in FACTS, CLIENT'S OWN WORDS, the FORUM block, or any other provided source.",
+    "fix": "Replace the URL with '[TO CONFIRM: MP Police e-FIR portal URL]' or remove the URL entirely; a supervising advocate should verify and insert the correct link before filing."
+   }
+  ]
+ }
+}

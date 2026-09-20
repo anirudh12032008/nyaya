@@ -40,6 +40,9 @@ def render():
 
     prefill = st.query_params.get("prefill", "")
     text = st.text_area("Client's statement", value=prefill, height=160, key="intake_text")
+    with st.expander("🎤 Voice intake (Hindi)"):  # 5D
+        from ui.intake_extras import render_mic
+        render_mic()
 
     pdf_file = st.file_uploader("Rent agreement PDF (optional)", type="pdf")  # stage2
     if pdf_file is not None:
@@ -141,3 +144,11 @@ def render():
                        draft_to_pdf(d["draft_markdown"],
                                     {**(f or {}), "deadline_iso": d.get("deadline_iso")}),
                        file_name="nyaya-draft.pdf", mime="application/pdf")
+
+    from ui.intake_extras import render_similar, render_autopilot  # 5G / 5F
+    try:
+        render_similar(r)
+    except Exception as e:  # never let memory lookups break the draft
+        st.caption(f"similar cases unavailable: {e}")
+    with st.expander("Filing autopilot preview (mock)"):
+        render_autopilot(r)

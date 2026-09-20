@@ -13,6 +13,7 @@ PUBLIC = ROOT / "public"
 CTA = "Get help at your nearest legal aid clinic"
 TITLES = {"en": "How to file a {m} complaint in Madhya Pradesh",
           "hi": "मध्य प्रदेश में {m} शिकायत कैसे दर्ज करें"}
+HI_MODULE = {"consumer": "उपभोक्ता", "police": "पुलिस", "tenant": "किरायेदारी"}
 _MARK = "<!-- nyaya:lang="
 
 
@@ -28,16 +29,23 @@ def read(module: str) -> dict | None:
     out = {}
     for chunk in p.read_text(encoding="utf-8").split(_MARK)[1:]:
         lang, _, body = chunk.partition("-->")
-        body = body.strip()
-        if body.startswith("# "):           # drop the title line _render() added back
-            body = body.split("\n", 1)[1].strip() if "\n" in body else ""
-        out[lang.strip()] = body
+        out[lang.strip()] = _strip_title(body)   # drop the title _render() added
     return out or None
+
+
+def _strip_title(body: str) -> str:
+    """Drop a leading `# ...` line so the page never carries two titles."""
+    body = (body or "").strip()
+    if body.startswith("# "):
+        return body.split("\n", 1)[1].strip() if "\n" in body else ""
+    return body
 
 
 def _render(module: str, guide: dict) -> str:
     return "\n\n".join(
-        f"{_MARK}{lang} -->\n\n# {TITLES[lang].format(m=module)}\n\n{guide.get(lang, '').strip()}"
+        f"{_MARK}{lang} -->\n\n"
+        f"# {TITLES[lang].format(m=HI_MODULE.get(module, module) if lang == 'hi' else module)}\n\n"
+        f"{_strip_title(guide.get(lang, ''))}"
         for lang in ("en", "hi"))
 
 

@@ -1,0 +1,25 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"deadline_iso is '2025-01-01' but no computed deadline date appears in draft_markdown; however next_steps states 'the 2-year limitation period runs from [TO CONFIRM — agreed possession date]' — the deadline_iso value of 2025-01-01 is derived by adding 2 years to the cause-of-action date 2023-01-01, yet this computed deadline (2025-01-01) is never disclosed to the reviewer in the draft, and TODAY (2026-09-20) is already past that deadline, which is a material procedural gap that must be surfaced\",\n   \"fix\": \"Add an explicit notice in next_steps (or a flagged note in the draft) stating: 'IMPORTANT: The 2-year limitation period computed from the cause-of-action date of 2023-01-01 expired on 2025-01-01. TODAY is 2026-09-20, which is past that deadline. A condonation of delay application will be required. Confirm with supervising advocate before filing.' The draft must not leave this gap invisible.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Paragraph 1 of Facts states the flat was purchased 'for personal residential use and not for any commercial purpose or resale' — the FACTS and client's own words do not confirm non-commercial/non-resale purpose; they only state it is a 'residential flat'\",\n   \"fix\": \"Replace the invented characterisation with '[TO CONFIRM — confirm that purchase was for personal residential use and not for resale or commercial purpose]' pending client confirmation.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Relief Sought item 1 states interest 'at 18% per annum' — no interest rate appears in FACTS, client's words, or the FORUM block; this figure has been invented by the drafter\",\n   \"fix\": \"Replace '18% per annum' with '[TO CONFIRM — applicable interest rate, to be determined by supervising advocate]'.\"\n  }\n ]}\n```",
+ "ts": 1789893556.6556091,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "unsupported_claim",
+    "detail": "deadline_iso is '2025-01-01' but no computed deadline date appears in draft_markdown; however next_steps states 'the 2-year limitation period runs from [TO CONFIRM — agreed possession date]' — the deadline_iso value of 2025-01-01 is derived by adding 2 years to the cause-of-action date 2023-01-01, yet this computed deadline (2025-01-01) is never disclosed to the reviewer in the draft, and TODAY (2026-09-20) is already past that deadline, which is a material procedural gap that must be surfaced",
+    "fix": "Add an explicit notice in next_steps (or a flagged note in the draft) stating: 'IMPORTANT: The 2-year limitation period computed from the cause-of-action date of 2023-01-01 expired on 2025-01-01. TODAY is 2026-09-20, which is past that deadline. A condonation of delay application will be required. Confirm with supervising advocate before filing.' The draft must not leave this gap invisible."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Paragraph 1 of Facts states the flat was purchased 'for personal residential use and not for any commercial purpose or resale' — the FACTS and client's own words do not confirm non-commercial/non-resale purpose; they only state it is a 'residential flat'",
+    "fix": "Replace the invented characterisation with '[TO CONFIRM — confirm that purchase was for personal residential use and not for resale or commercial purpose]' pending client confirmation."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Relief Sought item 1 states interest 'at 18% per annum' — no interest rate appears in FACTS, client's words, or the FORUM block; this figure has been invented by the drafter",
+    "fix": "Replace '18% per annum' with '[TO CONFIRM — applicable interest rate, to be determined by supervising advocate]'."
+   }
+  ]
+ }
+}

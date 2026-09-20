@@ -1,0 +1,35 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"pass\": false,\n \"issues\": [\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Fact 4 states 'The agreed date of possession was 1 January 2023' as a specific date, but FACTS only states the promised year was 2023 ('promised possession in 2023'); no specific date of 1 January 2023 appears in FACTS or client's words.\",\n   \"fix\": \"Replace '1 January 2023' in Fact 4 (and wherever else it is stated as the agreed possession date, including in the sections table row for 2(69) and next_steps item 6) with '[TO CONFIRM — specific agreed possession date in 2023]'. The date_of_cause in FACTS is the system-computed cause-of-action date, not a contractually agreed possession date confirmed by the client.\"\n  },\n  {\n   \"type\": \"unsupported_claim\",\n   \"detail\": \"Section 69 row in the sections table and next_steps item 6 repeat '1 January 2023' as the cause-of-action date used to compute the limitation deadline '1 January 2025', but this specific date is not in FACTS or client's words.\",\n   \"fix\": \"Replace '1 January 2023' in the Section 69 'why' and in next_steps item 6 with '[TO CONFIRM — agreed possession date]' so the limitation calculation is not asserted as fact until the actual contractual date is confirmed.\"\n  },\n  {\n   \"type\": \"placeholder\",\n   \"detail\": \"Verification block contains '[Place]' — 'Verified at [Place] on this [TO CONFIRM — date]' — '[Place]' is not a literal '[TO CONFIRM]' placeholder.\",\n   \"fix\": \"Replace '[Place]' with '[TO CONFIRM — place of verification]'.\"\n  },\n  {\n   \"type\": \"placeholder\",\n   \"detail\": \"Verification block contains '[Name]' under 'Signature of Complainant' — '[Name]' is not a literal '[TO CONFIRM]' placeholder.\",\n   \"fix\": \"Replace '[Name]' with '[TO CONFIRM — Complainant's name]'.\"\n  },\n  {\n   \"type\": \"placeholder\",\n   \"detail\": \"Verification block contains '[Date]' under the signature line — '[Date]' is not a literal '[TO CONFIRM]' placeholder.\",\n   \"fix\": \"Replace '[Date]' with '[TO CONFIRM — date]'.\"\n  }\n ]}\n```",
+ "ts": 1789893507.448491,
+ "parsed": {
+  "pass": false,
+  "issues": [
+   {
+    "type": "unsupported_claim",
+    "detail": "Fact 4 states 'The agreed date of possession was 1 January 2023' as a specific date, but FACTS only states the promised year was 2023 ('promised possession in 2023'); no specific date of 1 January 2023 appears in FACTS or client's words.",
+    "fix": "Replace '1 January 2023' in Fact 4 (and wherever else it is stated as the agreed possession date, including in the sections table row for 2(69) and next_steps item 6) with '[TO CONFIRM — specific agreed possession date in 2023]'. The date_of_cause in FACTS is the system-computed cause-of-action date, not a contractually agreed possession date confirmed by the client."
+   },
+   {
+    "type": "unsupported_claim",
+    "detail": "Section 69 row in the sections table and next_steps item 6 repeat '1 January 2023' as the cause-of-action date used to compute the limitation deadline '1 January 2025', but this specific date is not in FACTS or client's words.",
+    "fix": "Replace '1 January 2023' in the Section 69 'why' and in next_steps item 6 with '[TO CONFIRM — agreed possession date]' so the limitation calculation is not asserted as fact until the actual contractual date is confirmed."
+   },
+   {
+    "type": "placeholder",
+    "detail": "Verification block contains '[Place]' — 'Verified at [Place] on this [TO CONFIRM — date]' — '[Place]' is not a literal '[TO CONFIRM]' placeholder.",
+    "fix": "Replace '[Place]' with '[TO CONFIRM — place of verification]'."
+   },
+   {
+    "type": "placeholder",
+    "detail": "Verification block contains '[Name]' under 'Signature of Complainant' — '[Name]' is not a literal '[TO CONFIRM]' placeholder.",
+    "fix": "Replace '[Name]' with '[TO CONFIRM — Complainant's name]'."
+   },
+   {
+    "type": "placeholder",
+    "detail": "Verification block contains '[Date]' under the signature line — '[Date]' is not a literal '[TO CONFIRM]' placeholder.",
+    "fix": "Replace '[Date]' with '[TO CONFIRM — date]'."
+   }
+  ]
+ }
+}

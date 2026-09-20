@@ -14,3 +14,14 @@ def on_draft_complete(result: dict) -> None:
     verdict = "eligible for free legal aid" if case.get("eligible_aid") else "not established"
     st.success(f"Case #{case_id} created, assigned to {who}. "
                f"Eligibility: {verdict} — {case.get('eligibility_reason') or ''}")
+
+
+# Stage 4 / 5 extras, re-exported so cases.py / admin.py pick them up via getattr.
+from ui.stage4 import extra_case_actions, admin_extras as _s4_admin  # noqa: E402
+
+
+def admin_extras() -> None:
+    _s4_admin()
+    from ui.triage import render_triage_button, render_sentinel  # 5A / 5C
+    st.divider(); st.subheader("Overnight triage"); render_triage_button()
+    st.divider(); st.subheader("Deadline sentinel"); render_sentinel()
