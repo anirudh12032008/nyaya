@@ -13,7 +13,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = Path(os.environ.get("NYAYA_DB") or ROOT / "db" / "nyaya.db")
+DB_PATH = Path(os.environ.get("NYAYA_DB") or ROOT / "db" / "nyaya.db").resolve()
 SCHEMA = ROOT / "db" / "schema.sql"
 SEED_CASES = ROOT / "data" / "seed_cases.json"
 
@@ -25,14 +25,19 @@ DONE = ("filed", "closed")
 
 CASE_COLS = ["created_at", "module", "status", "urgency", "client_name", "summary",
              "draft_md", "sections_json", "deadline", "assigned_to", "eligible_aid",
-             "eligibility_reason", "intake_seconds", "trace_json", "facts_json", "council_json"]
+             "eligibility_reason", "intake_seconds", "trace_json", "facts_json", "council_json",
+             "outcome", "outcome_note", "outcome_at", "copilot_json"]
+
+# columns added after the first DBs were seeded; init() ALTERs them in
+LATE_COLS = ["council_json", "outcome", "outcome_note", "outcome_at", "copilot_json"]
+OUTCOMES = ("won", "lost", "settled", "withdrawn")
 
 _conn: sqlite3.Connection | None = None
 
 
 def connect() -> sqlite3.Connection:
     global _conn
-    if _conn is None or Path(_conn.execute("PRAGMA database_list").fetchone()[2]) != DB_PATH:
+    if _conn is None or Path(_conn.execute("PRAGMA database_list").fetchone()[2]).resolve() != DB_PATH:
         DB_PATH.parent.mkdir(parents=True, exist_ok=True)
         _conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
         _conn.row_factory = sqlite3.Row
@@ -64,8 +69,10 @@ def _wait_for_seed(timeout_s: int = 600) -> bool:
 def init() -> None:
     c = connect()
     c.executescript(SCHEMA.read_text())
-    if "council_json" not in {r[1] for r in c.execute("PRAGMA table_info(cases)")}:
-        c.execute("ALTER TABLE cases ADD COLUMN council_json TEXT")  # orchestra, added post-seed
+    have = {r[1] for r in c.execute("PRAGMA table_info(cases)")}
+    for col in LATE_COLS:
+        if col not in have:
+            c.execute(f"ALTER TABLE cases ADD COLUMN {col} TEXT")
     if not c.execute("SELECT 1 FROM volunteers LIMIT 1").fetchone():
         c.executemany("INSERT INTO volunteers(name, load) VALUES (?, 0)",
                       [(n,) for n in VOLUNTEERS])
@@ -147,7 +154,7 @@ def update_case(id: int, **fields) -> None:
     old = get_case(id)
     if not old or not fields:
         return
-    for k in ("sections_json", "trace_json", "facts_json"):
+    for k in ("sections_json", "trace_json", "facts_json", "council_json", "copilot_json"):
         if k in fields and not isinstance(fields[k], (str, type(None))):
             fields[k] = json.dumps(fields[k], ensure_ascii=False, default=str)
     c = connect()
@@ -173,6 +180,14 @@ def update_case(id: int, **fields) -> None:
     log_event(id, "updated", changed)
 
 
+def set_outcome(case_id: int, outcome: str | None, note: str = "") -> None:
+    """Record how a case actually ended. outcome must be one of OUTCOMES (or None to clear)."""
+    if outcome is not None and outcome not in OUTCOMES:
+        raise ValueError(f"outcome must be one of {OUTCOMES} or None, got {outcome!r}")
+    update_case(case_id, outcome=outcome, outcome_note=note or None,
+                outcome_at=_now() if outcome else None)
+
+
 def add_feedback(case_id: int, rating: str, note: str = "") -> int:
     c = connect()
     cur = c.execute("INSERT INTO feedback(case_id, rating, note, created_at) VALUES (?,?,?,?)",
@@ -187,6 +202,22 @@ def list_feedback(case_id=None) -> list[dict]:
     rows = (c.execute("SELECT * FROM feedback WHERE case_id = ? ORDER BY id", (case_id,))
             if case_id else c.execute("SELECT * FROM feedback ORDER BY id")).fetchall()
     return [dict(r) for r in rows]
+
+
+def add_annexure(case_id: int, filename: str, path: str, kind: str, label: str,
+                 summary: str = "", matches_item: str = "") -> int:
+    c = connect()
+    cur = c.execute("INSERT INTO annexures(case_id, filename, path, kind, label, summary, "
+                    "matches_item, created_at) VALUES (?,?,?,?,?,?,?,?)",
+                    (case_id, filename, path, kind, label, summary, matches_item, _now()))
+    c.commit()
+    log_event(case_id, "annexure", {"filename": filename, "label": label, "kind": kind})
+    return cur.lastrowid
+
+
+def list_annexures(case_id: int) -> list[dict]:
+    return [dict(r) for r in connect().execute(
+        "SELECT * FROM annexures WHERE case_id = ? ORDER BY id", (case_id,)).fetchall()]
 
 
 def list_events(case_id: int) -> list[dict]:

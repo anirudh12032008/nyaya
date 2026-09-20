@@ -1,0 +1,211 @@
+{
+ "sections": [
+  {
+   "id": "PWA 15",
+   "act": "Payment of Wages Act 1936",
+   "title": "Claims arising out of deductions or delay in payment of wages",
+   "gist": "The Authority appointed under this section hears claims for deducted or delayed wages, may order payment of the wages due plus compensation up to ten times the deducted amount (up to Rs 3,000 for delayed wages), and the application must be made within twelve months of the date the wages fell due, which the Authority may condone for sufficient cause.",
+   "source": "Payment of Wages Act 1936, s.15 (as amended); wage ceiling Rs 24,000 per month notified by S.O. 2806(E) dated 28.08.2017"
+  },
+  {
+   "id": "PWA 5",
+   "act": "Payment of Wages Act 1936",
+   "title": "Time of payment of wages",
+   "gist": "Wages must be paid before the expiry of the 7th day after the last day of the wage period in an establishment with fewer than 1,000 workers, and before the 10th day otherwise; wages of a dismissed or resigned worker are payable by the second working day after the employment ends.",
+   "source": "Payment of Wages Act 1936, s.5"
+  },
+  {
+   "id": "MWA 20",
+   "act": "Minimum Wages Act 1948",
+   "title": "Claims for wages below the notified minimum rate",
+   "gist": "The Authority appointed under this section hears claims that a worker was paid less than the minimum wage notified for the scheduled employment and may award the difference plus compensation up to ten times that difference; the application must be made within six months of the date the wage became payable, condonable for sufficient cause.",
+   "source": "Minimum Wages Act 1948, s.20; MP minimum wage rates notified half-yearly by the Labour Commissioner, Madhya Pradesh"
+  },
+  {
+   "id": "ID Act 2A",
+   "act": "Industrial Disputes Act 1947",
+   "title": "Dismissal of an individual workman is itself an industrial dispute",
+   "gist": "A dispute between an individual workman and the employer connected with his discharge, dismissal, retrenchment or termination is an industrial dispute even if no union espouses it; the workman may apply directly to the Labour Court after 45 days from the date he made the conciliation application, and the direct application must be made within three years of the date of discharge.",
+   "source": "Industrial Disputes Act 1947, s.2A(1)-(3)"
+  },
+  {
+   "id": "ID Act 25F",
+   "act": "Industrial Disputes Act 1947",
+   "title": "Conditions precedent to retrenchment",
+   "gist": "A workman with one year of continuous service may not be retrenched unless he is given one month's written notice stating the reasons (or wages in lieu of the notice period), retrenchment compensation of fifteen days' average pay for every completed year of continuous service, and notice is served on the appropriate Government; non-compliance makes the termination void.",
+   "source": "Industrial Disputes Act 1947, s.25F read with s.25B (continuous service)"
+  },
+  {
+   "id": "ID Act 25B",
+   "act": "Industrial Disputes Act 1947",
+   "title": "Definition of continuous service",
+   "gist": "A workman is deemed to be in continuous service for one year if he has actually worked for at least 240 days in the twelve calendar months preceding the date of termination (160 days in an underground mine).",
+   "source": "Industrial Disputes Act 1947, s.25B(2)"
+  },
+  {
+   "id": "PGA 4",
+   "act": "Payment of Gratuity Act 1972",
+   "title": "Payment of gratuity",
+   "gist": "Gratuity is payable to an employee on termination of employment after five years of continuous service (the five-year condition does not apply on death or disablement), at fifteen days' wages for every completed year of service based on the last drawn wage, subject to the statutory ceiling of Rs 20,00,000.",
+   "source": "Payment of Gratuity Act 1972, s.4 read with s.4(3); ceiling notified by S.O. 1420(E) dated 29.03.2018"
+  },
+  {
+   "id": "PGA 7",
+   "act": "Payment of Gratuity Act 1972",
+   "title": "Determination of the amount of gratuity and recovery",
+   "gist": "The employer must determine and pay gratuity within thirty days of it becoming payable, whether or not the employee applies, and pays simple interest for any delay; a disputed or unpaid claim goes to the Controlling Authority, and its direction is recoverable as an arrear of land revenue. An application to the Controlling Authority is ordinarily made within ninety days, which the Authority may condone for sufficient cause.",
+   "source": "Payment of Gratuity Act 1972, s.7(2)-(7) read with rule 10, Payment of Gratuity (Central) Rules 1972"
+  },
+  {
+   "id": "EPF 7A",
+   "act": "Employees' Provident Funds and Miscellaneous Provisions Act 1952",
+   "title": "Determination of provident fund dues by inquiry",
+   "gist": "The Regional Provident Fund Commissioner may hold an inquiry, with the powers of a civil court, to determine the provident fund contributions an employer has failed to deposit and to pass an order for the amount due; the order is recoverable from the employer along with damages and interest.",
+   "source": "Employees' Provident Funds and Miscellaneous Provisions Act 1952, s.7A read with s.7Q and s.14B"
+  },
+  {
+   "id": "EPF 14",
+   "act": "Employees' Provident Funds and Miscellaneous Provisions Act 1952",
+   "title": "Penalties for default in payment of contributions",
+   "gist": "An employer who deducts the employee's share of provident fund contribution from wages and fails to deposit it commits an offence punishable with imprisonment up to three years and fine; other contravention of the Act or the Scheme is separately punishable.",
+   "source": "Employees' Provident Funds and Miscellaneous Provisions Act 1952, s.14(1A) and s.14(2)"
+  },
+  {
+   "id": "ESI 85",
+   "act": "Employees' State Insurance Act 1948",
+   "title": "Punishment for failure to pay contributions",
+   "gist": "An employer who fails to pay any ESI contribution, and in particular who deducts the employee's share from wages and does not deposit it, is punishable with imprisonment (not less than one year where the employee's share was deducted) and fine; the contribution itself remains recoverable.",
+   "source": "Employees' State Insurance Act 1948, s.85(a)-(g) read with s.85A and s.45A"
+  },
+  {
+   "id": "Wages Code 45",
+   "act": "Code on Wages 2019",
+   "title": "Claims before the authority under the Code",
+   "gist": "The Code consolidates the Payment of Wages Act and the Minimum Wages Act and allows a wage claim within three years of when it arose, before an authority not below the rank of a Gazetted Officer. NOT YET IN FORCE for claims: the Code is enacted but its substantive provisions have not been brought into force, and Madhya Pradesh has published only draft rules — file under the Payment of Wages Act 1936 or the Minimum Wages Act 1948, and cite this section only as the position once the Code is notified.",
+   "source": "Code on Wages 2019, s.45 read with s.50(2); enforcement status as at 2026 — substantive provisions not notified, MP Code on Wages (Madhya Pradesh) Draft Rules 2021 not finally notified"
+  },
+  {
+   "id": "MP Shops 1958",
+   "act": "Madhya Pradesh Shops and Establishments Act 1958",
+   "title": "Notice of termination and wages in shops and commercial establishments",
+   "gist": "An employee of a shop or commercial establishment in Madhya Pradesh who has completed six months of service may not be terminated without one month's notice or wages in lieu, except for misconduct proved in an inquiry; the Labour Inspector and the prescribed appellate authority enforce this.",
+   "source": "Madhya Pradesh Shops and Establishments Act 1958, s.58 (notice of discharge)"
+  }
+ ],
+ "forums": [
+  {
+   "id": "pwa_authority",
+   "grievance": "unpaid_wages",
+   "name": "Authority under section 15, Payment of Wages Act 1936",
+   "who": "Labour Court / the officer notified as Authority under the Payment of Wages Act for the district (in Madhya Pradesh the Labour Court judge or the Labour Officer so notified)",
+   "where": "Office of the Labour Court / notified Authority for the district where the establishment is situated — for Pithampur and the Indore industrial belt, the Labour Court at Indore",
+   "how": "Application in Form A of the Madhya Pradesh Payment of Wages Rules, signed by the worker or a registered trade union official or an Inspector, with the wage slips, appointment letter or ID card and a computation of the amount due. No court fee for a worker's application.",
+   "sections": ["PWA 15", "PWA 5"],
+   "source": "Payment of Wages Act 1936, s.15(1)-(2); Madhya Pradesh Payment of Wages Rules 1962, rule 19 and Form A"
+  },
+  {
+   "id": "mwa_authority",
+   "grievance": "below_minimum_wage",
+   "name": "Authority under section 20, Minimum Wages Act 1948",
+   "who": "Labour Court judge or the Labour Officer notified as Authority under the Minimum Wages Act for the area",
+   "where": "Office of the notified Authority for the district where the work was done; Labour Court, Indore for the Pithampur / Dhar belt",
+   "how": "Application by the worker, a legal practitioner or an Inspector, annexing the notified MP minimum wage rate for the scheduled employment and the wages actually paid.",
+   "sections": ["MWA 20"],
+   "source": "Minimum Wages Act 1948, s.20(1)-(2)"
+  },
+  {
+   "id": "labour_court",
+   "grievance": "illegal_termination",
+   "name": "Labour Court under the Industrial Disputes Act 1947",
+   "who": "Presiding Officer, Labour Court, after conciliation before the Conciliation Officer (Labour Officer) of the Labour Department",
+   "where": "Labour Court having jurisdiction over the establishment — Indore for the Pithampur / Dhar industrial area, Bhopal, Jabalpur and Gwalior for their regions",
+   "how": "First a conciliation application to the Conciliation Officer under section 2A(2); if conciliation fails or 45 days pass from that application, a direct application to the Labour Court under section 2A(3) seeking reinstatement with back wages, pleading the breach of section 25F.",
+   "sections": ["ID Act 2A", "ID Act 25F", "ID Act 25B"],
+   "source": "Industrial Disputes Act 1947, s.2A(2)-(3) read with s.10 and s.25F"
+  },
+  {
+   "id": "labour_commissioner",
+   "grievance": "general",
+   "name": "Labour Commissioner, Madhya Pradesh",
+   "who": "Labour Commissioner, Madhya Pradesh, through the Deputy/Assistant Labour Commissioner and the Labour Inspector for the area",
+   "where": "Shram Bhawan, Vindhyachal Bhawan, Bhopal 462004; district Labour Offices, and the online grievance portal https://labour.mp.gov.in / Shram Seva Portal",
+   "how": "Written complaint (Hindi is accepted) giving the establishment's name and address, the worker's period of service, the wages due and the relief sought; the office marks it to the Labour Inspector for inspection and conciliation.",
+   "sections": ["PWA 15", "MWA 20", "MP Shops 1958"],
+   "source": "Madhya Pradesh Labour Department, Labour Commissioner organisation (labour.mp.gov.in); Payment of Wages Act 1936, s.14 (Inspectors)"
+  },
+  {
+   "id": "epfo_regional",
+   "grievance": "pf_not_deposited",
+   "name": "Regional Provident Fund Commissioner, EPFO",
+   "who": "Regional Provident Fund Commissioner (s.7A quasi-judicial authority)",
+   "where": "EPFO Regional Office Indore (Bhavishya Nidhi Bhawan, Nanda Nagar, Indore 452011) for the Indore/Dhar/Pithampur belt; EPFO Regional Office Bhopal (Bhavishya Nidhi Bhawan, Arera Hills, Bhopal 462011) for the Bhopal region",
+   "how": "Grievance on the EPFiGMS portal (epfigms.gov.in) quoting the UAN and the establishment code, followed by a written request that the Commissioner hold a section 7A inquiry; the member's passbook on the EPFO member portal is the proof of non-deposit.",
+   "sections": ["EPF 7A", "EPF 14"],
+   "source": "EPF and MP Act 1952, s.7A; EPFO office jurisdiction, epfindia.gov.in"
+  },
+  {
+   "id": "esic_regional",
+   "grievance": "esi_not_deposited",
+   "name": "Regional Director, ESI Corporation / ESI Court",
+   "who": "Regional Director, ESIC Madhya Pradesh, for recovery under section 45A; the Employees' Insurance Court under section 75 for a disputed claim",
+   "where": "ESIC Regional Office, Nanda Nagar, Indore 452011 / Panchdeep Bhawan, Bhopal; ESI Court at the district headquarters",
+   "how": "Written complaint with the insurance number and wage slips showing the ESI deduction; ESIC determines the contribution under section 45A and may prosecute under section 85.",
+   "sections": ["ESI 85"],
+   "source": "Employees' State Insurance Act 1948, s.45A, s.75 and s.85"
+  },
+  {
+   "id": "gratuity_controlling_authority",
+   "grievance": "gratuity",
+   "name": "Controlling Authority under the Payment of Gratuity Act 1972",
+   "who": "Controlling Authority notified for the area — in Madhya Pradesh the Labour Officer / Assistant Labour Commissioner of the district",
+   "where": "Office of the Assistant Labour Commissioner / Labour Officer for the district where the establishment is situated",
+   "how": "Form I to the employer claiming gratuity; if it is not paid within thirty days, application in Form N to the Controlling Authority, ordinarily within ninety days, annexing proof of five years of continuous service and the last drawn wage.",
+   "sections": ["PGA 4", "PGA 7"],
+   "source": "Payment of Gratuity Act 1972, s.7(4); Payment of Gratuity (Central) Rules 1972, rules 7 and 10, Forms I and N"
+  }
+ ],
+ "limitation": {
+  "unpaid_wages": {
+   "months": 12,
+   "from": "the date on which the wages fell due",
+   "rule": "Twelve months from the date the wages became payable; the Authority may admit a later application if the applicant shows sufficient cause for the delay.",
+   "source": "Payment of Wages Act 1936, s.15(2) second proviso"
+  },
+  "below_minimum_wage": {
+   "months": 6,
+   "from": "the date on which the minimum wage became payable",
+   "rule": "Six months from the date the wage became payable; condonable for sufficient cause.",
+   "source": "Minimum Wages Act 1948, s.20(2) proviso"
+  },
+  "illegal_termination": {
+   "months": 36,
+   "from": "the date of discharge, dismissal, retrenchment or termination",
+   "rule": "Three years from the date of termination for a direct application to the Labour Court under section 2A(3); conciliation should be sought first and the direct application lies after 45 days from the conciliation application.",
+   "source": "Industrial Disputes Act 1947, s.2A(3)"
+  },
+  "gratuity": {
+   "months": 3,
+   "from": "the date gratuity became payable (thirty days after the employment ended)",
+   "rule": "Gratuity is payable within thirty days of becoming due; an application to the Controlling Authority is ordinarily made within ninety days thereafter, and the Authority may condone delay for sufficient cause.",
+   "source": "Payment of Gratuity Act 1972, s.7(3); Payment of Gratuity (Central) Rules 1972, rule 10(1) proviso"
+  },
+  "pf_not_deposited": {
+   "months": null,
+   "from": "the date the contribution ought to have been deposited",
+   "rule": "No limitation is prescribed for a section 7A inquiry, but the Commissioner may decline to reopen stale periods, so complain as soon as the passbook shows the gap.",
+   "source": "EPF and MP Act 1952, s.7A (no period of limitation prescribed)"
+  },
+  "esi_not_deposited": {
+   "months": null,
+   "from": "the date the contribution ought to have been paid",
+   "rule": "No limitation for ESIC to determine and recover contributions under section 45A; a claim before the Employees' Insurance Court must be brought within three years of the cause of action.",
+   "source": "Employees' State Insurance Act 1948, s.45A and s.77(1A)"
+  },
+  "general": {
+   "months": 36,
+   "from": "the date the cause of action arose",
+   "rule": "Three years for an ordinary money claim under the Limitation Act 1963; a complaint to the Labour Commissioner is administrative and has no fixed limitation, but the underlying claim's own period still runs.",
+   "source": "Limitation Act 1963, Article 7 (wages of a labourer) and Article 113"
+  }
+ }
+}

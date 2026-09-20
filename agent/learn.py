@@ -1,4 +1,8 @@
-"""Feedback -> prompt hints: what advocates keep correcting becomes a `## Learned` section."""
+"""Feedback -> prompt hints: what advocates keep correcting becomes a `## Learned` section.
+
+Recorded case outcomes (db.set_outcome) feed the same section: a note on a case that was
+won or settled is a lesson about what actually works in this module.
+"""
 from __future__ import annotations
 
 import re
@@ -42,6 +46,14 @@ def top_corrections(module: str, n: int = 3) -> list[str]:
     return [c["note"] for c in corrections(module)[:n]]
 
 
+def outcome_lessons(module: str, n: int = 3) -> list[str]:
+    """Notes from cases of this module that were actually won or settled, newest first."""
+    won = [c for c in db.list_cases(module=module)
+           if c.get("outcome") in ("won", "settled") and (c.get("outcome_note") or "").strip()]
+    won.sort(key=lambda c: c.get("outcome_at") or "", reverse=True)
+    return [c["outcome_note"].strip() for c in won[:n]]
+
+
 def prompt_path(module: str) -> Path:
     return PROMPTS / f"draft_{module}.md"
 
@@ -55,11 +67,16 @@ def apply_hints(module: str, n: int = 3) -> tuple[str, str]:
     p = prompt_path(module)
     old = p.read_text(encoding="utf-8")
     body = old.split("\n" + HEADING)[0].rstrip()
-    hints = top_corrections(module, n)
-    new = body + "\n" if not hints else (
-        body + "\n\n" + HEADING + "\n"
-        "Corrections supervising advocates made on past drafts of this module — apply them:\n"
-        + "".join(f"- {h}\n" for h in hints))
+    hints, wins = top_corrections(module, n), outcome_lessons(module, n)
+    section = ""
+    if hints:
+        section += ("Corrections supervising advocates made on past drafts of this module "
+                    "— apply them:\n" + "".join(f"- {h}\n" for h in hints))
+    if wins:
+        section += ("\n" if hints else "") + (
+            "What worked in past cases of this module that were won or settled:\n"
+            + "".join(f"- {w}\n" for w in wins))
+    new = body + "\n" if not section else body + "\n\n" + HEADING + "\n" + section
     if new != old:
         p.write_text(new, encoding="utf-8")
     return old, new

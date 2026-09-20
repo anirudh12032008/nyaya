@@ -51,6 +51,14 @@ STEPS = [
            "or 👎 with a note.",
      "why": "The feedback notes are fed back as hints into later drafts, so correcting "
             "the model here makes the next draft better."},
+    {"page": "Document Analyzer",
+     "title": "Read a document the client brought in",
+     "do": "Upload a PDF or TXT — a notice, an agreement, an FIR copy — and press "
+           "'Analyze Document'.",
+     "why": "It pulls out the parties, the dates, the laws and sections cited, the "
+            "obligations and deadlines, and the points worth a second look. Use it on "
+            "paperwork you have not read yet; use Intake when you have the client's own "
+            "account of what happened."},
     {"page": "Ask Nyaya",
      "title": "Ask the workspace agent",
      "do": "Pick a focus case in the sidebar and ask in plain language — 'which cases are "
@@ -58,12 +66,6 @@ STEPS = [
      "why": "Ask Nyaya has tools over the real data: it lists and opens cases, searches "
             "the statutes, computes the consumer forum and fee, finds similar past cases, "
             "runs the council, and updates a case's status when you ask it to."},
-    {"page": "Admin",
-     "title": "Watch the clinic, not just the case",
-     "do": "Check the metrics and the per-volunteer load, then look at 'Overnight triage' "
-           "and 'Deadline sentinel'.",
-     "why": "Triage classifies the new cases in a batch and writes a morning brief. The "
-            "sentinel watches limitation dates and flags what is about to lapse."},
 ]
 
 SYSTEM = """You are Nyaya's guide: you show a new legal-aid clinic volunteer how to use the

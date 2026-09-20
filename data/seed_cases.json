@@ -57,7 +57,10 @@
   "eligible_aid": 0,
   "eligibility_reason": "No s.12 category applicable.",
   "intake_seconds": 15,
-  "facts_json": "{\"parties\": [\"Kavita Joshi\", \"Bhopal Electronics Store\"], \"amount_inr\": 3500, \"date_of_cause\": \"2026-02-10\", \"what_happened\": \"Defective mixer-grinder, replacement refused; later resolved.\"}"
+  "facts_json": "{\"parties\": [\"Kavita Joshi\", \"Bhopal Electronics Store\"], \"amount_inr\": 3500, \"date_of_cause\": \"2026-02-10\", \"what_happened\": \"Defective mixer-grinder, replacement refused; later resolved.\"}",
+  "outcome": "won",
+  "outcome_note": "Commission ordered a full refund with 9% interest. The dated WhatsApp chat with the dealer was the evidence that decided it.",
+  "outcome_at": "2026-08-20T11:00:00"
  },
  {
   "module": "police",
@@ -102,7 +105,10 @@
   "eligible_aid": 0,
   "eligibility_reason": "Income above ceiling; not in a listed category.",
   "intake_seconds": 19,
-  "facts_json": "{\"parties\": [\"Deepak Ahirwar\", \"Unknown\"], \"amount_inr\": 25000, \"date_of_cause\": \"2026-09-01\", \"what_happened\": \"Shop break-in, cash and goods stolen; FIR already filed.\"}"
+  "facts_json": "{\"parties\": [\"Deepak Ahirwar\", \"Unknown\"], \"amount_inr\": 25000, \"date_of_cause\": \"2026-09-01\", \"what_happened\": \"Shop break-in, cash and goods stolen; FIR already filed.\"}",
+  "outcome": "settled",
+  "outcome_note": "SP-level complaint got the FIR registered within a week; matter settled once the station acted, no 156(3) application needed.",
+  "outcome_at": "2026-08-20T11:00:00"
  },
  {
   "module": "police",
@@ -136,7 +142,7 @@
  },
  {
   "module": "tenant",
-  "status": "in_progress",
+  "status": "closed",
   "urgency": "medium",
   "client_name": "Farhan Qureshi",
   "summary": "Client signed a 24-month lease that was never registered and paid a 6-month deposit for a residential flat with a Rs 50,000 penalty clause for early exit. He wants the agreement reviewed and flagged clauses explained.",
@@ -147,7 +153,10 @@
   "eligible_aid": 0,
   "eligibility_reason": "No s.12 category; income above ceiling.",
   "intake_seconds": 35,
-  "facts_json": "{\"parties\": [\"Farhan Qureshi\", \"Landlord (name withheld)\"], \"amount_inr\": 50000, \"date_of_cause\": \"2026-06-01\", \"what_happened\": \"24-month unregistered lease with 6-month deposit and Rs 50,000 exit penalty.\"}"
+  "facts_json": "{\"parties\": [\"Farhan Qureshi\", \"Landlord (name withheld)\"], \"amount_inr\": 50000, \"date_of_cause\": \"2026-06-01\", \"what_happened\": \"24-month unregistered lease with 6-month deposit and Rs 50,000 exit penalty.\"}",
+  "outcome": "settled",
+  "outcome_note": "Landlord returned the deposit after the clinic's legal notice; settled before the Rent Controller, no hearing required.",
+  "outcome_at": "2026-08-20T11:00:00"
  },
  {
   "module": "tenant",
@@ -166,7 +175,7 @@
  },
  {
   "module": "tenant",
-  "status": "new",
+  "status": "closed",
   "urgency": "low",
   "client_name": "Vikram Rathore",
   "summary": "Client's landlord entered his rented flat without prior notice while he was away, going through his belongings. He wants to know his rights regarding privacy and entry notice.",
@@ -177,6 +186,9 @@
   "eligible_aid": 0,
   "eligibility_reason": "No s.12 category; income above ceiling.",
   "intake_seconds": 16,
-  "facts_json": "{\"parties\": [\"Vikram Rathore\", \"Landlord (name withheld)\"], \"amount_inr\": null, \"date_of_cause\": \"2026-09-18\", \"what_happened\": \"Landlord entered flat without notice in tenant's absence.\"}"
+  "facts_json": "{\"parties\": [\"Vikram Rathore\", \"Landlord (name withheld)\"], \"amount_inr\": null, \"date_of_cause\": \"2026-09-18\", \"what_happened\": \"Landlord entered flat without notice in tenant's absence.\"}",
+  "outcome": "withdrawn",
+  "outcome_note": "Client withdrew after the landlord apologised in writing and agreed to 24 hours' notice before entry; the clinic's warning letter was enough.",
+  "outcome_at": "2026-08-28T16:30:00"
  }
 ]

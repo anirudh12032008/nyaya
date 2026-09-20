@@ -1,0 +1,17 @@
+{
+ "model": "claude-sonnet-4-6",
+ "text": "```json\n{\"similar\": [{\"case_id\": 1, \"why\": \"Identical case: same module, same parties, same amount (Rs 40,000), same cause (warranty repair denied after 3 months), same purchase date — this is a duplicate entry [TO CONFIRM if intentional]\"}, {\"case_id\": 4, \"why\": \"Same consumer module involving a defective product and dealer/service centre refusing remedy; outcome shows dated documentary evidence (e.g., WhatsApp chat) was decisive before the District Commission.\"}]}\n```",
+ "ts": 1789896414.512138,
+ "parsed": {
+  "similar": [
+   {
+    "case_id": 1,
+    "why": "Identical case: same module, same parties, same amount (Rs 40,000), same cause (warranty repair denied after 3 months), same purchase date — this is a duplicate entry [TO CONFIRM if intentional]"
+   },
+   {
+    "case_id": 4,
+    "why": "Same consumer module involving a defective product and dealer/service centre refusing remedy; outcome shows dated documentary evidence (e.g., WhatsApp chat) was decisive before the District Commission."
+   }
+  ]
+ }
+}

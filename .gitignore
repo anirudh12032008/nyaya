@@ -5,3 +5,5 @@ db/nyaya.db
 .env
 .DS_Store
 logs/
+uploads/
+public/audits/
