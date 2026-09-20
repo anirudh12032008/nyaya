@@ -213,8 +213,10 @@ _NIGHT_CSS = """
 section[data-testid="stSidebar"] .stButton > button[kind="secondary"], .stButton > button[kind="secondary"],
 [data-testid="stAlert"], [data-testid="stDataFrame"] { background: var(--nyaya-surface) !important; color: var(--nyaya-ink) !important; border-color: var(--nyaya-line) !important; }
 .ny-head h1, .ny-card h3, .ny-section h2, .stMarkdown, .stMarkdown p, .stMarkdown li, label, .stCaption, [data-testid="stCaptionContainer"] { color: var(--nyaya-ink) !important; }
-[style*="1F3A5F"] { color: var(--nyaya-navy) !important; }
-[style*="1A1D21"], [style*="5B6470"] { color: var(--nyaya-ink) !important; }
+.ny-brand div, .ny-brand span { color: var(--nyaya-navy) !important; }
+.ny-brand span:last-child { color: var(--nyaya-brass) !important; }
+.ny-clinic, .ny-clinic b, .ny-clinic div, [style*="1A1D21"], [style*="5B6470"] { color: var(--nyaya-ink) !important; }
+[data-testid="stSelectbox"] *, [data-testid="stSelectbox"] svg { color: var(--nyaya-ink) !important; fill: var(--nyaya-ink) !important; }
 [data-baseweb="select"] *, [data-baseweb="popover"] *, [data-baseweb="menu"] * { color: var(--nyaya-ink) !important; }
 [data-baseweb="popover"] > div, [data-baseweb="menu"] { background: var(--nyaya-surface) !important; }
 .stButton > button[kind="primary"] { background: var(--nyaya-navy) !important; color: #15181D !important; }
