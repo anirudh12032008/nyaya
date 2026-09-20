@@ -13,7 +13,7 @@ from db import db
 
 # Every "page" here must be a key in app.PAGES — tests/test_tour.py enforces that.
 STEPS = [
-    {"page": "Intake",
+    {"page": "New intake",
      "title": "Take a client's statement",
      "do": "Paste what the client said — Hindi, Hinglish or English — leave Module on "
            "'auto', and press Analyse. Attach a rent agreement PDF, or dictate with "
@@ -51,7 +51,7 @@ STEPS = [
            "or 👎 with a note.",
      "why": "The feedback notes are fed back as hints into later drafts, so correcting "
             "the model here makes the next draft better."},
-    {"page": "Document Analyzer",
+    {"page": "Document analyzer",
      "title": "Read a document the client brought in",
      "do": "Upload a PDF or TXT — a notice, an agreement, an FIR copy — and press "
            "'Analyze Document'.",

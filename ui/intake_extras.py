@@ -11,6 +11,8 @@ import re
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui import theme
+
 
 # ---------------------------------------------------------------------------
 # 5D. Voice intake
@@ -114,12 +116,14 @@ def render_similar(result: dict) -> None:
     if not matches:
         return
 
-    st.markdown("### Similar past cases")
-    for m in matches:
-        label = f"Case #{m['case_id']} — {m['client_name']} ({m['module']}, {m['what_worked']})"
-        st.markdown(f"[{label}](?case={m['case_id']})")
-        if m.get("why"):
-            st.caption(m["why"])
+    with theme.card("Similar past cases", "मिलते-जुलते पुराने केस — what worked there"):
+        for m in matches:
+            st.markdown(
+                f"[Case #{m['case_id']} — {m['client_name']}](?case={m['case_id']}) &nbsp;"
+                + theme.badge(m["module"], "info") + " " + theme.badge(m["what_worked"], "ok"),
+                unsafe_allow_html=True)
+            if m.get("why"):
+                st.caption(m["why"])
 
 
 # ---------------------------------------------------------------------------
@@ -153,8 +157,8 @@ def render_autopilot(result: dict) -> None:
         "Relief": _relief_from_draft(draft.get("draft_markdown", "")),
     }
 
-    st.markdown("### Filing autopilot preview")
-    st.warning("MOCK — demo only, not connected to e-Daakhil.")
+    st.caption("MOCK — a demo of the e-Daakhil form filling itself. "
+               "Nothing is submitted anywhere.")
 
     rows = "".join(
         f"""

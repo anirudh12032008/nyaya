@@ -1,16 +1,60 @@
 import streamlit as st
 
 from agent.pipeline import run_intake
+from ui import theme
 
 MODULES = ["auto", "consumer", "police", "tenant", "labour"]
+
+# Six visible stages of the pipeline. `done` is derived from what actually ran.
+STEPS = [
+    {"key": "intake", "title": "Understand", "desc": "read the statement"},
+    {"key": "triage", "title": "Classify", "desc": "module + urgency"},
+    {"key": "evidence", "title": "Extract", "desc": "facts, parties, dates"},
+    {"key": "eligibility", "title": "Check", "desc": "forum, fee, free aid"},
+    {"key": "draft", "title": "Prepare", "desc": "complaint / notice"},
+    {"key": "verify", "title": "Review", "desc": "second agent"},
+]
+
+EXAMPLES = {
+    "Consumer": "I bought a washing machine for Rs. 28,000 from a showroom in Bhopal on "
+                "12 March. It stopped working in a week. The shop refuses to repair or refund.",
+    "Police": "Main apne bete ki gumshudgi ki report likhwane thane gaya tha, "
+              "lekin police ne FIR darj karne se mana kar diya.",
+    "Tenant": "My landlord in Indore is keeping my Rs. 40,000 security deposit and has "
+              "cut the water supply to force me to leave before the agreement ends.",
+    "Labour": "I worked as a helper at a factory in Jabalpur for 14 months. "
+              "Wages for the last three months, about Rs. 33,000, were never paid.",
+}
+
+
+def _done_steps(r):
+    """Which of STEPS actually completed, read off the result — never guessed."""
+    if not r:
+        return set()
+    steps = {t["step"] for t in r.get("trace") or []}
+    done = {"intake"}
+    if "classify" in steps:
+        done.add("triage")
+    if (r.get("classification") or {}).get("facts"):
+        done.add("evidence")
+    # eligibility runs in the post-draft hook (case_service), so a saved case is the proof
+    if r.get("forum") or st.session_state.get("last_case_id"):
+        done.add("eligibility")
+    if any(s.startswith("draft") for s in steps):
+        done.add("draft")
+    if any(s.startswith("verify") for s in steps):
+        done.add("verify")
+    return done
 
 
 def _trace_panel(trace, issues=()):
     with st.expander(f"Agent trace ({sum(t['ms'] for t in trace)} ms)", expanded=False):
-        st.table([{"step": t["step"], "model": t["model"], "ms": t["ms"],
-                   "": "cached" if t["cached"] else ""} for t in trace])
+        st.dataframe(
+            [{"step": t["step"], "model": t["model"], "ms": t["ms"],
+              "cached": bool(t["cached"])} for t in trace],
+            use_container_width=True, hide_index=True)
         if any(t["cached"] for t in trace):
-            st.caption(":grey[cached — served from cache/, no API call]")
+            st.caption("cached — served from cache/, no API call")
         if issues:  # stage5b: verifier findings
             st.markdown("**Verifier issues**")
             for i in issues:
@@ -23,7 +67,8 @@ def _analyse(text, override, answer=None):
             st.session_state.result = run_intake(
                 text, module_override=None if override == "auto" else override, answers=answer)
     except RuntimeError as e:  # API down and nothing cached for this input
-        st.error(f"Could not reach Claude and nothing is cached for this text. {e}")
+        st.error("Could not reach Claude, and this statement is not in the local cache. "
+                 f"Try again when the connection is back. ({e})")
         return
     r = st.session_state.result
     if r.get("draft"):
@@ -34,120 +79,200 @@ def _analyse(text, override, answer=None):
             st.warning(f"post-draft hook failed: {e}")
 
 
+def _seed_box():
+    """Prefill the box once: Home hands off via intake_text_seed, links via ?prefill=."""
+    seed = st.session_state.pop("intake_text_seed", "")
+    if not seed and "intake_text" not in st.session_state:
+        seed = st.query_params.get("prefill", "")
+    if seed:
+        st.session_state["intake_text"] = seed
+
+
+def _fill_example(name):
+    st.session_state["intake_text"] = EXAMPLES[name]
+
+
+def _input_card():
+    """Returns (text, override, clicked)."""
+    text = ""
+    with theme.card("Client's statement",
+                    "Hindi, Hinglish or English — write it the way the client said it."):
+        tab_type, tab_speak, tab_upload = st.tabs(["Type", "Speak", "Upload"])
+
+        with tab_type:
+            text = st.text_area("Statement", height=210, key="intake_text",
+                                label_visibility="collapsed",
+                                placeholder="जो हुआ वह यहाँ लिखें / Write what happened…")
+            st.caption(f"{len(text)} characters")
+            st.markdown('<div class="ny-kv">Start from an example</div>', unsafe_allow_html=True)
+            for col, name in zip(st.columns(len(EXAMPLES)), EXAMPLES):
+                col.button(name, key=f"eg_{name}", use_container_width=True,
+                           on_click=_fill_example, args=(name,))
+
+        with tab_speak:
+            from ui.intake_extras import render_mic  # 5D
+            render_mic()
+
+        with tab_upload:
+            pdf_file = st.file_uploader("Rent agreement PDF (optional)", type="pdf")  # stage2
+            if pdf_file is not None:
+                from agent.tenant import extract_pdf_text
+                text = (text + "\n\n" + extract_pdf_text(pdf_file.getvalue())).strip()
+                st.caption(f"Attached {pdf_file.name} — its text is appended to the statement.")
+            else:
+                st.caption("A rent agreement helps the tenant module flag unfair clauses.")
+
+        detected = (st.session_state.get("result") or {}).get("classification", {}).get("module")
+        col1, col2 = st.columns([2, 1])
+        override = col1.selectbox("Module", MODULES,
+                                  index=MODULES.index(detected) if detected in MODULES else 0,
+                                  help="'auto' lets the classifier decide.")
+        col2.markdown("<div style='height:1.85rem'></div>", unsafe_allow_html=True)
+        clicked = col2.button("Analyse", type="primary", use_container_width=True)
+    return text, override, clicked
+
+
+def _summary_card(r, cls, d, f, v):
+    """Right-hand rail: what this case is, and what to do about it."""
+    with theme.card("Case summary", "क्लाइंट को क्या बताना है"):
+        theme.badges((cls.get("module", "?"), "info"),
+                     (f"urgency: {cls.get('urgency', '?')}",
+                      "danger" if str(cls.get("urgency")).lower() in ("high", "urgent") else "warn"),
+                     (cls.get("language", "?"), "muted"),
+                     (cls.get("jurisdiction", "?"), "muted"))
+
+        if f:
+            theme.stat_cards([{"label": "Forum", "value": f.get("forum", "—")},
+                              {"label": "Fee", "value": f"Rs.{f.get('fee_inr', '—')}"},
+                              {"label": "Limitation", "value": f"{f.get('limitation_years', '—')} yrs"}])
+            if f.get("amount_unknown"):
+                st.warning("Claim amount unknown — forum shown is provisional "
+                           "(District Commission).")
+
+        if d.get("deadline_iso"):
+            st.markdown(theme.deadline_badge(_days_left(d["deadline_iso"])) +
+                        " " + theme.kv("expires", d["deadline_iso"]),
+                        unsafe_allow_html=True)
+
+        # verification
+        if v.get("pass") is True:  # stage5b badge
+            st.markdown(theme.badge("verified by second agent", "ok", solid=True),
+                        unsafe_allow_html=True)
+        elif v.get("pass") is False:
+            n = len(v.get("first_issues") or v.get("issues") or [])
+            label = f"{n} issues flagged — redrafted once" if v.get("redrafted") \
+                else f"{n} issues flagged"
+            st.markdown(theme.badge(label, "warn", solid=True), unsafe_allow_html=True)
+            with st.expander("Verifier issues"):
+                for i in v.get("issues") or v.get("first_issues") or []:
+                    st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
+        elif v:
+            st.caption(f"verifier skipped: {v.get('skipped', 'no result')}")
+
+        if d.get("sections"):
+            with st.expander("Sections relied on", expanded=True):
+                for s in d["sections"]:
+                    st.markdown(f"- **{s.get('id')}** — {s.get('why', '')}")
+        if r.get("sections_dropped"):
+            st.warning("Dropped (not in our statute data): " + ", ".join(
+                str(x) for x in r["sections_dropped"]))
+
+        if d.get("next_steps"):
+            with st.expander("Next steps", expanded=True):
+                for s in d["next_steps"]:
+                    st.markdown(f"- {s}")
+
+        if d.get("what_to_carry"):  # stage2
+            with st.expander("What to carry"):
+                for s in d["what_to_carry"]:
+                    st.markdown(f"- {s}")
+
+        if d.get("hindi_summary"):
+            st.markdown("**क्लाइंट के लिए सारांश**")
+            theme.quote(d["hindi_summary"])
+
+        from pdf.render import draft_to_pdf
+        st.download_button("Download PDF",
+                           draft_to_pdf(d["draft_markdown"],
+                                        {**(f or {}), "deadline_iso": d.get("deadline_iso")}),
+                           file_name="nyaya-draft.pdf", mime="application/pdf",
+                           type="primary", use_container_width=True)
+
+
+def _days_left(deadline_iso):
+    from datetime import date
+    try:
+        y, m, dd = (int(x) for x in str(deadline_iso)[:10].split("-"))
+        return (date(y, m, dd) - date.today()).days
+    except Exception:
+        return None
+
+
 def render():
-    st.title("Intake")
-    st.caption("Paste what the client said — Hindi, Hinglish or English.")
+    theme.page_header("New intake",
+                      "Paste or speak what the client said. Claude classifies it, checks the "
+                      "forum and limitation, and prepares a draft you review.",
+                      hindi="क्लाइंट की बात यहाँ लिखें", eyebrow="Legal aid clinic")
 
-    prefill = st.query_params.get("prefill", "")
-    text = st.text_area("Client's statement", value=prefill, height=160, key="intake_text")
-    with st.expander("🎤 Voice intake (Hindi)"):  # 5D
-        from ui.intake_extras import render_mic
-        render_mic()
-
-    pdf_file = st.file_uploader("Rent agreement PDF (optional)", type="pdf")  # stage2
-    if pdf_file is not None:
-        from agent.tenant import extract_pdf_text
-        text = (text + "\n\n" + extract_pdf_text(pdf_file.getvalue())).strip()
-        st.caption(f"Attached {pdf_file.name} — its text is appended to the statement.")
-
-    detected = (st.session_state.get("result") or {}).get("classification", {}).get("module")
-    col1, col2 = st.columns([2, 1])
-    override = col1.selectbox("Module", MODULES,
-                              index=MODULES.index(detected) if detected in MODULES else 0)
-    if col2.button("Analyse", type="primary", use_container_width=True) and text.strip():
+    _seed_box()
+    text, override, clicked = _input_card()
+    if clicked and text.strip():
         _analyse(text, override)
+    elif clicked:
+        st.error("Write or paste the client's statement first.")
 
     r = st.session_state.get("result")
+    st.write("")
+    theme.agent_strip(STEPS, done=_done_steps(r))
+
     if not r:
+        theme.empty_state("📄", "No intake analysed yet",
+                          "The draft, forum and deadline appear here once you press Analyse.")
         return
 
     v = r.get("verification") or {}
     _trace_panel(r["trace"], v.get("first_issues") or v.get("issues") or [])
 
     if r.get("missing_fact") and not r.get("draft"):
-        st.info(f"**One question:** {r['missing_fact']}")
-        ans = st.text_input("Answer", key="followup")
-        if st.button("Continue") and ans.strip():
-            _analyse(text, override, answer=ans)
-            st.rerun()
+        with theme.card("One question before drafting", "एक सवाल"):
+            st.info(r["missing_fact"])
+            ans = st.text_input("Answer", key="followup")
+            if st.button("Continue", type="primary") and ans.strip():
+                _analyse(text, override, answer=ans)
+                st.rerun()
         return
 
     cls = r["classification"]
-    st.write(f"**Module:** {cls['module']} · **Urgency:** {cls['urgency']} · "
-             f"**Language:** {cls['language']} · **Jurisdiction:** {cls['jurisdiction']}")
-
-    f = r.get("forum")
-    if f:
-        c = st.columns(3)
-        c[0].metric("Forum", f["forum"])
-        c[1].metric("Fee", f"Rs.{f['fee_inr']}")
-        c[2].metric("Limitation", f"{f['limitation_years']} years")
-        if f.get("amount_unknown"):
-            st.warning("Claim amount unknown — forum shown is provisional (District Commission).")
-
     d = r.get("draft")
     if not d:
-        st.info(f"Module '{cls['module']}' drafting arrives in Stage 2.")
+        theme.empty_state("🛠", f"No drafting for '{cls['module']}' yet",
+                          "Classification is done; this module's drafting arrives in Stage 2.")
         return
 
-    if d.get("flags"):  # stage2: tenant clause review
-        st.markdown("### Clause flags")
-        st.table([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
-                   "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
-                  for x in d["flags"]])
+    f = r.get("forum")
+    left, right = st.columns([3, 2], gap="large")
 
-    if v.get("pass") is True:  # stage5b badge
-        st.success("✅ Verified by second agent")
-    elif v.get("pass") is False:
-        n = len(v.get("first_issues") or v.get("issues") or [])
-        st.warning(f"⚠️ Verifier flagged {n} issues (redrafted once)" if v.get("redrafted")
-                   else f"⚠️ Verifier flagged {n} issues")
-        with st.expander("Verifier issues"):
-            for i in v.get("issues") or v.get("first_issues") or []:
-                st.markdown(f"- `{i.get('type')}` {i.get('detail')} → {i.get('fix')}")
-    elif v:
-        st.caption(f"verifier skipped: {v.get('skipped', 'no result')}")
+    with left:
+        theme.section("Draft", "Review every fact before filing.")
+        theme.document(d["draft_markdown"])
 
-    st.markdown("### Draft")
-    st.markdown(d["draft_markdown"])
+        if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
+            with st.expander("Letter to the Superintendent of Police — BNSS 173(4)"):
+                theme.document(d["sp_letter_markdown"])
 
-    if d.get("sp_letter_markdown"):  # stage2: station refused -> BNSS 173(4)
-        st.markdown("### Letter to the Superintendent of Police — BNSS 173(4)")
-        st.markdown(d["sp_letter_markdown"])
+        if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer
+            with st.expander("Demand letter to the employer"):
+                theme.document(d["demand_letter_markdown"])
 
-    if d.get("demand_letter_markdown"):  # labour: pre-litigation notice to the employer
-        st.markdown("### Demand letter to the employer")
-        st.markdown(d["demand_letter_markdown"])
+        if d.get("flags"):  # stage2: tenant clause review
+            with theme.card("Clause flags", "Terms in the agreement that need a second look"):
+                st.dataframe([{"Clause": x.get("clause", ""), "Issue": x.get("issue", ""),
+                               "Rule": x.get("rule_id", ""), "Severity": x.get("severity", "")}
+                              for x in d["flags"]],
+                             use_container_width=True, hide_index=True)
 
-    if d.get("what_to_carry"):  # stage2
-        st.markdown("### What to carry")
-        for s in d["what_to_carry"]:
-            st.markdown(f"- {s}")
-
-    st.markdown("### Sections relied on")
-    for s in d["sections"]:
-        st.markdown(f"- **{s.get('id')}** — {s.get('why', '')}")
-    if r.get("sections_dropped"):
-        st.warning("Dropped (not in our statute data): " + ", ".join(
-            str(x) for x in r["sections_dropped"]))
-
-    if d.get("next_steps"):
-        st.markdown("### Next steps")
-        for s in d["next_steps"]:
-            st.markdown(f"- {s}")
-
-    if d.get("hindi_summary"):
-        st.markdown("### Client summary (Hindi)")
-        st.info(d["hindi_summary"])
-
-    if d.get("deadline_iso"):
-        st.markdown(f"**Limitation expires:** {d['deadline_iso']}")
-
-    from pdf.render import draft_to_pdf
-    st.download_button("Download PDF",
-                       draft_to_pdf(d["draft_markdown"],
-                                    {**(f or {}), "deadline_iso": d.get("deadline_iso")}),
-                       file_name="nyaya-draft.pdf", mime="application/pdf")
+    with right:
+        _summary_card(r, cls, d, f, v)
 
     from ui.intake_extras import render_similar, render_autopilot  # 5G / 5F
     try:

@@ -5,20 +5,26 @@ import streamlit as st
 
 from agent import sentinel, triage
 from pdf.render import draft_to_pdf
+from ui import theme
 
 
 def render_triage_button() -> None:
-    st.subheader("Overnight triage")
-    if st.button("Run overnight triage", type="primary"):
-        with st.spinner("Classifying new cases and writing the morning brief..."):
-            st.session_state["triage_result"] = triage.run_overnight()
+    # ui/hooks.admin_extras already prints the section heading, so the card carries only the gloss
+    with theme.card(caption="Classifies every new case and writes the morning brief · रात्रि छँटाई"):
+        if st.button("Run overnight triage", type="primary"):
+            with st.spinner("Classifying new cases and writing the morning brief..."):
+                st.session_state["triage_result"] = triage.run_overnight()
 
     result = st.session_state.get("triage_result")
     if not result:
         return
 
-    st.caption(f"Triaged {result['triaged']} new case(s) in {result['seconds']}s")
-    st.markdown(result["brief_md"])
+    theme.stat_cards([
+        {"label": "Cases triaged", "value": result["triaged"]},
+        {"label": "Took", "value": f"{result['seconds']}s"},
+    ])
+    st.write("")
+    theme.document(result["brief_md"])
     st.download_button(
         "Download brief PDF",
         data=draft_to_pdf(result["brief_md"],
@@ -29,23 +35,27 @@ def render_triage_button() -> None:
 
 
 def render_sentinel() -> None:
-    st.subheader("Deadline sentinel")
-    a, b, c = st.columns([1, 1, 2])
-    if a.button("Advance clock 30 days"):
-        sentinel.advance_clock(30)
-    if b.button("Reset clock"):
-        sentinel.reset_clock()
-    offset = sentinel.offset_days()
-    c.metric("Simulated date", sentinel.today().strftime("%d-%m-%Y"),
-             f"+{offset} days" if offset else "real time")
+    with theme.card(caption="Move the clock to see which limitation periods bite · समय-सीमा प्रहरी"):
+        a, b, c = st.columns([1, 1, 2])
+        if a.button("Advance clock 30 days", use_container_width=True):
+            sentinel.advance_clock(30)
+        if b.button("Reset clock", use_container_width=True):
+            sentinel.reset_clock()
+        offset = sentinel.offset_days()
+        c.metric("Simulated date", sentinel.today().strftime("%d-%m-%Y"),
+                 f"+{offset} days" if offset else "real time")
 
     pending = sentinel.pending_notifications()
-    st.caption(f"Pending notifications: {len(pending)}")
+    if not pending:
+        theme.empty_state("✅", "No deadline notifications pending",
+                          "Nothing is close enough to its limitation date to warn about.")
+        return
+
+    theme.section("Pending notifications", f"{len(pending)} client(s) to warn")
     for n in pending:
         with st.container(border=True):
             left, right = st.columns([3, 1])
-            left.write(f"**#{n['case_id']} · {n['client']}** — limitation {n['deadline']}")
-            days = n["days_left"]
-            right.markdown(f":red-background[{-days} days overdue]" if days < 0
-                           else f":orange-background[{days} days left]")
+            left.markdown(f"**#{n['case_id']} · {n['client']}** — limitation {n['deadline']}")
+            with right:
+                theme.badges(theme.deadline_badge(n["days_left"]))
             st.code(n["message"], language=None)
