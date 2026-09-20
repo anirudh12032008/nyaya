@@ -126,4 +126,7 @@ def council_for_case(case_id: int, force: bool = False, on_agent_done=None) -> d
         return json.loads(case["council_json"])
     out = run_council(case, on_agent_done)
     db.update_case(case_id, council_json=json.dumps(out, ensure_ascii=False))
+    db.log_event(case_id, "council_ran", {"specialists": sorted(out["agents"]),
+                                          "errors": sorted(out.get("errors") or {}),
+                                          "ms": out["ms"]})
     return out

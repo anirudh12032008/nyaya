@@ -1,46 +1,10 @@
 """Nyaya UI for legal document analysis."""
-
 from __future__ import annotations
 
-import io
-
 import streamlit as st
-from pypdf import PdfReader
 
 from agent.document_analyzer import analyze_document
-
-
-def _extract_pdf_text(uploaded_file) -> str:
-    """Extract text from all readable PDF pages."""
-
-    reader = PdfReader(io.BytesIO(uploaded_file.getvalue()))
-
-    pages = []
-
-    for page in reader.pages:
-        text = page.extract_text()
-
-        if text:
-            pages.append(text)
-
-    return "\n\n".join(pages)
-
-
-def _extract_text(uploaded_file) -> str:
-    """Extract text from supported document formats."""
-
-    filename = uploaded_file.name.lower()
-
-    if filename.endswith(".pdf"):
-        return _extract_pdf_text(uploaded_file)
-
-    if filename.endswith(".txt"):
-        return uploaded_file.getvalue().decode(
-            "utf-8",
-            errors="ignore",
-        )
-
-    return ""
+from agent.evidence import extract_text
 
 
 def _show_list(title: str, items) -> None:
@@ -97,7 +61,8 @@ def render():
     with st.spinner("Analyzing document..."):
 
         try:
-            document_text = _extract_text(uploaded_file)
+            document_text = extract_text(uploaded_file.getvalue(),
+                                         uploaded_file.type or "", uploaded_file.name)
         except Exception as exc:
             st.error(f"Could not read the document: {exc}")
             return

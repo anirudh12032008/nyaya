@@ -1,7 +1,8 @@
 """Stage 1 spine: text in -> classification, forum, draft, trace."""
 from datetime import date
 
-from agent import classify as clf, client, draft as drafter, forum as forum_mod, verify as ver
+from agent import (classify as clf, client, draft as drafter, forum as forum_mod,
+                   pipeline_modules, verify as ver)
 
 
 def _step(trace: list, name: str) -> None:
@@ -52,8 +53,7 @@ def run_intake(text: str, module_override: str | None = None, answers: str | Non
         return result
 
     facts = classification["facts"]
-    if module in ("police", "tenant"):  # stage2 branches, same result shape
-        from agent import pipeline_modules
+    if module in pipeline_modules.MODULES:  # police/tenant/labour, same result shape
         draft = pipeline_modules.run_module(module, classification, text, today, trace)
         result["draft"] = draft
         result["sections_dropped"] = draft.get("sections_dropped", [])

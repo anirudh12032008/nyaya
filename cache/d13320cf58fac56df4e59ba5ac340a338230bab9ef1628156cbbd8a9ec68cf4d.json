@@ -1,0 +1,27 @@
+{
+ "model": "claude-haiku-4-5",
+ "text": "```json\n{\n  \"module\": \"labour\",\n  \"jurisdiction\": \"Pithampur\",\n  \"urgency\": \"high\",\n  \"language\": \"hinglish\",\n  \"facts\": {\n    \"parties\": [\"Client (helper)\", \"Factory in Pithampur\"],\n    \"amount_inr\": 36000,\n    \"date_of_cause\": \"2026-06-20\",\n    \"what_happened\": \"Client worked as a helper at a factory in Pithampur. Salary of ₹12,000 per month was not paid for 3 months. Last week, the client was terminated without notice. PF contributions were deducted from wages but not deposited into the client's account.\",\n    \"employer\": \"Factory in Pithampur\",\n    \"monthly_wage_inr\": 12000,\n    \"months_unpaid\": 3,\n    \"last_working_day\": \"2026-09-13\",\n    \"pf_uan\": null,\n    \"workers_count\": null\n  },\n  \"missing_fact\": \"Kya aapka PF UAN (12 digit number) aapko malum hai?\"\n}\n```",
+ "ts": 1789896460.6203032,
+ "parsed": {
+  "module": "labour",
+  "jurisdiction": "Pithampur",
+  "urgency": "high",
+  "language": "hinglish",
+  "facts": {
+   "parties": [
+    "Client (helper)",
+    "Factory in Pithampur"
+   ],
+   "amount_inr": 36000,
+   "date_of_cause": "2026-06-20",
+   "what_happened": "Client worked as a helper at a factory in Pithampur. Salary of ₹12,000 per month was not paid for 3 months. Last week, the client was terminated without notice. PF contributions were deducted from wages but not deposited into the client's account.",
+   "employer": "Factory in Pithampur",
+   "monthly_wage_inr": 12000,
+   "months_unpaid": 3,
+   "last_working_day": "2026-09-13",
+   "pf_uan": null,
+   "workers_count": null
+  },
+  "missing_fact": "Kya aapka PF UAN (12 digit number) aapko malum hai?"
+ }
+}

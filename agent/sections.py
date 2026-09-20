@@ -8,6 +8,7 @@ _SOURCES = {  # module -> (json file, key holding the list)
     "consumer": ("cpa_rules", "sections"),
     "police": ("bns_sections", "sections"),
     "tenant": ("tenancy_rules", "rules"),
+    "labour": ("labour_rules", "sections"),
 }
 
 
