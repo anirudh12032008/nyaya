@@ -95,7 +95,7 @@ def _fill_example(name):
 def _input_card():
     """Returns (text, override, clicked)."""
     text = ""
-    with theme.card("Client's statement",
+    with theme.card(theme.t("Client's statement"),
                     "Hindi, Hinglish or English - write it the way the client said it."):
         tab_type, tab_speak, tab_upload = st.tabs(["Type", "Speak", "Upload"])
 
@@ -104,7 +104,7 @@ def _input_card():
                                 label_visibility="collapsed",
                                 placeholder="जो हुआ वह यहाँ लिखें / Write what happened…")
             st.caption(f"{len(text)} characters")
-            st.markdown('<div class="ny-kv">Start from an example</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="ny-kv">{theme.t("Start from an example")}</div>', unsafe_allow_html=True)
             for col, name in zip(st.columns(len(EXAMPLES)), EXAMPLES):
                 col.button(name, key=f"eg_{name}", use_container_width=True,
                            on_click=_fill_example, args=(name,))
@@ -114,13 +114,13 @@ def _input_card():
             render_mic()
 
         with tab_upload:
-            pdf_file = st.file_uploader("Rent agreement PDF (optional)", type="pdf")  # stage2
+            pdf_file = st.file_uploader(theme.t("Rent agreement PDF (optional)"), type="pdf")  # stage2
             if pdf_file is not None:
                 from agent.tenant import extract_pdf_text
                 text = (text + "\n\n" + extract_pdf_text(pdf_file.getvalue())).strip()
                 st.caption(f"Attached {pdf_file.name} - its text is appended to the statement.")
             else:
-                st.caption("A rent agreement helps the tenant module flag unfair clauses.")
+                st.caption(theme.t("A rent agreement helps the tenant module flag unfair clauses."))
 
         detected = (st.session_state.get("result") or {}).get("classification", {}).get("module")
         col1, col2 = st.columns([2, 1])
@@ -165,7 +165,7 @@ def _summary_card(r, cls, d, f, v):
             st.markdown(theme.badge(label, "warn", solid=True), unsafe_allow_html=True)
 
         if d.get("next_steps"):
-            st.markdown("**Next steps**")
+            st.markdown(f"**{theme.t('Next steps')}**")
             for s_ in d["next_steps"][:3]:
                 st.markdown(f"- {s_}")
 
@@ -223,7 +223,7 @@ def render():
     if clicked and text.strip():
         _analyse(text, override)
     elif clicked:
-        st.error("Write or paste the client's statement first.")
+        st.error(theme.t("Write or paste the client's statement first."))
 
     r = st.session_state.get("result")
     st.write("")
@@ -240,7 +240,7 @@ def render():
         with theme.card("One question before drafting", "एक सवाल"):
             st.info(r["missing_fact"])
             ans = st.text_input("Answer", key="followup")
-            if st.button("Continue", type="primary") and ans.strip():
+            if st.button(theme.t("Continue"), type="primary") and ans.strip():
                 _analyse(text, override, answer=ans)
                 st.rerun()
         return

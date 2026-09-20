@@ -48,7 +48,7 @@ def _goto(label: str) -> None:
 def _case_rows(cases: list[dict], names: dict, key: str) -> None:
     """One line per case: id · client · module · volunteer · deadline badge · open button."""
     if not cases:
-        st.caption("Nothing here right now.")
+        st.caption(theme.t("Nothing here right now."))
         return
     for c in cases:
         left, right = st.columns([9, 1])
@@ -58,12 +58,12 @@ def _case_rows(cases: list[dict], names: dict, key: str) -> None:
             + theme.badge(f"#{c['id']}", "info")
             + theme.kv("", c.get("client_name") or " - ")
             + theme.kv("·", c.get("module") or " - ")
-            + theme.kv("·", names.get(c.get("assigned_to")) or "unassigned")
+            + theme.kv("·", names.get(c.get("assigned_to")) or theme.t("unassigned"))
             + theme.deadline_badge(days)
             + "</div>",
             unsafe_allow_html=True,
         )
-        if right.button("Open", key=f"open_{key}_{c['id']}"):
+        if right.button(theme.t("Open"), key=f"open_{key}_{c['id']}"):
             _go_to_case(c["id"])
 
 
@@ -84,15 +84,15 @@ def render() -> None:
     c1, c2, c3 = st.columns(3)
     with c1:
         with theme.card("New intake", "Start a matter for a citizen or volunteer."):
-            if st.button("New intake →", type="primary", use_container_width=True, key="card_intake"):
+            if st.button(theme.t("New intake →"), type="primary", use_container_width=True, key="card_intake"):
                 _goto("New intake")
     with c2:
         with theme.card("My cases", "For lawyers and volunteers tracking their queue."):
-            if st.button("My cases →", type="primary", use_container_width=True, key="card_cases"):
+            if st.button(theme.t("My cases →"), type="primary", use_container_width=True, key="card_cases"):
                 _goto("Cases")
     with c3:
         with theme.card("Analyze a document", "Upload a document for Nyaya to read."):
-            if st.button("Analyze a document →", type="primary", use_container_width=True, key="card_doc"):
+            if st.button(theme.t("Analyze a document →"), type="primary", use_container_width=True, key="card_doc"):
                 _goto("Document analyzer")
 
     if not cases:
@@ -116,7 +116,7 @@ def render() -> None:
                     + "</div>", unsafe_allow_html=True)
 
     # ── everything else, collapsed ──────────────────────────────────────────
-    with st.expander("Your case, our AI agents"):
+    with st.expander(theme.t("Your case, our AI agents")):
         theme.agent_strip(PIPELINE)
 
     with st.expander("Work queue"):
