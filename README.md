@@ -90,6 +90,8 @@ Query params select special views: `?page=guide-<module>` (public guide),
 | 5D | Voice intake (browser SpeechRecognition, hi-IN) | `ui/intake_extras.py` |
 | 5F | Filing autopilot preview: mock e-Daakhil form autofill, disabled Submit | `ui/intake_extras.py` |
 | 5G | Similar past cases from the clinic DB (Sonnet over summaries, no vector DB) | `agent/similar.py` |
+| 6 | Orchestra: five specialist agents (evidence, devil's advocate, strategy, risk, client letter) run in parallel on a case, then Opus 5 writes the counsel brief. Auto-runs after intake, on-demand from the case page, stored in `cases.council_json` | `agent/orchestra.py`, `ui/orchestra.py` |
+| 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace — lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` |
 
 ## Layout
 

@@ -1,0 +1,125 @@
+{
+ "model": "claude-opus-5",
+ "text": "{\"steps\":[{\"day\":0,\"action\":\"Intake verification call with client: confirm the gap facts flagged in the draft — exact date handset was handed to the service centre, job sheet/reference number, whether the warranty denial was given in writing or orally, whether any legal/demand notice was already sent, client's annual income and any protected-category status (for the free-aid re-check), and preferred forum address (residence/workplace in Bhopal).\",\"who\":\"volunteer\",\"output\":\"Completed [TO CONFIRM] checklist appended to the packet; free-aid eligibility re-assessment note for the supervising advocate\"},{\"day\":0,\"action\":\"Supervising advocate reads the junior's draft against the 2026-09-29 limitation deadline and records a go/no-go on filing route (e-Daakhil vs. physical filing at District Commission, Bhopal) and on whether a pre-filing notice is to be sent in parallel.\",\"who\":\"advocate\",\"output\":\"Signed filing-route direction on file cover\"},{\"day\":1,\"action\":\"Client assembles and hands over documents: tax invoice dated 15 Jan 2026, warranty card, service centre job sheet, any written refusal/WhatsApp/email correspondence, ID proof, and proof of address for territorial jurisdiction. Originals shown, two photocopy sets made.\",\"who\":\"client\",\"output\":\"Document bundle with index; originals returned to client, copies retained\"},{\"day\":1,\"action\":\"Verify jurisdiction and fee on record: claim value Rs 40,000 plus Rs 15,000 compensation — confirm this falls in District Commission pecuniary limit and confirm the applicable filing fee slab under the Consumer Protection (Consumer Disputes Redressal Commissions) Rules as currently notified [TO CONFIRM exact fee amount and mode of payment accepted at Bhopal District Commission].\",\"who\":\"volunteer\",\"output\":\"Jurisdiction and fee memo\"},{\"day\":2,\"action\":\"Revise the draft complaint to add the items missing from the current version: memo of parties with full addresses of Rakesh Sharma and XYZ Mobiles Service Centre, list of dates and events, prayer clause numbering, index of annexures A-1 onwards, and the statutory affidavit in support of the complaint.\",\"who\":\"volunteer\",\"output\":\"Revision-2 complaint set (complaint + memo of parties + list of dates + index + draft affidavit)\"},{\"day\":2,\"action\":\"If the advocate so directed on Day 0, issue a short pre-filing demand notice to the service centre by email and registered post, running in parallel so it does not delay filing.\",\"who\":\"volunteer\",\"output\":\"Dispatched notice copy with postal receipt / email delivery record\"},{\"day\":3,\"action\":\"Advocate settles the final complaint text, affidavit, and vakalatnama; confirms sections 2(7), 2(11) and 39 are pleaded to the facts as verified on Day 0 and that no unverified fact has crept in.\",\"who\":\"advocate\",\"output\":\"Advocate-approved final filing set, initialled on each page\"},{\"day\":4,\"action\":\"Client signs the complaint, verification clause, vakalatnama and affidavit; affidavit sworn/notarised. Verification place and date to be filled as Bhopal and the actual signing date (replacing the [TO CONFIRM] in the draft).\",\"who\":\"client\",\"output\":\"Executed and notarised filing set\"},{\"day\":5,\"action\":\"Create/confirm e-Daakhil account in the client's name (mobile and email OTP with client present), scan the full set into the prescribed PDF format, upload, and pay the filing fee online. Keep a complete hard-copy set ready in case the Commission directs physical submission.\",\"who\":\"volunteer\",\"output\":\"e-Daakhil submission acknowledgement with temporary case/diary number; fee payment receipt\"},{\"day\":6,\"action\":\"Check e-Daakhil portal for scrutiny status and objections raised by the registry; note any defect (annexure legibility, affidavit format, fee shortfall, address defect).\",\"who\":\"volunteer\",\"output\":\"Scrutiny status printout; defect list if any\"},{\"day\":7,\"action\":\"Cure any scrutiny defect and re-submit the same day; if the registry insists on physical filing, lodge the hard-copy set at the District Consumer Disputes Redressal Commission, Bhopal, and obtain the filing stamp. Report completion to the advocate.\",\"who\":\"advocate\",\"output\":\"Confirmed filing with case number / stamped receipt; completion note to client\"},{\"day\":8,\"action\":\"Reserve buffer day before the limitation deadline: if filing is still not accepted, advocate prepares an application for condonation of delay under Section 69(2) with a supporting affidavit explaining the cause, to be filed together with the complaint.\",\"who\":\"advocate\",\"output\":\"Contingency condonation application (used only if required)\"}],\"critical_dates\":[{\"date_iso\":\"2026-01-15\",\"what\":\"Date of purchase / invoice date pleaded as start of the cause of action\"},{\"date_iso\":\"2026-09-20\",\"what\":\"Day 0 — packet date, intake verification and advocate go/no-go\"},{\"date_iso\":\"2026-09-23\",\"what\":\"Advocate settles final complaint, affidavit and vakalatnama\"},{\"date_iso\":\"2026-09-24\",\"what\":\"Client signature and notarisation of affidavit\"},{\"date_iso\":\"2026-09-25\",\"what\":\"e-Daakhil upload and fee payment\"},{\"date_iso\":\"2026-09-27\",\"what\":\"Target filing completion / defects cured (two clear days before deadline)\"},{\"date_iso\":\"2026-09-28\",\"what\":\"Buffer day — contingency condonation application prepared if filing not yet accepted\"},{\"date_iso\":\"2026-09-29\",\"what\":\"Limitation deadline as stated in the packet — filing must be on record by this date\"}],\"escalation_path\":[\"Registry raises scrutiny objection on e-Daakhil: volunteer cures and re-submits the same working day; if the defect is substantive (jurisdiction, fee slab, affidavit format), refer to the supervising advocate before re-submission.\",\"Client documents incomplete or the handover date / written warranty denial cannot be confirmed by Day 2: volunteer escalates to the supervising advocate, who decides whether to file on available material with the gap pleaded as [TO CONFIRM] rather than miss 2026-09-29.\",\"e-Daakhil portal outage or payment gateway failure: switch immediately to physical filing at the District Consumer Disputes Redressal Commission, Bhopal, with a printed record of the failed attempt.\",\"Filing slips past 2026-09-29 for any reason: advocate files the Section 69(2) condonation of delay application with supporting affidavit along with the complaint.\",\"Free-aid eligibility: if the Day 0 income/category answers change the position, volunteer routes the file to the clinic's eligibility desk before fee payment on Day 5.\",\"Post-filing adverse order: appeal route to the State Consumer Disputes Redressal Commission under Section 41 within the prescribed period — advocate to advise separately at that stage.\",\"Any disagreement within the review council on strategy: escalate to the supervising advocate, whose written direction on the file cover governs.\"],\"total_est_days_to_filing\":7}",
+ "ts": 1789895175.6904352,
+ "parsed": {
+  "steps": [
+   {
+    "day": 0,
+    "action": "Intake verification call with client: confirm the gap facts flagged in the draft — exact date handset was handed to the service centre, job sheet/reference number, whether the warranty denial was given in writing or orally, whether any legal/demand notice was already sent, client's annual income and any protected-category status (for the free-aid re-check), and preferred forum address (residence/workplace in Bhopal).",
+    "who": "volunteer",
+    "output": "Completed [TO CONFIRM] checklist appended to the packet; free-aid eligibility re-assessment note for the supervising advocate"
+   },
+   {
+    "day": 0,
+    "action": "Supervising advocate reads the junior's draft against the 2026-09-29 limitation deadline and records a go/no-go on filing route (e-Daakhil vs. physical filing at District Commission, Bhopal) and on whether a pre-filing notice is to be sent in parallel.",
+    "who": "advocate",
+    "output": "Signed filing-route direction on file cover"
+   },
+   {
+    "day": 1,
+    "action": "Client assembles and hands over documents: tax invoice dated 15 Jan 2026, warranty card, service centre job sheet, any written refusal/WhatsApp/email correspondence, ID proof, and proof of address for territorial jurisdiction. Originals shown, two photocopy sets made.",
+    "who": "client",
+    "output": "Document bundle with index; originals returned to client, copies retained"
+   },
+   {
+    "day": 1,
+    "action": "Verify jurisdiction and fee on record: claim value Rs 40,000 plus Rs 15,000 compensation — confirm this falls in District Commission pecuniary limit and confirm the applicable filing fee slab under the Consumer Protection (Consumer Disputes Redressal Commissions) Rules as currently notified [TO CONFIRM exact fee amount and mode of payment accepted at Bhopal District Commission].",
+    "who": "volunteer",
+    "output": "Jurisdiction and fee memo"
+   },
+   {
+    "day": 2,
+    "action": "Revise the draft complaint to add the items missing from the current version: memo of parties with full addresses of Rakesh Sharma and XYZ Mobiles Service Centre, list of dates and events, prayer clause numbering, index of annexures A-1 onwards, and the statutory affidavit in support of the complaint.",
+    "who": "volunteer",
+    "output": "Revision-2 complaint set (complaint + memo of parties + list of dates + index + draft affidavit)"
+   },
+   {
+    "day": 2,
+    "action": "If the advocate so directed on Day 0, issue a short pre-filing demand notice to the service centre by email and registered post, running in parallel so it does not delay filing.",
+    "who": "volunteer",
+    "output": "Dispatched notice copy with postal receipt / email delivery record"
+   },
+   {
+    "day": 3,
+    "action": "Advocate settles the final complaint text, affidavit, and vakalatnama; confirms sections 2(7), 2(11) and 39 are pleaded to the facts as verified on Day 0 and that no unverified fact has crept in.",
+    "who": "advocate",
+    "output": "Advocate-approved final filing set, initialled on each page"
+   },
+   {
+    "day": 4,
+    "action": "Client signs the complaint, verification clause, vakalatnama and affidavit; affidavit sworn/notarised. Verification place and date to be filled as Bhopal and the actual signing date (replacing the [TO CONFIRM] in the draft).",
+    "who": "client",
+    "output": "Executed and notarised filing set"
+   },
+   {
+    "day": 5,
+    "action": "Create/confirm e-Daakhil account in the client's name (mobile and email OTP with client present), scan the full set into the prescribed PDF format, upload, and pay the filing fee online. Keep a complete hard-copy set ready in case the Commission directs physical submission.",
+    "who": "volunteer",
+    "output": "e-Daakhil submission acknowledgement with temporary case/diary number; fee payment receipt"
+   },
+   {
+    "day": 6,
+    "action": "Check e-Daakhil portal for scrutiny status and objections raised by the registry; note any defect (annexure legibility, affidavit format, fee shortfall, address defect).",
+    "who": "volunteer",
+    "output": "Scrutiny status printout; defect list if any"
+   },
+   {
+    "day": 7,
+    "action": "Cure any scrutiny defect and re-submit the same day; if the registry insists on physical filing, lodge the hard-copy set at the District Consumer Disputes Redressal Commission, Bhopal, and obtain the filing stamp. Report completion to the advocate.",
+    "who": "advocate",
+    "output": "Confirmed filing with case number / stamped receipt; completion note to client"
+   },
+   {
+    "day": 8,
+    "action": "Reserve buffer day before the limitation deadline: if filing is still not accepted, advocate prepares an application for condonation of delay under Section 69(2) with a supporting affidavit explaining the cause, to be filed together with the complaint.",
+    "who": "advocate",
+    "output": "Contingency condonation application (used only if required)"
+   }
+  ],
+  "critical_dates": [
+   {
+    "date_iso": "2026-01-15",
+    "what": "Date of purchase / invoice date pleaded as start of the cause of action"
+   },
+   {
+    "date_iso": "2026-09-20",
+    "what": "Day 0 — packet date, intake verification and advocate go/no-go"
+   },
+   {
+    "date_iso": "2026-09-23",
+    "what": "Advocate settles final complaint, affidavit and vakalatnama"
+   },
+   {
+    "date_iso": "2026-09-24",
+    "what": "Client signature and notarisation of affidavit"
+   },
+   {
+    "date_iso": "2026-09-25",
+    "what": "e-Daakhil upload and fee payment"
+   },
+   {
+    "date_iso": "2026-09-27",
+    "what": "Target filing completion / defects cured (two clear days before deadline)"
+   },
+   {
+    "date_iso": "2026-09-28",
+    "what": "Buffer day — contingency condonation application prepared if filing not yet accepted"
+   },
+   {
+    "date_iso": "2026-09-29",
+    "what": "Limitation deadline as stated in the packet — filing must be on record by this date"
+   }
+  ],
+  "escalation_path": [
+   "Registry raises scrutiny objection on e-Daakhil: volunteer cures and re-submits the same working day; if the defect is substantive (jurisdiction, fee slab, affidavit format), refer to the supervising advocate before re-submission.",
+   "Client documents incomplete or the handover date / written warranty denial cannot be confirmed by Day 2: volunteer escalates to the supervising advocate, who decides whether to file on available material with the gap pleaded as [TO CONFIRM] rather than miss 2026-09-29.",
+   "e-Daakhil portal outage or payment gateway failure: switch immediately to physical filing at the District Consumer Disputes Redressal Commission, Bhopal, with a printed record of the failed attempt.",
+   "Filing slips past 2026-09-29 for any reason: advocate files the Section 69(2) condonation of delay application with supporting affidavit along with the complaint.",
+   "Free-aid eligibility: if the Day 0 income/category answers change the position, volunteer routes the file to the clinic's eligibility desk before fee payment on Day 5.",
+   "Post-filing adverse order: appeal route to the State Consumer Disputes Redressal Commission under Section 41 within the prescribed period — advocate to advise separately at that stage.",
+   "Any disagreement within the review council on strategy: escalate to the supervising advocate, whose written direction on the file cover governs."
+  ],
+  "total_est_days_to_filing": 7
+ }
+}

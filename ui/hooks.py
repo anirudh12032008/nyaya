@@ -17,7 +17,13 @@ def on_draft_complete(result: dict) -> None:
 
 
 # Stage 4 / 5 extras, re-exported so cases.py / admin.py pick them up via getattr.
-from ui.stage4 import extra_case_actions, admin_extras as _s4_admin  # noqa: E402
+from ui.stage4 import extra_case_actions as _s4_case, admin_extras as _s4_admin  # noqa: E402
+
+
+def extra_case_actions(case: dict) -> None:
+    _s4_case(case)
+    from ui.orchestra import render_council  # orchestra: five-agent council on demand
+    st.divider(); render_council(case)
 
 
 def admin_extras() -> None:

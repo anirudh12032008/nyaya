@@ -1,0 +1,73 @@
+{
+ "model": "claude-sonnet-5",
+ "text": "{\"have\": [{\"item\": \"Purchase invoice dated 15-01-2026 for Rs 40,000 smartphone\", \"why_it_matters\": \"Establishes date of purchase, consideration paid, and consumer status under Sec 2(7)\"}, {\"item\": \"Warranty card\", \"why_it_matters\": \"Proves the product was within warranty period when the defect arose, supporting deficiency claim under Sec 2(11)\"}, {\"item\": \"Service centre job sheet\", \"why_it_matters\": \"Documents that the phone was handed over for repair and records the date of submission, relevant to computing the 3-month delay\"}], \"need\": [{\"item\": \"Written communication/refusal from the service centre denying warranty repair\", \"how_to_get\": \"Request a copy of the rejection letter, email, or SMS from XYZ Mobiles Service Centre; if none exists in writing, ask client to get one in writing or record the date/mode of the oral refusal\", \"blocking\": true}, {\"item\": \"Proof of date phone was handed over to service centre (to calculate exact 3-month delay)\", \"how_to_get\": \"Cross-check job sheet date with client's own record/receipt acknowledgment\", \"blocking\": true}, {\"item\": \"Legal notice sent to opposite party prior to filing (if any) and proof of dispatch\", \"how_to_get\": \"Check if a demand/legal notice was sent; if not sent yet, prepare and dispatch by registered post/speed post with acknowledgment before filing complaint\", \"blocking\": false}, {\"item\": \"IMEI number and device serial number\", \"how_to_get\": \"Obtain from invoice/warranty card or phone box for identification in complaint\", \"blocking\": false}, {\"item\": \"Manufacturer's warranty terms/policy document\", \"how_to_get\": \"Request from manufacturer's website or service centre to verify the alleged 'warranty exclusion' claimed by OP\", \"blocking\": true}, {\"item\": \"Proof of client's annual income and any protected category status (for free legal aid eligibility)\", \"how_to_get\": \"Obtain self-declaration or income certificate from client; verify against NALSA/State Legal Services Authority eligibility criteria\", \"blocking\": false}, {\"item\": \"Current status/location of the phone (whether still with service centre or returned)\", \"how_to_get\": \"Confirm with client directly and request any acknowledgment of possession from service centre\", \"blocking\": true}, {\"item\": \"Proof of payment mode (bank statement/card slip) if invoice does not clearly show payment\", \"how_to_get\": \"Ask client for bank/card statement corresponding to purchase date\", \"blocking\": false}], \"questions_for_client\": [\"On what exact date did you hand over the phone to the service centre for repair?\", \"Do you have any written refusal (letter, email, SMS, WhatsApp message) from the service centre citing the warranty exclusion? If yes, please share a copy.\", \"Have you sent any legal notice or written complaint to the service centre or manufacturer before this? If yes, when and how?\", \"Is the phone currently still with the service centre, or has it been returned to you (working or non-working)?\", \"What is your annual income, and do you belong to any protected category (e.g., SC/ST, woman, senior citizen, disabled) for legal aid eligibility purposes?\", \"Do you have the original box, IMEI number, or warranty policy document from the manufacturer?\", \"What amount of compensation are you seeking beyond repair/replacement, and can you explain the basis for the Rs 15,000 harassment claim?\", \"Do you have the full name, address, and contact details of the opposite party (service centre) for service of notice/summons?\"]}",
+ "ts": 1789895146.2296581,
+ "parsed": {
+  "have": [
+   {
+    "item": "Purchase invoice dated 15-01-2026 for Rs 40,000 smartphone",
+    "why_it_matters": "Establishes date of purchase, consideration paid, and consumer status under Sec 2(7)"
+   },
+   {
+    "item": "Warranty card",
+    "why_it_matters": "Proves the product was within warranty period when the defect arose, supporting deficiency claim under Sec 2(11)"
+   },
+   {
+    "item": "Service centre job sheet",
+    "why_it_matters": "Documents that the phone was handed over for repair and records the date of submission, relevant to computing the 3-month delay"
+   }
+  ],
+  "need": [
+   {
+    "item": "Written communication/refusal from the service centre denying warranty repair",
+    "how_to_get": "Request a copy of the rejection letter, email, or SMS from XYZ Mobiles Service Centre; if none exists in writing, ask client to get one in writing or record the date/mode of the oral refusal",
+    "blocking": true
+   },
+   {
+    "item": "Proof of date phone was handed over to service centre (to calculate exact 3-month delay)",
+    "how_to_get": "Cross-check job sheet date with client's own record/receipt acknowledgment",
+    "blocking": true
+   },
+   {
+    "item": "Legal notice sent to opposite party prior to filing (if any) and proof of dispatch",
+    "how_to_get": "Check if a demand/legal notice was sent; if not sent yet, prepare and dispatch by registered post/speed post with acknowledgment before filing complaint",
+    "blocking": false
+   },
+   {
+    "item": "IMEI number and device serial number",
+    "how_to_get": "Obtain from invoice/warranty card or phone box for identification in complaint",
+    "blocking": false
+   },
+   {
+    "item": "Manufacturer's warranty terms/policy document",
+    "how_to_get": "Request from manufacturer's website or service centre to verify the alleged 'warranty exclusion' claimed by OP",
+    "blocking": true
+   },
+   {
+    "item": "Proof of client's annual income and any protected category status (for free legal aid eligibility)",
+    "how_to_get": "Obtain self-declaration or income certificate from client; verify against NALSA/State Legal Services Authority eligibility criteria",
+    "blocking": false
+   },
+   {
+    "item": "Current status/location of the phone (whether still with service centre or returned)",
+    "how_to_get": "Confirm with client directly and request any acknowledgment of possession from service centre",
+    "blocking": true
+   },
+   {
+    "item": "Proof of payment mode (bank statement/card slip) if invoice does not clearly show payment",
+    "how_to_get": "Ask client for bank/card statement corresponding to purchase date",
+    "blocking": false
+   }
+  ],
+  "questions_for_client": [
+   "On what exact date did you hand over the phone to the service centre for repair?",
+   "Do you have any written refusal (letter, email, SMS, WhatsApp message) from the service centre citing the warranty exclusion? If yes, please share a copy.",
+   "Have you sent any legal notice or written complaint to the service centre or manufacturer before this? If yes, when and how?",
+   "Is the phone currently still with the service centre, or has it been returned to you (working or non-working)?",
+   "What is your annual income, and do you belong to any protected category (e.g., SC/ST, woman, senior citizen, disabled) for legal aid eligibility purposes?",
+   "Do you have the original box, IMEI number, or warranty policy document from the manufacturer?",
+   "What amount of compensation are you seeking beyond repair/replacement, and can you explain the basis for the Rs 15,000 harassment claim?",
+   "Do you have the full name, address, and contact details of the opposite party (service centre) for service of notice/summons?"
+  ]
+ }
+}

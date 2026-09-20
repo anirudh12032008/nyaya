@@ -1,0 +1,44 @@
+{
+ "model": "claude-sonnet-5",
+ "text": "{\"urgency\": \"high\", \"urgency_reason\": \"Limitation deadline (2026-09-29) is only 9 days away from today (2026-09-20); complaint must be finalized, verified, and filed immediately to avoid time-bar. Stated urgency of 'medium' understates this risk.\", \"red_flags\": [{\"flag\": \"Near limitation deadline (9 days remaining)\", \"severity\": \"high\", \"action\": \"Confirm exact limitation trigger date (purchase vs. date of deficiency/denial), finalize draft, obtain client verification/signature, and file before 2026-09-29 without delay.\"}, {\"flag\": \"Incomplete opposite party details\", \"severity\": \"medium\", \"action\": \"Obtain full registered address of XYZ Mobiles Service Centre and consider impleading the manufacturer/brand owner as a necessary party for warranty enforcement.\"}, {\"flag\": \"Free legal aid eligibility undetermined\", \"severity\": \"low\", \"action\": \"Ask client for annual income certificate/details and any SC/ST/disability/women-headed-household status to reassess eligibility under Legal Services Authorities Act criteria.\"}, {\"flag\": \"Verification section left as placeholder\", \"severity\": \"medium\", \"action\": \"Have client review, sign, and verify the complaint with correct date before filing; unverified pleadings can be rejected.\"}, {\"flag\": \"No proof of prior written demand/notice to opposite party on record\", \"severity\": \"low\", \"action\": \"Check if a written notice/demand for repair was sent and annex it; strengthens deficiency claim and may be needed to establish date of cause of action.\"}], \"vulnerability_notes\": [\"No protected category identified yet; income and other eligibility details still to be confirmed with client.\"], \"refer_out\": {\"needed\": false, \"to\": \"N/A\", \"why\": \"Matter is a routine consumer complaint within clinic's competence; supervising advocate review before filing is sufficient. Escalate only if limitation is found to have already lapsed or if criminal/fraud elements (e.g., counterfeit warranty denial) emerge.\"}}",
+ "ts": 1789895143.336703,
+ "parsed": {
+  "urgency": "high",
+  "urgency_reason": "Limitation deadline (2026-09-29) is only 9 days away from today (2026-09-20); complaint must be finalized, verified, and filed immediately to avoid time-bar. Stated urgency of 'medium' understates this risk.",
+  "red_flags": [
+   {
+    "flag": "Near limitation deadline (9 days remaining)",
+    "severity": "high",
+    "action": "Confirm exact limitation trigger date (purchase vs. date of deficiency/denial), finalize draft, obtain client verification/signature, and file before 2026-09-29 without delay."
+   },
+   {
+    "flag": "Incomplete opposite party details",
+    "severity": "medium",
+    "action": "Obtain full registered address of XYZ Mobiles Service Centre and consider impleading the manufacturer/brand owner as a necessary party for warranty enforcement."
+   },
+   {
+    "flag": "Free legal aid eligibility undetermined",
+    "severity": "low",
+    "action": "Ask client for annual income certificate/details and any SC/ST/disability/women-headed-household status to reassess eligibility under Legal Services Authorities Act criteria."
+   },
+   {
+    "flag": "Verification section left as placeholder",
+    "severity": "medium",
+    "action": "Have client review, sign, and verify the complaint with correct date before filing; unverified pleadings can be rejected."
+   },
+   {
+    "flag": "No proof of prior written demand/notice to opposite party on record",
+    "severity": "low",
+    "action": "Check if a written notice/demand for repair was sent and annex it; strengthens deficiency claim and may be needed to establish date of cause of action."
+   }
+  ],
+  "vulnerability_notes": [
+   "No protected category identified yet; income and other eligibility details still to be confirmed with client."
+  ],
+  "refer_out": {
+   "needed": false,
+   "to": "N/A",
+   "why": "Matter is a routine consumer complaint within clinic's competence; supervising advocate review before filing is sufficient. Escalate only if limitation is found to have already lapsed or if criminal/fraud elements (e.g., counterfeit warranty denial) emerge."
+  }
+ }
+}
