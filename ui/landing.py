@@ -34,7 +34,7 @@ _LANDING_HTML = r"""
   <section class="content">
     <div class="kicker"><span class="live-dot"></span><span>LEGAL CLARITY, DESIGNED FOR PEOPLE</span></div>
     <h1>Where every<br><em>voice</em> finds<br>its <span>due course.</span></h1>
-    <p class="lede">Nyaya AI turns complex legal journeys into clear next steps—bringing calm, context and confidence to every matter.</p>
+    <p class="lede">Nyaya AI turns complex legal journeys into clear next steps, bringing calm, context and confidence to every matter.</p>
     <div class="motto"><span>सत्यमेव जयते</span><i></i><small>TRUTH ALONE TRIUMPHS</small></div>
     <div class="actions"><button id="enter" type="button"><span>ENTER NYĀYA</span><i>↗</i></button><span class="microcopy">START A MATTER<br>IN MINUTES</span></div>
   </section>
