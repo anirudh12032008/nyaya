@@ -1,0 +1,123 @@
+{
+ "rules": [
+  {
+   "id": "REG-17",
+   "title": "Compulsory registration of leases over 11 months",
+   "gist": "A lease of immovable property from year to year, or for a term exceeding one year, or reserving a yearly rent, must be registered.",
+   "source": "Registration Act 1908 s.17",
+   "severity": "high"
+  },
+  {
+   "id": "REG-49",
+   "title": "Effect of non-registration",
+   "gist": "An unregistered document required to be registered cannot be received as evidence of any transaction affecting the property or conferring the terms of the lease (limited exceptions for collateral purposes).",
+   "source": "Registration Act 1908 s.49",
+   "severity": "high"
+  },
+  {
+   "id": "MTA-11",
+   "title": "Security deposit cap",
+   "gist": "Security deposit must not exceed 2 months' rent for residential premises and 6 months' rent for non-residential premises.",
+   "source": "Model Tenancy Act 2021 s.11",
+   "severity": "high"
+  },
+  {
+   "id": "MTA-NOTICE",
+   "title": "Notice period for eviction and rent revision",
+   "gist": "Landlord must give at least 1 month's notice before eviction of a residential tenant, and 3 months' notice before revising rent.",
+   "source": "Model Tenancy Act 2021",
+   "severity": "medium"
+  },
+  {
+   "id": "CA-74",
+   "title": "Penalty clauses limited to actual loss",
+   "gist": "Where a contract names a sum as penalty for breach, the aggrieved party can recover only reasonable compensation not exceeding the amount named, regardless of proof of actual loss.",
+   "source": "Indian Contract Act 1872 s.74",
+   "severity": "high"
+  },
+  {
+   "id": "CA-23",
+   "title": "Agreements against public policy are void",
+   "gist": "Consideration or object of an agreement is unlawful if the court regards it as opposed to public policy; such agreements are void.",
+   "source": "Indian Contract Act 1872 s.23",
+   "severity": "medium"
+  },
+  {
+   "id": "CA-27",
+   "title": "Restraint of trade void",
+   "gist": "Every agreement by which anyone is restrained from exercising a lawful profession, trade or business is void to that extent.",
+   "source": "Indian Contract Act 1872 s.27",
+   "severity": "low"
+  },
+  {
+   "id": "TPA-106",
+   "title": "Notice period for termination of lease",
+   "gist": "In absence of contract to the contrary, a lease of immovable property for agricultural/manufacturing purposes is terminable on 6 months' notice, and for any other purpose (e.g. residential, month-to-month) on 15 days' notice.",
+   "source": "Transfer of Property Act 1882 s.106",
+   "severity": "medium"
+  },
+  {
+   "id": "TPA-108",
+   "title": "Rights and liabilities of lessor and lessee",
+   "gist": "Lessor must disclose material defects and allow quiet enjoyment; lessee may make repairs if lessor neglects them and deduct reasonable cost from rent.",
+   "source": "Transfer of Property Act 1882 s.108",
+   "severity": "medium"
+  },
+  {
+   "id": "MPACA-12",
+   "title": "Grounds for eviction",
+   "gist": "A tenant can be evicted only on specified grounds: default in rent, subletting without consent, nuisance/misuse of premises, bona fide requirement of landlord, structural repairs needed, or similar listed grounds.",
+   "source": "MP Accommodation Control Act 1961 s.12",
+   "severity": "high"
+  },
+  {
+   "id": "MPACA-13",
+   "title": "Deposit of arrears stops eviction for default",
+   "gist": "In a suit for eviction on ground of rent default, if the tenant deposits the arrears and costs as directed by the court, the tenant cannot be evicted on that ground.",
+   "source": "MP Accommodation Control Act 1961 s.13",
+   "severity": "medium"
+  },
+  {
+   "id": "MPACA-7",
+   "title": "Standard rent fixation",
+   "gist": "Either party may apply to the Rent Controlling Authority for fixation of standard/fair rent of the accommodation.",
+   "source": "MP Accommodation Control Act 1961 s.7",
+   "severity": "low"
+  },
+  {
+   "id": "MPACA-RENT-INC",
+   "title": "Limits on rent increase",
+   "gist": "Rent can be increased only in the manner and to the extent permitted (e.g. for improvements/rise in taxes), not arbitrarily by the landlord.",
+   "source": "MP Accommodation Control Act 1961",
+   "severity": "medium"
+  },
+  {
+   "id": "ESSENTIAL-SERVICES",
+   "title": "Landlord cannot cut essential services",
+   "gist": "Landlord cannot cut off or withhold water, electricity or other essential supply/service to the premises, even during a dispute, except in accordance with law.",
+   "source": "MP Accommodation Control Act 1961 (s.43-type provision) / Model Tenancy Act 2021 s.20",
+   "severity": "high"
+  },
+  {
+   "id": "LOCKIN",
+   "title": "Lock-in period limited to actual loss",
+   "gist": "A lock-in clause preventing early exit is enforceable only to the extent of the landlord's/tenant's actual demonstrable loss, not as an automatic penalty.",
+   "source": "Indian Contract Act 1872 s.74 (applied to lock-in clauses)",
+   "severity": "medium"
+  },
+  {
+   "id": "ARBITRARY-ENTRY",
+   "title": "Notice required before landlord's entry",
+   "gist": "Landlord must give at least 24 hours' notice before entering the premises for inspection/repairs, except in emergencies.",
+   "source": "Model Tenancy Act 2021 s.22",
+   "severity": "medium"
+  },
+  {
+   "id": "FORFEITURE",
+   "title": "Deposit forfeiture without accounting unenforceable",
+   "gist": "A clause allowing the landlord to forfeit the entire security deposit without accounting for actual dues/damage is not enforceable beyond the genuine loss shown.",
+   "source": "Indian Contract Act 1872 s.74; Model Tenancy Act 2021 s.11",
+   "severity": "medium"
+  }
+ ]
+}

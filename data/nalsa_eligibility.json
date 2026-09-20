@@ -1,0 +1,64 @@
+{
+ "categories": [
+  {
+   "id": "sc_st",
+   "label": "Member of Scheduled Caste or Scheduled Tribe",
+   "source": "Legal Services Authorities Act 1987 s.12(a)"
+  },
+  {
+   "id": "women",
+   "label": "Woman or child",
+   "source": "Legal Services Authorities Act 1987 s.12(c)"
+  },
+  {
+   "id": "children",
+   "label": "Child (as defined in Juvenile Justice Act)",
+   "source": "Legal Services Authorities Act 1987 s.12(c)"
+  },
+  {
+   "id": "disability",
+   "label": "Person with disability as defined in the Rights of Persons with Disabilities Act",
+   "source": "Legal Services Authorities Act 1987 s.12(d)"
+  },
+  {
+   "id": "trafficking_victim",
+   "label": "Victim of trafficking in human beings or begar (forced labour)",
+   "source": "Legal Services Authorities Act 1987 s.12(b)"
+  },
+  {
+   "id": "industrial_workman",
+   "label": "Industrial workman",
+   "source": "Legal Services Authorities Act 1987 s.12(e)"
+  },
+  {
+   "id": "custody",
+   "label": "Person in custody, including in jail, juvenile home, or psychiatric hospital/nursing home",
+   "source": "Legal Services Authorities Act 1987 s.12(g)"
+  },
+  {
+   "id": "disaster_victim",
+   "label": "Victim of mass disaster, ethnic violence, caste atrocity, flood, drought, earthquake or industrial disaster",
+   "source": "Legal Services Authorities Act 1987 s.12(f)"
+  },
+  {
+   "id": "income",
+   "label": "Person whose annual income is below the prescribed state/Supreme Court ceiling",
+   "source": "Legal Services Authorities Act 1987 s.12(h)"
+  },
+  {
+   "id": "senior_citizen",
+   "label": "Senior citizen",
+   "source": "State-added category under NALSA (Senior Citizens) guidelines / State Legal Services Authority regulations"
+  },
+  {
+   "id": "transgender",
+   "label": "Transgender person",
+   "source": "State-added category under NALSA schemes for transgender persons"
+  }
+ ],
+ "income_ceiling_inr": {
+  "mp": 300000,
+  "mp_note": "MP State Legal Services Authority ceiling; verify current MPSLSA notification",
+  "supreme_court": 500000
+ }
+}

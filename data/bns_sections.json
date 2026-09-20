@@ -1,0 +1,589 @@
+{
+ "sections": [
+  {
+   "id": "303",
+   "act": "BNS 2023",
+   "title": "Theft",
+   "gist": "Dishonestly taking movable property out of another's possession without consent.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "378/379"
+  },
+  {
+   "id": "304",
+   "act": "BNS 2023",
+   "title": "Snatching",
+   "gist": "Theft committed by sudden or forcible seizure before the victim can resist.",
+   "punishment": "Imprisonment up to 3 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "305",
+   "act": "BNS 2023",
+   "title": "Theft in a dwelling house or means of transport",
+   "gist": "Theft in a building, tent, vessel, or means of transport used as human dwelling.",
+   "punishment": "Imprisonment up to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "380"
+  },
+  {
+   "id": "316",
+   "act": "BNS 2023",
+   "title": "Criminal breach of trust",
+   "gist": "Dishonest misappropriation of property entrusted to a person.",
+   "punishment": "Imprisonment up to 5 years (up to 10 years for public servant/agent), and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "405/406"
+  },
+  {
+   "id": "318",
+   "act": "BNS 2023",
+   "title": "Cheating",
+   "gist": "Deceiving a person to deliver property or do/omit an act causing damage.",
+   "punishment": "Imprisonment up to 3 years (up to 7 years if property/valuable security involved), and fine.",
+   "cognizable": false,
+   "ipc_equivalent": "415/420"
+  },
+  {
+   "id": "319",
+   "act": "BNS 2023",
+   "title": "Cheating by personation",
+   "gist": "Cheating by pretending to be another person or a fictitious person.",
+   "punishment": "Imprisonment up to 5 years, or fine, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "416/419"
+  },
+  {
+   "id": "324",
+   "act": "BNS 2023",
+   "title": "Mischief",
+   "gist": "Causing wrongful loss or damage to property with intent or knowledge.",
+   "punishment": "Imprisonment up to 1 year (higher for fire/explosives/animals), or fine, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "425/426"
+  },
+  {
+   "id": "329",
+   "act": "BNS 2023",
+   "title": "House-trespass / house-breaking",
+   "gist": "Entering or unlawfully remaining in a dwelling with intent to commit an offence.",
+   "punishment": "Imprisonment up to 2 years and fine (higher for house-breaking).",
+   "cognizable": true,
+   "ipc_equivalent": "448/449"
+  },
+  {
+   "id": "351",
+   "act": "BNS 2023",
+   "title": "Criminal intimidation",
+   "gist": "Threatening a person with injury to induce fear or compel an act/omission.",
+   "punishment": "Imprisonment up to 2 years, or fine, or both (up to 7 years for grave threats).",
+   "cognizable": false,
+   "ipc_equivalent": "503/506"
+  },
+  {
+   "id": "352",
+   "act": "BNS 2023",
+   "title": "Intentional insult with intent to provoke breach of peace",
+   "gist": "Insulting a person intending to provoke breach of public peace.",
+   "punishment": "Imprisonment up to 1 month, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "504"
+  },
+  {
+   "id": "356",
+   "act": "BNS 2023",
+   "title": "Defamation",
+   "gist": "Making or publishing an imputation harming a person's reputation.",
+   "punishment": "Simple imprisonment up to 2 years, or fine, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "499/500"
+  },
+  {
+   "id": "115",
+   "act": "BNS 2023",
+   "title": "Voluntarily causing hurt",
+   "gist": "Causing bodily pain, disease or infirmity to another intentionally.",
+   "punishment": "Imprisonment up to 1 year, or fine up to Rs 10,000, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "323"
+  },
+  {
+   "id": "117",
+   "act": "BNS 2023",
+   "title": "Voluntarily causing grievous hurt",
+   "gist": "Causing hurt amounting to grievous injury as defined under the Act.",
+   "punishment": "Imprisonment up to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "325"
+  },
+  {
+   "id": "118",
+   "act": "BNS 2023",
+   "title": "Hurt/grievous hurt by dangerous weapons or means",
+   "gist": "Causing hurt using a weapon, fire, poison or other dangerous means.",
+   "punishment": "Imprisonment up to 10 years and fine (up to life for grievous hurt).",
+   "cognizable": true,
+   "ipc_equivalent": "324/326"
+  },
+  {
+   "id": "126",
+   "act": "BNS 2023",
+   "title": "Wrongful restraint",
+   "gist": "Obstructing a person from proceeding in a direction they have a right to.",
+   "punishment": "Imprisonment up to 1 month, or fine up to Rs 5,000, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "341"
+  },
+  {
+   "id": "127",
+   "act": "BNS 2023",
+   "title": "Wrongful confinement",
+   "gist": "Wrongfully preventing a person from proceeding beyond certain limits.",
+   "punishment": "Imprisonment up to 1 year, or fine, or both (higher for longer confinement).",
+   "cognizable": true,
+   "ipc_equivalent": "342"
+  },
+  {
+   "id": "131",
+   "act": "BNS 2023",
+   "title": "Assault",
+   "gist": "Gesture or preparation causing apprehension of criminal force.",
+   "punishment": "Imprisonment up to 3 months, or fine up to Rs 1,000, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "351/352"
+  },
+  {
+   "id": "74",
+   "act": "BNS 2023",
+   "title": "Assault or criminal force to woman with intent to outrage her modesty",
+   "gist": "Assault/use of criminal force intending to outrage a woman's modesty.",
+   "punishment": "Imprisonment 1 to 5 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "354"
+  },
+  {
+   "id": "75",
+   "act": "BNS 2023",
+   "title": "Sexual harassment",
+   "gist": "Physical contact/demand for sexual favour, showing pornography, or sexually coloured remarks.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "354A"
+  },
+  {
+   "id": "76",
+   "act": "BNS 2023",
+   "title": "Assault/use of criminal force to disrobe a woman",
+   "gist": "Act intending to disrobe or compel nakedness of a woman.",
+   "punishment": "Imprisonment 3 to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "354B"
+  },
+  {
+   "id": "77",
+   "act": "BNS 2023",
+   "title": "Voyeurism",
+   "gist": "Watching or capturing image of a woman engaged in a private act without consent.",
+   "punishment": "Imprisonment 1 to 3 years (up to 7 years on repeat), and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "354C"
+  },
+  {
+   "id": "78",
+   "act": "BNS 2023",
+   "title": "Stalking",
+   "gist": "Following, contacting or monitoring a woman despite disinterest, including cyber-stalking.",
+   "punishment": "Imprisonment up to 3 years (up to 5 years on repeat), and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "354D"
+  },
+  {
+   "id": "79",
+   "act": "BNS 2023",
+   "title": "Word, gesture or act intended to insult modesty of a woman",
+   "gist": "Insulting the modesty of a woman by word, gesture, act or intrusion of privacy.",
+   "punishment": "Imprisonment up to 3 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "509"
+  },
+  {
+   "id": "80",
+   "act": "BNS 2023",
+   "title": "Dowry death",
+   "gist": "Death of a woman within 7 years of marriage caused by dowry-related cruelty/harassment.",
+   "punishment": "Imprisonment not less than 7 years, extendable to life.",
+   "cognizable": true,
+   "ipc_equivalent": "304B"
+  },
+  {
+   "id": "85",
+   "act": "BNS 2023",
+   "title": "Cruelty by husband or relatives of husband",
+   "gist": "Subjecting a woman to cruelty by husband or his relatives.",
+   "punishment": "Imprisonment up to 3 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "498A"
+  },
+  {
+   "id": "86",
+   "act": "BNS 2023",
+   "title": "Cruelty defined",
+   "gist": "Defines cruelty: wilful conduct likely to drive to suicide/grave injury, or harassment for dowry.",
+   "punishment": "Refer to section 85 for punishment.",
+   "cognizable": true,
+   "ipc_equivalent": "498A explanation"
+  },
+  {
+   "id": "137",
+   "act": "BNS 2023",
+   "title": "Kidnapping",
+   "gist": "Kidnapping from India or from lawful guardianship.",
+   "punishment": "Imprisonment up to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "359-363"
+  },
+  {
+   "id": "140",
+   "act": "BNS 2023",
+   "title": "Kidnapping or abduction for ransom etc.",
+   "gist": "Kidnapping/abducting to compel payment of ransom or for other unlawful compulsion.",
+   "punishment": "Imprisonment 10 years to life, and fine; death/life for hurt caused.",
+   "cognizable": true,
+   "ipc_equivalent": "364A"
+  },
+  {
+   "id": "143",
+   "act": "BNS 2023",
+   "title": "Trafficking of person",
+   "gist": "Recruiting, transporting, harbouring or receiving a person by force/fraud for exploitation.",
+   "punishment": "Rigorous imprisonment 7 to 10 years and fine (higher for minors/repeat).",
+   "cognizable": true,
+   "ipc_equivalent": "370"
+  },
+  {
+   "id": "189",
+   "act": "BNS 2023",
+   "title": "Unlawful assembly",
+   "gist": "Assembly of 5 or more persons with a common unlawful object.",
+   "punishment": "Imprisonment up to 6 months, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "141/143"
+  },
+  {
+   "id": "191",
+   "act": "BNS 2023",
+   "title": "Rioting",
+   "gist": "Force or violence used by an unlawful assembly or its members.",
+   "punishment": "Imprisonment up to 2 years, or fine, or both (higher with deadly weapon).",
+   "cognizable": true,
+   "ipc_equivalent": "146/147"
+  },
+  {
+   "id": "196",
+   "act": "BNS 2023",
+   "title": "Promoting enmity between groups",
+   "gist": "Acts prejudicial to harmony on grounds of religion, race, place of birth, language etc.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "153A"
+  },
+  {
+   "id": "270",
+   "act": "BNS 2023",
+   "title": "Public nuisance",
+   "gist": "Act causing common injury, danger or annoyance to the public.",
+   "punishment": "Fine up to Rs 1,000.",
+   "cognizable": false,
+   "ipc_equivalent": "268/290"
+  },
+  {
+   "id": "281",
+   "act": "BNS 2023",
+   "title": "Rash driving or riding on a public way",
+   "gist": "Driving/riding so rashly or negligently as to endanger human life.",
+   "punishment": "Imprisonment up to 6 months, or fine up to Rs 1,000, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "279"
+  },
+  {
+   "id": "106",
+   "act": "BNS 2023",
+   "title": "Causing death by negligence",
+   "gist": "Causing death by a rash or negligent act not amounting to culpable homicide.",
+   "punishment": "Imprisonment up to 5 years and fine (higher for hit-and-run by registered driver).",
+   "cognizable": true,
+   "ipc_equivalent": "304A"
+  },
+  {
+   "id": "308",
+   "act": "BNS 2023",
+   "title": "Extortion",
+   "gist": "Putting a person in fear of injury to dishonestly induce delivery of property.",
+   "punishment": "Imprisonment up to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "383/384"
+  },
+  {
+   "id": "309",
+   "act": "BNS 2023",
+   "title": "Robbery",
+   "gist": "Theft or extortion aggravated by force or fear causing hurt/wrongful restraint.",
+   "punishment": "Rigorous imprisonment up to 10 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "392"
+  },
+  {
+   "id": "310",
+   "act": "BNS 2023",
+   "title": "Dacoity",
+   "gist": "Robbery committed by five or more persons acting in concert.",
+   "punishment": "Imprisonment for life or rigorous imprisonment up to 10 years, and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "395"
+  },
+  {
+   "id": "314",
+   "act": "BNS 2023",
+   "title": "Dishonest misappropriation of property",
+   "gist": "Dishonestly misappropriating or converting movable property to one's own use.",
+   "punishment": "Imprisonment up to 2 years, or fine, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "403"
+  },
+  {
+   "id": "317",
+   "act": "BNS 2023",
+   "title": "Receiving stolen property",
+   "gist": "Dishonestly receiving or retaining property known to be stolen.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both (up to 5 years for habitual dealing).",
+   "cognizable": true,
+   "ipc_equivalent": "411/413"
+  },
+  {
+   "id": "336",
+   "act": "BNS 2023",
+   "title": "Forgery",
+   "gist": "Making a false document/electronic record with intent to cause damage or support a claim.",
+   "punishment": "Imprisonment up to 2 years, or fine, or both (up to 7 years for specified purposes).",
+   "cognizable": false,
+   "ipc_equivalent": "463/465"
+  },
+  {
+   "id": "338",
+   "act": "BNS 2023",
+   "title": "Forgery of a valuable security, will, etc.",
+   "gist": "Forgery of a valuable security, will, or authority to adopt/make/transfer property.",
+   "punishment": "Imprisonment up to 10 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "467"
+  },
+  {
+   "id": "340",
+   "act": "BNS 2023",
+   "title": "Using as genuine a forged document",
+   "gist": "Fraudulently or dishonestly using a document known to be forged.",
+   "punishment": "Same punishment as for forgery of that document.",
+   "cognizable": true,
+   "ipc_equivalent": "471"
+  },
+  {
+   "id": "61",
+   "act": "BNS 2023",
+   "title": "Criminal conspiracy",
+   "gist": "Agreement between two or more persons to do or cause to be done an illegal act.",
+   "punishment": "Punishable as if abetted, per the object of the conspiracy.",
+   "cognizable": false,
+   "ipc_equivalent": "120A/120B"
+  },
+  {
+   "id": "62",
+   "act": "BNS 2023",
+   "title": "Attempt to commit offences punishable with imprisonment for life or other imprisonment",
+   "gist": "Attempting an offence and doing an act towards its commission.",
+   "punishment": "Imprisonment up to one-half of the longest term provided, or as specified, and/or fine.",
+   "cognizable": false,
+   "ipc_equivalent": "511"
+  },
+  {
+   "id": "3(5)",
+   "act": "BNS 2023",
+   "title": "Common intention",
+   "gist": "Act done by several persons in furtherance of common intention treated as done by each.",
+   "punishment": "Each liable as if the act were done by them alone.",
+   "cognizable": false,
+   "ipc_equivalent": "34"
+  },
+  {
+   "id": "351(2)",
+   "act": "BNS 2023",
+   "title": "Criminal intimidation by anonymous communication",
+   "gist": "Intimidation by an anonymous or unsigned communication, or after taking precautions to conceal identity.",
+   "punishment": "Imprisonment up to 2 years, in addition to the term for the intimidation.",
+   "cognizable": false,
+   "ipc_equivalent": "507"
+  },
+  {
+   "id": "351(3)",
+   "act": "BNS 2023",
+   "title": "Criminal intimidation with threat of death/grievous hurt etc.",
+   "gist": "Aggravated criminal intimidation: threat of death, grievous hurt, destruction by fire, or imputation affecting chastity.",
+   "punishment": "Imprisonment up to 7 years, or fine, or both.",
+   "cognizable": false,
+   "ipc_equivalent": "506 (Part II)"
+  },
+  {
+   "id": "111",
+   "act": "BNS 2023",
+   "title": "Organised crime",
+   "gist": "Continuing unlawful activity by a crime syndicate using violence, threat, or corruption for material benefit.",
+   "punishment": "Imprisonment 5 years to life, and fine not less than Rs 5 lakh (death/life if death results).",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "112",
+   "act": "BNS 2023",
+   "title": "Petty organised crime",
+   "gist": "Theft, snatching, cheating, unauthorised ticketing/gambling etc. by a group/gang.",
+   "punishment": "Imprisonment 1 to 7 years and fine.",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "152",
+   "act": "BNS 2023",
+   "title": "Acts endangering sovereignty, unity and integrity of India",
+   "gist": "Exciting secession, armed rebellion, subversive activities, or endangering sovereignty/unity of India.",
+   "punishment": "Imprisonment for life, or up to 7 years, and fine.",
+   "cognizable": true,
+   "ipc_equivalent": "124A (sedition, repealed/replaced)"
+  },
+  {
+   "id": "353",
+   "act": "BNS 2023",
+   "title": "Statements conducing to public mischief",
+   "gist": "Making/publishing statements likely to cause fear, alarm, or incite an offence against the State/public tranquility.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both (higher for religion/race/community).",
+   "cognizable": true,
+   "ipc_equivalent": "505"
+  },
+  {
+   "id": "302",
+   "act": "BNS 2023",
+   "title": "Uttering words, etc., with deliberate intent to wound religious feelings",
+   "gist": "Deliberate and malicious acts/words intended to outrage religious feelings by insulting religion or beliefs.",
+   "punishment": "Imprisonment up to 3 years, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "298"
+  },
+  {
+   "id": "296",
+   "act": "BNS 2023",
+   "title": "Obscene acts and songs",
+   "gist": "Doing an obscene act in a public place, or singing obscene songs causing annoyance.",
+   "punishment": "Imprisonment up to 3 months, or fine, or both.",
+   "cognizable": true,
+   "ipc_equivalent": "294"
+  },
+  {
+   "id": "223",
+   "act": "BNS 2023",
+   "title": "Disobedience to order duly promulgated by public servant",
+   "gist": "Knowingly disobeying a lawful order/direction issued by a public servant.",
+   "punishment": "Imprisonment up to 6 months, or fine up to Rs 2,500, or both (higher if it causes danger).",
+   "cognizable": true,
+   "ipc_equivalent": "188"
+  },
+  {
+   "id": "BNSS 173",
+   "act": "BNSS 2023",
+   "title": "Information in cognizable cases (FIR)",
+   "gist": "Police officer must register FIR on information of a cognizable offence; preliminary enquiry allowed in limited cases (3-7 yr punishment) before registration.",
+   "punishment": "Procedural — governs registration of FIR.",
+   "cognizable": true,
+   "ipc_equivalent": "CrPC 154"
+  },
+  {
+   "id": "BNSS 173(4)",
+   "act": "BNSS 2023",
+   "title": "Refusal to register FIR - remedy",
+   "gist": "If officer-in-charge refuses to record information, complainant may send the substance in writing by post to the Superintendent of Police.",
+   "punishment": "Procedural — SP must then investigate or direct investigation.",
+   "cognizable": true,
+   "ipc_equivalent": "CrPC 154(3)"
+  },
+  {
+   "id": "BNSS 175(3)",
+   "act": "BNSS 2023",
+   "title": "Magistrate's power to order police investigation",
+   "gist": "Magistrate may order an investigation under this section, or himself investigate/direct inquiry, on a complaint of a cognizable offence.",
+   "punishment": "Procedural — precedes cognizance.",
+   "cognizable": true,
+   "ipc_equivalent": "CrPC 156(3)"
+  },
+  {
+   "id": "BNSS 35",
+   "act": "BNSS 2023",
+   "title": "Arrest without warrant by police",
+   "gist": "Conditions under which police may arrest without a warrant, including safeguards for offences punishable up to 3 years.",
+   "punishment": "Procedural — governs arrest.",
+   "cognizable": true,
+   "ipc_equivalent": "CrPC 41"
+  },
+  {
+   "id": "BNSS 479",
+   "act": "BNSS 2023",
+   "title": "Maximum period for which undertrial prisoner can be detained",
+   "gist": "First-time offenders (not facing death/life sentence) to be released on bond after undergoing one-third of the maximum sentence for the offence; undertrials generally after half.",
+   "punishment": "Procedural — bail/release entitlement.",
+   "cognizable": false,
+   "ipc_equivalent": "CrPC 436A"
+  },
+  {
+   "id": "BNSS 173(1)",
+   "act": "BNSS 2023",
+   "title": "Zero FIR",
+   "gist": "FIR can be registered at any police station irrespective of the area where the offence occurred (zero FIR), later transferred to the jurisdictional station.",
+   "punishment": "Procedural — no territorial refusal permitted for cognizable offence.",
+   "cognizable": true,
+   "ipc_equivalent": "CrPC 154 (zero FIR practice)"
+  },
+  {
+   "id": "IT Act 66C",
+   "act": "Information Technology Act 2000",
+   "title": "Identity theft",
+   "gist": "Fraudulently or dishonestly using another person's electronic signature, password or unique identification feature.",
+   "punishment": "Imprisonment up to 3 years and fine up to Rs 1 lakh.",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "IT Act 66D",
+   "act": "Information Technology Act 2000",
+   "title": "Cheating by personation using computer resource",
+   "gist": "Cheating by personation by means of any communication device or computer resource.",
+   "punishment": "Imprisonment up to 3 years and fine up to Rs 1 lakh.",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "IT Act 66E",
+   "act": "Information Technology Act 2000",
+   "title": "Violation of privacy",
+   "gist": "Intentionally capturing, publishing or transmitting the image of a private area of a person without consent.",
+   "punishment": "Imprisonment up to 3 years, or fine up to Rs 2 lakh, or both.",
+   "cognizable": true,
+   "ipc_equivalent": null
+  },
+  {
+   "id": "IT Act 67",
+   "act": "Information Technology Act 2000",
+   "title": "Publishing obscene material in electronic form",
+   "gist": "Publishing or transmitting obscene material in electronic form.",
+   "punishment": "First conviction up to 3 years and fine up to Rs 5 lakh (higher on subsequent conviction).",
+   "cognizable": true,
+   "ipc_equivalent": null
+  }
+ ]
+}

@@ -1,0 +1,178 @@
+{
+ "forums": [
+  {
+   "id": "district",
+   "name": "District Commission",
+   "min_inr": 0,
+   "max_inr": 5000000,
+   "source": "Consumer Protection (Jurisdiction) Rules 2021"
+  },
+  {
+   "id": "state",
+   "name": "State Commission",
+   "min_inr": 5000000,
+   "max_inr": 20000000,
+   "source": "Consumer Protection (Jurisdiction) Rules 2021"
+  },
+  {
+   "id": "national",
+   "name": "National Commission",
+   "min_inr": 20000000,
+   "max_inr": null,
+   "source": "Consumer Protection (Jurisdiction) Rules 2021"
+  }
+ ],
+ "fee_slabs": [
+  {
+   "max_inr": 500000,
+   "fee_inr": 0,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 1000000,
+   "fee_inr": 200,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 2000000,
+   "fee_inr": 400,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 5000000,
+   "fee_inr": 1000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 10000000,
+   "fee_inr": 2000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 20000000,
+   "fee_inr": 2500,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 40000000,
+   "fee_inr": 3000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 60000000,
+   "fee_inr": 4000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 80000000,
+   "fee_inr": 5000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": 100000000,
+   "fee_inr": 6000,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  },
+  {
+   "max_inr": null,
+   "fee_inr": 7500,
+   "source": "Consumer Protection (Consumer Commission Procedure) Regulations 2020"
+  }
+ ],
+ "limitation": {
+  "years": 2,
+  "section": "69"
+ },
+ "sections": [
+  {
+   "id": "2(7)",
+   "title": "Consumer",
+   "gist": "Person who buys goods/hires services for consideration, not for resale or commercial purpose.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "2(11)",
+   "title": "Deficiency",
+   "gist": "Fault, imperfection, shortcoming in quality/nature/manner of performance of a service.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "2(47)",
+   "title": "Unfair trade practice",
+   "gist": "False representation, misleading advertisement or deceptive practice in sale of goods/services.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "2(1)",
+   "title": "Advertisement",
+   "gist": "Any audio/visual publicity, representation or notice promoting sale of goods or services.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "2(9)",
+   "title": "Consumer rights",
+   "gist": "Right to safety, information, choice, be heard, redressal and consumer education.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "34",
+   "title": "Jurisdiction of District Commission",
+   "gist": "Pecuniary and territorial jurisdiction of the District Commission to entertain complaints.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "35",
+   "title": "Manner of filing complaint",
+   "gist": "Complaint may be filed by consumer, recognised association, or Central/State Government.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "36",
+   "title": "Procedure on receipt of complaint",
+   "gist": "Commission's procedure for admitting and processing complaints on receipt.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "38",
+   "title": "Procedure on admission of complaint",
+   "gist": "Reference to mediation, notice to opposite party, evidence and hearing procedure.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "39",
+   "title": "Reliefs",
+   "gist": "Orders the Commission may pass: removal of defect/deficiency, replacement, refund, compensation, costs.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "40",
+   "title": "Review",
+   "gist": "District Commission may review its own order on application within 30 days or on its own motion.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "41",
+   "title": "Appeal to State Commission",
+   "gist": "Appeal against District Commission order lies to State Commission within 45 days.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "69",
+   "title": "Limitation period",
+   "gist": "Complaint must be filed within 2 years from the date on which the cause of action arose.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "71",
+   "title": "Enforcement of orders",
+   "gist": "Orders of the Commission are enforced as if a decree of a civil court.",
+   "source": "Consumer Protection Act 2019"
+  },
+  {
+   "id": "72",
+   "title": "Penalty for non-compliance",
+   "gist": "Imprisonment (1 month to 3 years) and/or fine (Rs 25,000 to Rs 1 lakh) for failure to comply with an order.",
+   "source": "Consumer Protection Act 2019"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "consumer": {
+  "portal_url": "https://edaakhil.nic.in",
+  "documents": [
+   "ID proof of complainant",
+   "Proof of purchase (invoice/receipt/bill)",
+   "Warranty/guarantee card if any",
+   "Correspondence with opposite party (emails, letters, screenshots)",
+   "Proof of amount paid (bank statement/payment receipt)",
+   "Notice sent to opposite party, if any"
+  ],
+  "fee_rule": "Nil up to Rs 5 lakh; slab-wise court fee thereafter per Consumer Protection (Consumer Commission Procedure) Regulations 2020, payable via e-Daakhil.",
+  "deadline_rule": "2 years from the date the cause of action arose (Section 69, Consumer Protection Act 2019)."
+ },
+ "police": {
+  "portal_url": null,
+  "portal_note": "No online portal: Nearest police station / SP office; MP Police citizen portal https://mppolice.gov.in for e-FIR of vehicle theft",
+  "documents": [
+   "ID proof of complainant",
+   "Any evidence of the offence (photos, videos, medical report, bills)",
+   "Ownership documents (for theft of vehicle/property)",
+   "Witness names and contact details, if any"
+  ],
+  "fee_rule": "No fee for lodging an FIR.",
+  "deadline_rule": "No limitation for cognizable offences; file immediately."
+ },
+ "tenant": {
+  "portal_url": null,
+  "portal_note": "Rent Controlling Authority Bhopal / civil court",
+  "documents": [
+   "Rent/lease agreement",
+   "Rent receipts / bank payment proof",
+   "Security deposit receipt",
+   "Notice received from landlord/tenant, if any",
+   "Photographs of premises/disputed condition"
+  ],
+  "fee_rule": "Court fee as per MP Court Fees Act, nominal for rent applications; varies by relief sought.",
+  "deadline_rule": "Reply within notice period; 3 years for money claims under Limitation Act."
+ }
+}

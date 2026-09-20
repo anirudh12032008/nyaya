@@ -1,0 +1,6 @@
+streamlit>=1.38
+anthropic>=0.40
+fpdf2>=2.7
+qrcode[pil]>=7.4
+pypdf>=4.0
+python-dotenv>=1.0
