@@ -1,4 +1,4 @@
-"""Document analyzer: empty input, happy path, bad shape, model failure — no API key needed."""
+"""Document analyzer: empty input, happy path, bad shape, model failure - no API key needed."""
 from agent import client, document_analyzer
 
 

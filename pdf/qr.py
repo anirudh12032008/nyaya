@@ -25,7 +25,7 @@ def case_url(case_id: int, clinic: str = "nliu", **extra) -> str:
 
 
 def qr_for_case(case_id: int, clinic: str = "nliu") -> bytes:
-    """QR encoding ?case=<id>&clinic=<slug> — used on the PDF and by intake."""
+    """QR encoding ?case=<id>&clinic=<slug> - used on the PDF and by intake."""
     return make_qr_png(case_url(case_id, clinic))
 
 

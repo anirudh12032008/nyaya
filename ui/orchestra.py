@@ -12,7 +12,7 @@ LABELS = {"evidence": "🗂️ Evidence officer", "opponent": "⚔️ Devil's ad
 
 
 def _run(case_id: int, force: bool) -> dict:
-    with st.status("Council in session — five agents reading the case…", expanded=True) as box:
+    with st.status("Council in session - five agents reading the case…", expanded=True) as box:
         slots = {n: box.empty() for n in list(SPECIALISTS) + ["synthesis"]}
         for n, slot in slots.items():
             slot.write(f"⏳ {LABELS[n]}")
@@ -29,7 +29,7 @@ def _title(key: str) -> str:
 
 
 def _render_value(value, depth: int = 0) -> None:
-    """Specialist answers are small JSON trees — show them as headings and bullets."""
+    """Specialist answers are small JSON trees - show them as headings and bullets."""
     pad = "  " * depth
     if isinstance(value, dict):
         for k, v in value.items():
@@ -53,7 +53,7 @@ def _render_value(value, depth: int = 0) -> None:
 
 def _render_agent(name: str, data) -> None:
     if name == "client_letter" and isinstance(data, dict):
-        st.markdown("**हिंदी — the letter the client reads**")
+        st.markdown("**हिंदी - the letter the client reads**")
         theme.document(data.get("hindi_letter", ""))
         st.markdown("**English**")
         theme.document(data.get("english_letter", ""))
@@ -85,7 +85,7 @@ def render_council(case: dict, auto: bool = False) -> None:
             c2.caption(f"Last run {stored.get('ran_at', '')} · {stored.get('ms', 0) / 1000:.0f}s · "
                        f"{len(stored.get('agents', {}))}/5 agents")
         else:
-            c2.caption("About a minute — the five specialists run in parallel.")
+            c2.caption("About a minute - the five specialists run in parallel.")
 
     if run or (auto and not stored):
         try:

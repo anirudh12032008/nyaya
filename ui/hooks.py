@@ -13,7 +13,7 @@ def on_draft_complete(result: dict) -> None:
     who = names.get(case.get("assigned_to"), "unassigned")
     verdict = "eligible for free legal aid" if case.get("eligible_aid") else "not established"
     st.success(f"Case #{case_id} created, assigned to {who}. "
-               f"Eligibility: {verdict} — {case.get('eligibility_reason') or ''}")
+               f"Eligibility: {verdict} - {case.get('eligibility_reason') or ''}")
 
 
 # Stage 4 / 5 extras, re-exported so cases.py / admin.py pick them up via getattr.

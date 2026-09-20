@@ -1,4 +1,4 @@
-"""Outcome learning + volunteer copilot — offline (agent.client.ask is monkeypatched)."""
+"""Outcome learning + volunteer copilot - offline (agent.client.ask is monkeypatched)."""
 import importlib
 import json
 import sys

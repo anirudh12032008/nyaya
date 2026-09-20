@@ -1,4 +1,4 @@
-"""Stage 2 checks — no API: agent.client.ask is monkeypatched with canned JSON.
+"""Stage 2 checks - no API: agent.client.ask is monkeypatched with canned JSON.
 
 Run: .venv/bin/python tests/test_stage2.py     (or: pytest tests/test_stage2.py)
 """

@@ -1,4 +1,4 @@
-"""Stage 5B checks — verifier + one redraft, no API (agent.client.ask is monkeypatched)."""
+"""Stage 5B checks - verifier + one redraft, no API (agent.client.ask is monkeypatched)."""
 import sys
 from pathlib import Path
 

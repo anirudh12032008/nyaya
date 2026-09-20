@@ -38,7 +38,7 @@ def render_evidence(case: dict) -> None:
     ])
     st.write("")
 
-    with theme.card("What this filing needs", "दस्तावेज़ सूची — hover an item for why it matters."):
+    with theme.card("What this filing needs", "दस्तावेज़ सूची - hover an item for why it matters."):
         for i, row in enumerate(rows):
             st.checkbox(row["item"], value=row["have"], disabled=True, key=f"ev{cid}_{i}",
                         help=row["why"])

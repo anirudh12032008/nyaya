@@ -51,8 +51,8 @@ def _case_rows(cases: list[dict], names: dict, key: str) -> None:
         left.markdown(
             '<div class="ny-row">'
             + theme.badge(f"#{c['id']}", "info")
-            + theme.kv("", c.get("client_name") or "—")
-            + theme.kv("·", c.get("module") or "—")
+            + theme.kv("", c.get("client_name") or " - ")
+            + theme.kv("·", c.get("module") or " - ")
             + theme.kv("·", names.get(c.get("assigned_to")) or "unassigned")
             + theme.deadline_badge(days)
             + "</div>",
@@ -70,13 +70,13 @@ def render() -> None:
 
     theme.page_header(
         f"{_greeting()}, clinic desk",
-        "Turn problems into possibilities — intake, triage and drafting in one place.",
+        "Turn problems into possibilities - intake, triage and drafting in one place.",
         hindi="कानून सभी के लिए है, सिर्फ जानकार लोगों के लिए नहीं।",
         eyebrow="Nyaya · Madhya Pradesh legal aid",
     )
 
     # ── quick intake ────────────────────────────────────────────────────────
-    with theme.card("Start a new matter", "समस्या यहाँ लिखें — Type or paste what the client told you."):
+    with theme.card("Start a new matter", "समस्या यहाँ लिखें - Type or paste what the client told you."):
         text = st.text_area("Client's problem", key="home_intake_text", height=120,
                             placeholder="e.g. The shop refuses to refund a defective phone…",
                             label_visibility="collapsed")
@@ -132,7 +132,7 @@ def render() -> None:
                 st.markdown(
                     '<div class="ny-row">'
                     + theme.badge(f"#{c['id']}", "danger" if days < 10 else "muted")
-                    + theme.kv("", c.get("client_name") or "—")
+                    + theme.kv("", c.get("client_name") or " - ")
                     + theme.deadline_badge(days)
                     + "</div>", unsafe_allow_html=True)
     with right:
@@ -144,7 +144,7 @@ def render() -> None:
                 f"- **{len(near)}** open case(s) inside 10 days of limitation"
             )
             if near:
-                theme.quote(f"Nearest limitation: case #{near[0]['id']} — "
+                theme.quote(f"Nearest limitation: case #{near[0]['id']} - "
                             f"{near[0].get('client_name') or 'client'}.")
 
     # ── clinic impact ───────────────────────────────────────────────────────

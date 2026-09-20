@@ -1,4 +1,4 @@
-"""Evidence checklist + annexure upload — offline (client.ask / ask_image monkeypatched)."""
+"""Evidence checklist + annexure upload - offline (client.ask / ask_image monkeypatched)."""
 import importlib
 import sys
 from pathlib import Path

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent
 
 def main() -> int:
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ANTHROPIC_API_KEY not set — skipping warm-up (the app will serve cache/).")
+        print("ANTHROPIC_API_KEY not set - skipping warm-up (the app will serve cache/).")
         return 0
     for line in (ROOT / "demo_inputs.txt").read_text(encoding="utf-8").splitlines():
         line = line.strip()

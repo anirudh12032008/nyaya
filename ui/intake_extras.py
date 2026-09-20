@@ -1,6 +1,6 @@
 """Stage 5D + 5F + 5G: voice intake, filing-autopilot mock, case-similarity memory.
 
-Owned by this stage's agent only — app.py/ui/intake.py wire these in, they don't live here.
+Owned by this stage's agent only - app.py/ui/intake.py wire these in, they don't live here.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ def render_mic() -> str | None:
 
     Streamlit components can't push a value back into Python without a custom
     bidirectional component (out of scope here), so this shows the transcript in
-    a textarea with a Copy button — typed input in the main intake box stays the
+    a textarea with a Copy button - typed input in the main intake box stays the
     source of truth. Always returns None; kept as str|None for that future upgrade.
     """
     components.html(
@@ -54,20 +54,41 @@ def render_mic() -> str | None:
               rec.continuous = false;
               rec.onstart = () => { status.textContent = 'Listening… (Hindi)'; };
               rec.onerror = (e) => {
-                if (rec.lang === 'hi-IN') {
-                  status.textContent = 'Retrying in English (en-IN)…';
+                if (e.error === 'language-not-supported' && rec.lang === 'hi-IN') {
                   rec.lang = 'en-IN';
                   try { rec.start(); } catch (err) {}
-                } else {
-                  status.textContent = 'Mic error: ' + e.error;
+                  return;
                 }
+                const why = {
+                  'not-allowed': 'Microphone blocked - allow it in the browser address bar, then retry.',
+                  'service-not-allowed': 'Microphone blocked - allow it in the browser address bar, then retry.',
+                  'network': 'Speech service unreachable. Use Chrome/Edge with internet, or type instead.',
+                  'no-speech': 'Heard nothing - tap Speak and try again.',
+                  'audio-capture': 'No microphone found.'
+                };
+                status.textContent = why[e.error] || ('Mic error: ' + e.error);
+              };
+              // Push the transcript into the intake box in the parent page (same-origin iframe).
+              const push = (text) => {
+                try {
+                  const ta = window.parent.document.querySelector('textarea[aria-label="Statement"]');
+                  if (!ta) return false;
+                  ta.focus();
+                  Object.getOwnPropertyDescriptor(window.parent.HTMLTextAreaElement.prototype, 'value')
+                        .set.call(ta, text);
+                  ta.dispatchEvent(new Event('input', {bubbles: true}));
+                  ta.blur();
+                  return true;
+                } catch (err) { return false; }
               };
               rec.onresult = (e) => {
                 let text = '';
                 for (let i = 0; i < e.results.length; i++) text += e.results[i][0].transcript;
                 box.value = text;
+                if (e.results[e.results.length - 1].isFinal && push(text))
+                  status.textContent = 'Added to the intake box - see the Type tab.';
               };
-              rec.onend = () => { status.textContent = 'Stopped.'; };
+              rec.onend = () => { if (!status.textContent.match(/Mic|blocked|unreachable|Heard|No mic|Added/)) status.textContent = 'Stopped.'; };
               btn.onclick = () => {
                 rec.lang = 'hi-IN';
                 box.value = '';
@@ -76,7 +97,7 @@ def render_mic() -> str | None:
               copyBtn.onclick = () => {
                 box.select();
                 document.execCommand('copy');
-                status.textContent = 'Copied — paste into the intake box below.';
+                status.textContent = 'Copied - paste into the intake box below.';
               };
             }
           </script>
@@ -86,8 +107,8 @@ def render_mic() -> str | None:
     )
     st.caption(
         "Voice intake is browser speech-to-text (Hindi, falls back to English). "
-        "Streamlit cannot write the transcript into the text box automatically — "
-        "copy it and paste into the intake box above. Typed input stays primary."
+        "The transcript is added to the Type tab when you stop speaking; "
+        "copy it manually if that fails. Typed input stays primary."
     )
     return None
 
@@ -110,16 +131,16 @@ def render_similar(result: dict) -> None:
         with st.spinner("Checking similar past cases…"):
             matches = find_similar(summary, facts)
     except RuntimeError as e:
-        st.caption(f":grey[Similar cases unavailable — {e}]")
+        st.caption(f":grey[Similar cases unavailable - {e}]")
         return
 
     if not matches:
         return
 
-    with theme.card("Similar past cases", "मिलते-जुलते पुराने केस — what worked there"):
+    with theme.card("Similar past cases", "मिलते-जुलते पुराने केस - what worked there"):
         for m in matches:
             st.markdown(
-                f"[Case #{m['case_id']} — {m['client_name']}](?case={m['case_id']}) &nbsp;"
+                f"[Case #{m['case_id']} - {m['client_name']}](?case={m['case_id']}) &nbsp;"
                 + theme.badge(m["module"], "info") + " " + theme.badge(m["what_worked"], "ok"),
                 unsafe_allow_html=True)
             if m.get("why"):
@@ -157,7 +178,7 @@ def render_autopilot(result: dict) -> None:
         "Relief": _relief_from_draft(draft.get("draft_markdown", "")),
     }
 
-    st.caption("MOCK — a demo of the e-Daakhil form filling itself. "
+    st.caption("MOCK - a demo of the e-Daakhil form filling itself. "
                "Nothing is submitted anywhere.")
 
     rows = "".join(
@@ -174,7 +195,7 @@ def render_autopilot(result: dict) -> None:
     components.html(
         f"""
         <div style="font-family:sans-serif;border:1px solid #ddd;border-radius:8px;padding:14px">
-          <div style="font-weight:600;margin-bottom:10px">e-Daakhil — New Complaint (MOCK)</div>
+          <div style="font-weight:600;margin-bottom:10px">e-Daakhil - New Complaint (MOCK)</div>
           {rows}
           <button id="af-play" style="font-size:14px;padding:6px 14px;border-radius:8px;
                   border:1px solid #999;cursor:pointer;background:#fafafa">▶ Autofill</button>

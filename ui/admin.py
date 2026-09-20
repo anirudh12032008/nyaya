@@ -50,7 +50,7 @@ def render():
     cases = db.list_cases()
     theme.page_header(
         "Clinic analytics",
-        "Volume, workload and outcomes — counted from the case file, never estimated.",
+        "Volume, workload and outcomes - counted from the case file, never estimated.",
         hindi="क्लिनिक का लेखा-जोखा",
         eyebrow="Nyaya · clinic head",
     )
@@ -67,7 +67,7 @@ def render():
 
     if not s["total"]:
         theme.empty_state("📊", "No cases on file yet",
-                          "The first intake will fill this page — volume, status mix and "
+                          "The first intake will fill this page - volume, status mix and "
                           "volunteer load all come straight from the case records.")
     else:
         left, right = st.columns(2)

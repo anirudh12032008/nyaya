@@ -1,4 +1,4 @@
-"""Guided tour: script stays in sync with the real pages, prompt is grounded — no API key needed."""
+"""Guided tour: script stays in sync with the real pages, prompt is grounded - no API key needed."""
 import re
 from pathlib import Path
 
