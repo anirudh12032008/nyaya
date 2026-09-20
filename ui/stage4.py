@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import difflib
+import html
 import json
 import re
 
@@ -12,6 +13,7 @@ from agent import guide, learn
 from agent.data import load
 from db import db
 from pdf.qr import base_url, case_url, qr_for_case
+from ui import theme
 
 MODULES = ["consumer", "police", "tenant", "labour"]
 
@@ -71,22 +73,22 @@ def template_prefill(case: dict) -> str:
 def extra_case_actions(case: dict) -> None:
     """Wired into the Cases detail view via ui.hooks.extra_case_actions."""
     case_id = case["id"]
-    st.subheader("Share & reuse")
-    a, b = st.columns(2)
+    with theme.card("Share & reuse", "Give the client a link or a QR; reuse the shape of this file."):
+        a, b = st.columns(2)
+        if a.button("Use as template", key=f"tpl{case_id}", use_container_width=True,
+                    help="Open Intake prefilled with this case's shape, facts blanked"):
+            st.query_params.clear()
+            st.query_params["prefill"] = template_prefill(case)
+            st.rerun()
 
-    if a.button("Use as template", key=f"tpl{case_id}",
-                help="Open Intake prefilled with this case's shape, facts blanked"):
-        st.query_params.clear()
-        st.query_params["prefill"] = template_prefill(case)
-        st.rerun()
+        b.download_button("Download QR", qr_for_case(case_id), key=f"qr{case_id}",
+                          use_container_width=True,
+                          file_name=f"nyaya-case-{case_id}.png", mime="image/png")
 
-    b.download_button("Download QR", qr_for_case(case_id), key=f"qr{case_id}",
-                      file_name=f"nyaya-case-{case_id}.png", mime="image/png")
-
-    st.caption("Read-only share link (draft + next steps, no controls):")
-    st.code(f"{base_url()}/?case={case_id}&view=readonly", language=None)
-    st.caption("QR on the PDF opens:")
-    st.code(case_url(case_id), language=None)
+        st.caption("Read-only share link (draft + next steps, no controls):")
+        st.code(f"{base_url()}/?case={case_id}&view=readonly", language=None)
+        st.caption("QR on the PDF opens:")
+        st.code(case_url(case_id), language=None)
 
 
 # ---------------------------------------------------------------- read-only share view
@@ -107,6 +109,29 @@ def _next_steps(module: str) -> list[str]:
     return steps
 
 
+def _masthead(hindi: str = "") -> None:
+    """Public pages have no sidebar, so they carry the clinic's name themselves."""
+    hi = (f'<div style="font-family:\'Source Serif 4\',Georgia,serif;color:{theme.MUTED};'
+          f'font-size:1rem;margin-top:.15rem">{hindi}</div>') if hindi else ""
+    st.markdown(
+        '<div style="display:flex;align-items:center;gap:.7rem;padding-bottom:.8rem;'
+        f'border-bottom:1px solid {theme.LINE};margin-bottom:1.2rem">'
+        '<div style="font-size:2rem">⚖️</div><div>'
+        f'<div style="font-family:\'Source Serif 4\',Georgia,serif;font-size:1.5rem;'
+        f'font-weight:700;line-height:1;color:{theme.NAVY}">NYAYA '
+        f'<span style="font-size:1.1rem;color:{theme.BRASS}">न्याय</span></div>'
+        f'<div style="font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;'
+        f'color:{theme.MUTED};font-weight:600">Legal aid clinic · Madhya Pradesh</div>'
+        f'</div></div>{hi}', unsafe_allow_html=True)
+
+
+def _public_footer() -> None:
+    st.write("")
+    theme.badges((guide.CTA, "ok"), ("अपने नज़दीकी विधिक सहायता क्लिनिक से मदद लें", "ok"))
+    st.caption("General procedural information prepared for a supervising advocate's review. "
+               "This is not legal advice. · यह कानूनी सलाह नहीं है।")
+
+
 def render_readonly(case_id) -> None:
     """?case=<id>&view=readonly — draft + next steps only, nothing editable."""
     try:
@@ -114,87 +139,127 @@ def render_readonly(case_id) -> None:
     except (TypeError, ValueError):
         case = None
     if not case:
+        _masthead()
         st.error(f"Case #{case_id} not found.")
         return
 
-    st.title(f"Case #{case['id']} · {case.get('client_name') or ''}")
-    st.caption(f"{case.get('module')} · shared read-only copy")
-    if case.get("deadline"):
-        days = db.days_to_deadline(case["deadline"])
-        st.markdown(f"**Limitation:** {case['deadline']}"
-                    + (f" ({days} days left)" if days is not None else ""))
+    _masthead()
+    theme.page_header(
+        f"Your case file · {case.get('client_name') or ''}".strip(" ·"),
+        "A read-only copy of what the clinic has prepared for you.",
+        hindi="आपकी फाइल की नकल — इसे बदला नहीं जा सकता।",
+        eyebrow=f"Case #{case['id']}",
+    )
 
-    st.markdown(case.get("draft_md") or "_No draft stored._")
+    days = db.days_to_deadline(case.get("deadline")) if case.get("deadline") else None
+    theme.badges(
+        theme.badge(case.get("module") or "matter", "info"),
+        theme.badge(f"last date to file: {case['deadline']}", "warn") if case.get("deadline") else "",
+        theme.deadline_badge(days) if case.get("deadline") else "",
+    )
+    st.write("")
+
+    theme.section("The letter prepared for you", "आपके लिए तैयार किया गया मसौदा")
+    if (case.get("draft_md") or "").strip():
+        theme.document(case["draft_md"])
+    else:
+        theme.empty_state("📄", "No draft yet",
+                          "The clinic has not finished writing this one. Please check back, "
+                          "or ask the volunteer who took your details.")
 
     steps = _next_steps(case.get("module"))
     if steps:
-        st.subheader("Next steps")
-        for s in steps:
-            st.markdown(f"- {s}")
+        theme.section("What to do next", "आगे क्या करना है")
+        for i, s in enumerate(steps, 1):
+            st.markdown(
+                f'<div style="display:flex;gap:.8rem;align-items:flex-start;'
+                f'background:{theme.SURFACE};border:1px solid {theme.LINE};border-radius:10px;'
+                f'padding:.8rem 1rem;margin-bottom:.5rem">'
+                f'<div style="font-family:\'Source Serif 4\',Georgia,serif;font-size:1.3rem;'
+                f'font-weight:700;color:{theme.BRASS};line-height:1.2">{i}</div>'
+                f'<div style="font-size:1rem;line-height:1.6">{html.escape(s)}</div></div>',
+                unsafe_allow_html=True)
 
-    st.info(f"Draft prepared by Nyaya for a supervising advocate's review. Not legal advice. "
-            f"{guide.CTA}.")
+    _public_footer()
 
 
 # ---------------------------------------------------------------- public guide route
 
 def render_guide(module: str) -> None:
     """?page=guide-<module> — the generated public how-to page."""
-    st.title(f"How to file a {module} complaint in Madhya Pradesh")
+    _masthead()
+    hi_module = guide.HI_MODULE.get(module, module)
+    theme.page_header(
+        f"How to file a {module} complaint in Madhya Pradesh",
+        "Step by step, in plain language. Free to read, free to share.",
+        hindi=f"मध्य प्रदेश में {hi_module} शिकायत कैसे दर्ज करें",
+        eyebrow="Public guide · जन मार्गदर्शिका",
+    )
+
     text = guide.path(module).read_text(encoding="utf-8") if guide.path(module).exists() else ""
     if not text.strip():
-        st.info(f"No guide generated yet for '{module}'. "
-                "A clinic admin can create it from the Admin page.")
+        theme.empty_state("📘", "This guide is not ready yet",
+                          f"No '{module}' guide has been written. A clinic admin can generate it.")
         return
-    # strip the language markers' own title lines? no — they read fine as sections
-    st.markdown(re.sub(r"<!--.*?-->\n?", "", text))  # hide language markers
-    st.success(guide.CTA)
-    st.caption("General procedural information, not legal advice.")
+
+    langs = guide.read(module) or {}
+    if langs.get("hi") and langs.get("en"):
+        hi, en = st.tabs(["हिंदी", "English"])          # Hindi first: most readers here read Hindi
+        with hi:
+            theme.document(langs["hi"])
+        with en:
+            theme.document(langs["en"])
+    else:
+        # single-language or unmarked file: fall back to the whole text, markers hidden
+        theme.document(re.sub(r"<!--.*?-->\n?", "", text))
+
+    _public_footer()
 
 
 # ---------------------------------------------------------------- admin extras
 
 def _guide_panel() -> None:
-    st.subheader("Public guides")
-    for module in MODULES:
-        c1, c2, c3 = st.columns([1, 1, 2])
-        c1.write(module)
-        if c2.button("Generate guide", key=f"gen{module}"):
-            with st.spinner(f"Sonnet is writing the {module} guide (EN + HI)…"):
-                try:
-                    guide.generate(module, refresh=True)
-                    st.success(f"Wrote {guide.path(module).relative_to(guide.ROOT)}")
-                except Exception as e:
-                    st.error(f"Guide generation failed: {e}")
-        if guide.path(module).exists():
-            c3.markdown(f"[Open guide]({base_url()}/?page=guide-{module})")
-        else:
-            c3.caption("not generated yet")
+    with theme.card("Public guides", "Citizen-facing how-to pages, one per module (EN + HI)."):
+        for module in MODULES:
+            c1, c2, c3 = st.columns([1, 1, 2])
+            c1.write(module)
+            if c2.button("Generate guide", key=f"gen{module}"):
+                with st.spinner(f"Sonnet is writing the {module} guide (EN + HI)…"):
+                    try:
+                        guide.generate(module, refresh=True)
+                        st.success(f"Wrote {guide.path(module).relative_to(guide.ROOT)}")
+                    except Exception as e:
+                        st.error(f"Guide generation failed: {e}")
+            if guide.path(module).exists():
+                c3.markdown(f"[Open guide]({base_url()}/?page=guide-{module})")
+            else:
+                c3.caption("not generated yet")
 
 
 def _learning_panel() -> None:
-    st.subheader("Most corrected sections")
-    rows = [{"module": m, "correction": c["note"], "times": c["count"], "👎": c["down"]}
-            for m in MODULES for c in learn.corrections(m)[:5]]
-    if rows:
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
-    else:
-        st.caption("No feedback notes yet — add one from a case's Feedback box.")
+    with theme.card("Most corrected sections",
+                    "What volunteers keep fixing — fed back into the drafting prompts."):
+        rows = [{"module": m, "correction": c["note"], "times": c["count"], "👎": c["down"]}
+                for m in MODULES for c in learn.corrections(m)[:5]]
+        if rows:
+            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        else:
+            st.caption("No feedback notes yet — add one from a case's Feedback box.")
 
-    module = st.selectbox("Module prompt to update", MODULES, key="hintmodule")
-    if st.button("Regenerate prompt hints"):
-        try:
-            old, new = learn.apply_hints(module)
-        except FileNotFoundError:
-            st.error(f"No prompt file at agent/prompts/draft_{module}.md")
-            return
-        if old == new:
-            st.info("Prompt already up to date with the current feedback.")
-            return
-        diff = difflib.unified_diff(old.splitlines(), new.splitlines(),
-                                    fromfile=f"draft_{module}.md (before)",
-                                    tofile=f"draft_{module}.md (after)", lineterm="")
-        st.code("\n".join(diff), language="diff")
+        module = st.selectbox("Module prompt to update", MODULES, key="hintmodule")
+        if st.button("Regenerate prompt hints"):
+            try:
+                old, new = learn.apply_hints(module)
+            except FileNotFoundError:
+                st.error(f"No prompt file at agent/prompts/draft_{module}.md")
+                return
+            if old == new:
+                st.info("Prompt already up to date with the current feedback.")
+                return
+            diff = difflib.unified_diff(old.splitlines(), new.splitlines(),
+                                        fromfile=f"draft_{module}.md (before)",
+                                        tofile=f"draft_{module}.md (after)", lineterm="")
+            st.code("\n".join(diff), language="diff")
 
 
 def admin_extras() -> None:
