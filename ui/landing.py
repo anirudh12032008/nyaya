@@ -41,7 +41,7 @@ _LANDING_HTML = r"""
   <section class="statue-stage" aria-label="Lady Justice, an animated symbol of fair legal access">
     <div class="orbit orbit-back" aria-hidden="true"></div><div class="orbit orbit-front" aria-hidden="true"></div>
     <div class="gold-beam beam-one" aria-hidden="true"></div><div class="gold-beam beam-two" aria-hidden="true"></div><div class="halo" aria-hidden="true"></div>
-    <div class="statue-card" id="statue-card"><div class="statue-shadow" aria-hidden="true"></div><img id="justice" src="/app/static/lady-justice-hero.png" alt="Lady Justice holding scales and a sword"><div class="scanline" aria-hidden="true"></div></div>
+    <div class="statue-card" id="statue-card"><div class="statue-shadow" aria-hidden="true"></div><img id="justice" src="/app/static/lady-justice-hero.webp" alt="Lady Justice holding scales and a sword"><div class="scanline" aria-hidden="true"></div></div>
     <div class="focus-tag"><span class="focus-icon">✦</span><span>JUSTICE, WITH<br>HUMAN CONTEXT</span></div><div class="scale-tag"><i></i><span>BALANCE / <b>01</b></span></div>
   </section>
   <footer class="footer-line"><div><span>01</span> BEGIN WITH CLARITY</div><div class="footer-center">NYĀYA AI © 2026</div><div>THE RIGHT TO BE HEARD <span>↗</span></div></footer>
