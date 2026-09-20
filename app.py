@@ -4,10 +4,15 @@ import streamlit as st
 st.set_page_config(page_title="Nyaya", page_icon="⚖️", layout="wide")
 
 from db.db import init as _db_init; _db_init()  # noqa: E402  (schema + seed, idempotent)
-from ui import intake, cases, admin, chat  # noqa: E402  (each page exposes render())
 
-PAGES = {"Intake": intake, "Cases": cases, "Ask Nyaya": chat, "Admin": admin}
-
+from ui import intake, cases, admin, chat, document_analyzer
+PAGES = {
+    "Intake": intake,
+    "Cases": cases,
+    "Ask Nyaya": chat,
+    "Document Analyzer": document_analyzer,
+    "Admin": admin,
+}
 qp = st.query_params
 if qp.get("clinic"):
     st.caption(f"Clinic: {qp['clinic']}")
