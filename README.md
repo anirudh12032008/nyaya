@@ -97,7 +97,7 @@ Query params select special views: `?page=guide-<module>` (public guide),
 | 9 | Evidence: Haiku checklist per module, upload photos/PDFs, Haiku vision labels each one, annexure index appended to the draft | `agent/evidence.py`, `ui/evidence.py` |
 | 10 | Outcomes + volunteer copilot: record won/lost/settled, similar cases and `## Learned` use real outcomes; Opus plans call script + 3 dated next actions | `agent/copilot.py`, `ui/copilot.py` |
 | 11 | Audit trail: per-case timeline, model calls, verifier verdict, council run, Haiku plain summary, PDF export for funders/DLSA. Also an Ask Nyaya tool | `agent/audit.py`, `ui/audit.py` |
-| 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace — lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` |
+| 7 | Ask Nyaya: agentic chatbot (Opus 5 tool-use loop) over the workspace — lists/opens cases, searches statutes, computes forum + fee, finds similar cases, runs the council, updates status | `agent/chat.py`, `ui/chat.py` (floating 💬 bubble, bottom-right of every page) |
 
 ## Layout
 
