@@ -12,3 +12,4 @@ showErrorDetails = true
 
 [server]
 runOnSave = true
+enableStaticServing = true
